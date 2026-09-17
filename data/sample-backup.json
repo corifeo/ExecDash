@@ -1,0 +1,1572 @@
+{
+  "format": "cyber-dashboard",
+  "version": 1,
+  "type": "backup",
+  "exportedAt": "2026-09-17T00:00:00Z",
+  "structure": {
+    "appetiteLevels": [
+      "Very low",
+      "Low",
+      "Moderate",
+      "High"
+    ],
+    "categories": [
+      {
+        "appetite": "Low",
+        "id": "hr",
+        "indicator": {
+          "appetite": 5,
+          "desc": "Staff who clicked a simulated phish and did not report it",
+          "direction": "lower",
+          "max": 20,
+          "target": null,
+          "tolerance": 10,
+          "type": "appetite",
+          "unit": "%"
+        },
+        "name": "Human Risk",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Phishing"
+          },
+          {
+            "id": "s2",
+            "name": "Social engineering"
+          },
+          {
+            "id": "s3",
+            "name": "Insider risk"
+          }
+        ]
+      },
+      {
+        "appetite": "Low",
+        "id": "idt",
+        "indicator": {
+          "appetite": 3,
+          "desc": "High-privilege accounts and integrations without a current review",
+          "direction": "lower",
+          "max": 12,
+          "target": null,
+          "tolerance": 8,
+          "type": "appetite",
+          "unit": "count"
+        },
+        "name": "Identity & Trust",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Human identity"
+          },
+          {
+            "id": "s2",
+            "name": "Privileged access"
+          },
+          {
+            "id": "s3",
+            "name": "Machine identity"
+          },
+          {
+            "id": "s4",
+            "name": "Integration privilege"
+          },
+          {
+            "id": "s5",
+            "name": "Vendor and SaaS"
+          }
+        ]
+      },
+      {
+        "appetite": "Low",
+        "id": "ssc",
+        "indicator": {
+          "appetite": 10,
+          "desc": "Critical services releasing without a signed build and SBOM",
+          "direction": "lower",
+          "max": 50,
+          "target": null,
+          "tolerance": 25,
+          "type": "appetite",
+          "unit": "%"
+        },
+        "name": "Software Supply Chain",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Software composition"
+          },
+          {
+            "id": "s2",
+            "name": "Software Bill of Materials"
+          },
+          {
+            "id": "s3",
+            "name": "Toolchain security"
+          },
+          {
+            "id": "s4",
+            "name": "Build security"
+          },
+          {
+            "id": "s5",
+            "name": "Release integrity"
+          }
+        ]
+      },
+      {
+        "appetite": "Low",
+        "id": "pp",
+        "indicator": {
+          "appetite": 5,
+          "desc": "Internet-facing critical vulnerabilities past SLA",
+          "direction": "lower",
+          "max": 16,
+          "target": null,
+          "tolerance": 10,
+          "type": "appetite",
+          "unit": "count"
+        },
+        "name": "Product & Platform",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Product security"
+          },
+          {
+            "id": "s2",
+            "name": "Cloud and production infrastructure"
+          },
+          {
+            "id": "s3",
+            "name": "External attack surface"
+          }
+        ]
+      },
+      {
+        "appetite": "Low",
+        "id": "ei",
+        "indicator": {
+          "appetite": 2,
+          "desc": "Unsupported systems still in production",
+          "direction": "lower",
+          "max": 12,
+          "target": null,
+          "tolerance": 6,
+          "type": "appetite",
+          "unit": "count"
+        },
+        "name": "Enterprise Infrastructure",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Endpoint"
+          },
+          {
+            "id": "s2",
+            "name": "Corporate network"
+          },
+          {
+            "id": "s3",
+            "name": "On-premises infrastructure"
+          },
+          {
+            "id": "s4",
+            "name": "Legacy and unsupported systems"
+          }
+        ]
+      },
+      {
+        "appetite": "Very low",
+        "id": "data",
+        "indicator": {
+          "appetite": 0,
+          "desc": "Reportable data incidents this quarter",
+          "direction": "lower",
+          "max": 4,
+          "target": null,
+          "tolerance": 1,
+          "type": "appetite",
+          "unit": "count"
+        },
+        "name": "Data",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Data protection"
+          },
+          {
+            "id": "s2",
+            "name": "Data loss prevention"
+          }
+        ]
+      },
+      {
+        "appetite": "Low",
+        "id": "secops",
+        "indicator": {
+          "appetite": 5,
+          "desc": "Critical systems without detection coverage",
+          "direction": "lower",
+          "max": 40,
+          "target": null,
+          "tolerance": 20,
+          "type": "appetite",
+          "unit": "%"
+        },
+        "name": "Security Operations",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Detection"
+          },
+          {
+            "id": "s2",
+            "name": "Response"
+          }
+        ]
+      },
+      {
+        "appetite": "Low",
+        "id": "assur",
+        "indicator": {
+          "appetite": 0,
+          "desc": "Audit and regulatory actions past due date",
+          "direction": "lower",
+          "max": 6,
+          "target": null,
+          "tolerance": 2,
+          "type": "appetite",
+          "unit": "count"
+        },
+        "name": "Assurance",
+        "subs": [
+          {
+            "id": "s1",
+            "name": "Security validation"
+          },
+          {
+            "id": "s2",
+            "name": "Obligations"
+          },
+          {
+            "id": "s3",
+            "name": "Control evidence"
+          }
+        ]
+      },
+      {
+        "appetite": "",
+        "id": "exc",
+        "indicator": {
+          "appetite": 0,
+          "desc": "Accepted risks past their expiry date",
+          "direction": "lower",
+          "max": 8,
+          "target": null,
+          "tolerance": 3,
+          "type": "appetite",
+          "unit": "count"
+        },
+        "name": "Risk exceptions",
+        "subs": []
+      },
+      {
+        "appetite": "",
+        "id": "debt",
+        "indicator": {
+          "appetite": null,
+          "desc": "Remediation backlog within SLA",
+          "direction": "higher",
+          "max": 100,
+          "target": 90,
+          "tolerance": null,
+          "type": "target",
+          "unit": "%"
+        },
+        "name": "Security debt",
+        "subs": []
+      }
+    ],
+    "committee": "Executive Risk Committee",
+    "defaultQuarter": null,
+    "exposureTitle": "Exposure",
+    "footer": "Appetite thresholds from the board-approved cyber risk appetite statement. Operational resilience is reported separately. Illustrative data for design review.",
+    "functions": [
+      {
+        "id": "gv",
+        "name": "Govern",
+        "target": 3.5
+      },
+      {
+        "id": "id",
+        "name": "Identify",
+        "target": 3.5
+      },
+      {
+        "id": "pr",
+        "name": "Protect",
+        "target": 4
+      },
+      {
+        "id": "de",
+        "name": "Detect",
+        "target": 3.5
+      },
+      {
+        "id": "rs",
+        "name": "Respond",
+        "target": 3.5
+      },
+      {
+        "id": "rc",
+        "name": "Recover",
+        "target": 3.5
+      }
+    ],
+    "impacts": [
+      "Financial loss",
+      "Client detriment",
+      "Regulatory",
+      "Reputational",
+      "Operational"
+    ],
+    "initiativeTypes": [
+      {
+        "id": "strategic",
+        "name": "Strategic"
+      },
+      {
+        "id": "ci",
+        "name": "Continuous improvement"
+      }
+    ],
+    "lossBands": [
+      {
+        "id": "lb1",
+        "name": "Low",
+        "upTo": 250000
+      },
+      {
+        "id": "lb2",
+        "name": "Moderate",
+        "upTo": 1000000
+      },
+      {
+        "id": "lb3",
+        "name": "Significant",
+        "upTo": 5000000
+      },
+      {
+        "id": "lb4",
+        "name": "Major",
+        "upTo": 20000000
+      },
+      {
+        "id": "lb5",
+        "name": "Severe",
+        "upTo": null
+      }
+    ],
+    "maturityLabel": "NIST CSF 2.0",
+    "maturityMax": 5,
+    "ratings": [
+      "Critical",
+      "High",
+      "Medium",
+      "Low"
+    ],
+    "severities": [
+      "P0",
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "title": "Cyber security dashboard",
+    "topN": 5,
+    "ttcTarget": 8,
+    "vulnGroups": [
+      {
+        "id": "app",
+        "name": "Application"
+      },
+      {
+        "id": "infra",
+        "name": "Infrastructure"
+      }
+    ],
+    "vulnSeverities": [
+      "Critical",
+      "High",
+      "Medium",
+      "Low"
+    ],
+    "vulnAppetite": {
+      "Critical": {
+        "appetite": 5,
+        "tolerance": 10
+      },
+      "High": {
+        "appetite": 50,
+        "tolerance": 80
+      }
+    },
+    "incFocus": 2,
+    "vulnFocus": 2
+  },
+  "risks": [
+    {
+      "categoryId": "hr",
+      "enabled": false,
+      "id": "lib0",
+      "name": "Credential phishing leading to staff account compromise",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "categoryId": "hr",
+      "enabled": false,
+      "id": "lib1",
+      "name": "Business email compromise and payment diversion",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "categoryId": "hr",
+      "enabled": true,
+      "fair": {
+        "fMax": 1.5,
+        "fMin": 0.2,
+        "fMl": 0.5,
+        "lMax": 2000000,
+        "lMin": 50000,
+        "lMl": 250000
+      },
+      "id": "r4",
+      "name": "Deepfake-enabled payment fraud",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "categoryId": "hr",
+      "enabled": false,
+      "id": "lib3",
+      "name": "Social engineering of the service desk to reset credentials",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "categoryId": "hr",
+      "enabled": false,
+      "id": "lib4",
+      "name": "Malicious insider exfiltrating client data",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "hr",
+      "enabled": false,
+      "id": "lib5",
+      "name": "Accidental disclosure of client data by staff",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "hr",
+      "enabled": false,
+      "id": "lib6",
+      "name": "Insider misuse of privileged access",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": true,
+      "fair": {
+        "fMax": 12,
+        "fMin": 2,
+        "fMl": 5,
+        "lMax": 500000,
+        "lMin": 25000,
+        "lMl": 100000
+      },
+      "id": "r3",
+      "name": "Takeover of client accounts",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Client detriment",
+        "Financial loss"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": true,
+      "fair": {
+        "fMax": 0.5,
+        "fMin": 0.1,
+        "fMl": 0.2,
+        "lMax": 10000000,
+        "lMin": 250000,
+        "lMl": 1500000
+      },
+      "id": "r2",
+      "name": "Compromise through a critical supplier",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational",
+        "Client detriment"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": true,
+      "fair": {
+        "fMax": 0.3,
+        "fMin": 0.05,
+        "fMl": 0.1,
+        "lMax": 25000000,
+        "lMin": 500000,
+        "lMl": 5000000
+      },
+      "id": "lib9",
+      "name": "Compromise of privileged administrator accounts",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": false,
+      "id": "lib10",
+      "name": "Abuse of over-privileged integrations and API tokens",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": false,
+      "id": "lib11",
+      "name": "Leaked or unrotated machine credentials and secrets",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": true,
+      "fair": {
+        "fMax": 1,
+        "fMin": 0.1,
+        "fMl": 0.3,
+        "lMax": 3000000,
+        "lMin": 50000,
+        "lMl": 500000
+      },
+      "id": "lib12",
+      "name": "Unmanaged SaaS applications holding client data",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": false,
+      "id": "lib13",
+      "name": "MFA bypass through session hijacking or token theft",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "categoryId": "idt",
+      "enabled": false,
+      "id": "lib14",
+      "name": "Orphaned access from weak joiner, mover and leaver controls",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "ssc",
+      "enabled": false,
+      "id": "lib15",
+      "name": "Malicious or compromised open-source dependency",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ssc",
+      "enabled": false,
+      "id": "lib16",
+      "name": "Known-vulnerable third-party components in production",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ssc",
+      "enabled": false,
+      "id": "lib17",
+      "name": "Compromise of build pipelines or CI/CD tooling",
+      "source": "library",
+      "tags": [],
+      "fair": {
+        "fMin": 0.05,
+        "fMl": 0.1,
+        "fMax": 0.3,
+        "lMin": 250000,
+        "lMl": 2000000,
+        "lMax": 10000000
+      },
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ssc",
+      "enabled": false,
+      "id": "lib18",
+      "name": "Tampered release artefacts reaching production",
+      "source": "library",
+      "tags": [],
+      "fair": {
+        "fMin": 0.02,
+        "fMl": 0.05,
+        "fMax": 0.2,
+        "lMin": 500000,
+        "lMl": 3000000,
+        "lMax": 20000000
+      },
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "categoryId": "ssc",
+      "enabled": false,
+      "id": "lib19",
+      "name": "Incomplete software inventory slowing vulnerability response",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "pp",
+      "enabled": true,
+      "fair": {
+        "fMax": 0.5,
+        "fMin": 0.05,
+        "fMl": 0.2,
+        "lMax": 20000000,
+        "lMin": 250000,
+        "lMl": 2000000
+      },
+      "id": "r5",
+      "name": "Client data exposed through cloud misconfiguration",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory",
+        "Reputational"
+      ]
+    },
+    {
+      "categoryId": "pp",
+      "enabled": true,
+      "fair": {
+        "fMax": 2,
+        "fMin": 0.2,
+        "fMl": 0.5,
+        "lMax": 7500000,
+        "lMin": 100000,
+        "lMl": 1000000
+      },
+      "id": "lib21",
+      "name": "Exploitation of internet-facing vulnerabilities",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational",
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "pp",
+      "enabled": true,
+      "fair": {
+        "fMax": 1,
+        "fMin": 0.1,
+        "fMl": 0.3,
+        "lMax": 5000000,
+        "lMin": 100000,
+        "lMl": 500000
+      },
+      "id": "lib22",
+      "name": "Application logic flaws enabling unauthorised transactions",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "categoryId": "pp",
+      "enabled": true,
+      "fair": {
+        "fMax": 0.75,
+        "fMin": 0.1,
+        "fMl": 0.3,
+        "lMax": 10000000,
+        "lMin": 250000,
+        "lMl": 1500000
+      },
+      "id": "lib23",
+      "name": "Insecure APIs exposing client data",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "pp",
+      "enabled": false,
+      "id": "lib24",
+      "name": "Unknown or unmanaged external attack surface",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Reputational"
+      ]
+    },
+    {
+      "categoryId": "pp",
+      "enabled": false,
+      "id": "lib25",
+      "name": "Automated credential stuffing against client platforms",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "categoryId": "ei",
+      "enabled": true,
+      "fair": {
+        "fMax": 0.5,
+        "fMin": 0.1,
+        "fMl": 0.2,
+        "lMax": 5000000,
+        "lMin": 100000,
+        "lMl": 750000
+      },
+      "id": "r6",
+      "name": "End-of-support legacy platform",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ei",
+      "enabled": false,
+      "id": "lib27",
+      "name": "Malware compromise of staff endpoints",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ei",
+      "enabled": false,
+      "id": "lib28",
+      "name": "Unpatched servers and endpoints",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ei",
+      "enabled": false,
+      "id": "lib29",
+      "name": "Lateral movement across a flat corporate network",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "ei",
+      "enabled": false,
+      "id": "lib30",
+      "name": "Compromise of on-premises directory services",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "data",
+      "enabled": true,
+      "fair": {
+        "fMax": 1,
+        "fMin": 0.1,
+        "fMl": 0.3,
+        "lMax": 15000000,
+        "lMin": 500000,
+        "lMl": 3000000
+      },
+      "id": "r1",
+      "name": "Data theft and extortion by criminal groups",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Financial loss",
+        "Regulatory",
+        "Reputational"
+      ]
+    },
+    {
+      "categoryId": "data",
+      "enabled": false,
+      "id": "lib32",
+      "name": "Client data leaving through unsanctioned channels",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "data",
+      "enabled": false,
+      "id": "lib33",
+      "name": "Weak protection of sensitive data at rest and in transit",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "data",
+      "enabled": false,
+      "id": "lib34",
+      "name": "Excessive retention of client data increasing breach impact",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "data",
+      "enabled": false,
+      "id": "lib35",
+      "name": "Client data exposed in non-production environments",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "secops",
+      "enabled": true,
+      "fair": {
+        "fMax": 1,
+        "fMin": 0.2,
+        "fMl": 0.5,
+        "lMax": 5000000,
+        "lMin": 100000,
+        "lMl": 750000
+      },
+      "id": "lib36",
+      "name": "Delayed detection of intrusions due to logging gaps",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "secops",
+      "enabled": false,
+      "id": "lib37",
+      "name": "Slow or ineffective incident response",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Reputational"
+      ]
+    },
+    {
+      "categoryId": "secops",
+      "enabled": false,
+      "id": "lib38",
+      "name": "Alert fatigue causing missed threats",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "categoryId": "secops",
+      "enabled": false,
+      "id": "lib39",
+      "name": "Missed regulatory notification deadlines after an incident",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "assur",
+      "enabled": false,
+      "id": "lib40",
+      "name": "Controls failing without being detected",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "assur",
+      "enabled": false,
+      "id": "lib41",
+      "name": "Failure to meet regulatory security obligations",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "assur",
+      "enabled": false,
+      "id": "lib42",
+      "name": "Insufficient evidence of control operation",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "categoryId": "assur",
+      "enabled": false,
+      "id": "lib43",
+      "name": "New services launched without security validation",
+      "source": "library",
+      "tags": [],
+      "impacts": [
+        "Client detriment"
+      ]
+    }
+  ],
+  "initiatives": [
+    {
+      "categoryId": "pp",
+      "due": "Q1 2027",
+      "enabled": true,
+      "id": "i1",
+      "name": "Vulnerability remediation acceleration",
+      "projected": 5,
+      "riskIds": [
+        "lib21",
+        "r5"
+      ],
+      "start": "Q2 2026",
+      "subId": "s3",
+      "tags": [],
+      "type": "strategic",
+      "cost": 350000,
+      "reduction": 60
+    },
+    {
+      "categoryId": "ssc",
+      "due": "Q4 2026",
+      "enabled": true,
+      "id": "i2",
+      "name": "Signed builds and SBOM for all product pipelines",
+      "projected": 8,
+      "riskIds": [
+        "lib17",
+        "lib18"
+      ],
+      "start": "Q1 2026",
+      "subId": "s4",
+      "tags": [],
+      "type": "strategic",
+      "cost": 180000,
+      "reduction": 50
+    },
+    {
+      "categoryId": "secops",
+      "due": "Q2 2027",
+      "enabled": true,
+      "id": "i3",
+      "name": "Central logging for legacy platforms",
+      "projected": 5,
+      "riskIds": [
+        "lib36",
+        "r1"
+      ],
+      "start": "Q2 2026",
+      "subId": "s1",
+      "tags": [],
+      "type": "strategic",
+      "cost": 400000,
+      "reduction": 40
+    },
+    {
+      "categoryId": "ei",
+      "due": "Q1 2027",
+      "enabled": true,
+      "id": "i4",
+      "name": "Legacy platform migration",
+      "projected": 1,
+      "riskIds": [
+        "r6"
+      ],
+      "start": "Q4 2025",
+      "subId": "s4",
+      "tags": [],
+      "type": "strategic",
+      "cost": 900000,
+      "reduction": 70
+    },
+    {
+      "categoryId": "idt",
+      "due": "Q4 2026",
+      "enabled": true,
+      "id": "i5",
+      "name": "Integration and SaaS access reviews",
+      "projected": 3,
+      "riskIds": [
+        "r2",
+        "lib12"
+      ],
+      "start": "Q3 2026",
+      "subId": "s4",
+      "tags": [],
+      "type": "ci",
+      "cost": 60000,
+      "reduction": 35
+    },
+    {
+      "categoryId": "exc",
+      "due": "Q4 2026",
+      "enabled": true,
+      "id": "i6",
+      "name": "Risk exception renewal process",
+      "projected": 0,
+      "riskIds": [],
+      "start": "Q3 2026",
+      "subId": "",
+      "tags": [],
+      "type": "ci",
+      "cost": null,
+      "reduction": null
+    },
+    {
+      "categoryId": "hr",
+      "due": "Q4 2026",
+      "enabled": true,
+      "id": "i7",
+      "name": "Finance team social engineering drills",
+      "projected": 3,
+      "riskIds": [
+        "r4"
+      ],
+      "start": "Q2 2026",
+      "subId": "s2",
+      "tags": [],
+      "type": "ci",
+      "cost": 25000,
+      "reduction": 30
+    }
+  ],
+  "initiativeTypes": [
+    {
+      "id": "strategic",
+      "name": "Strategic"
+    },
+    {
+      "id": "ci",
+      "name": "Continuous improvement"
+    }
+  ],
+  "quarters": {
+    "2026-Q2": {
+      "categories": {
+        "assur": {
+          "subs": {
+            "s1": "g",
+            "s2": "g",
+            "s3": "g"
+          },
+          "value": 0
+        },
+        "data": {
+          "subs": {
+            "s1": "g",
+            "s2": "a"
+          },
+          "value": 0
+        },
+        "debt": {
+          "value": 78
+        },
+        "ei": {
+          "subs": {
+            "s1": "g",
+            "s2": "g",
+            "s3": "a",
+            "s4": "r"
+          },
+          "value": 9
+        },
+        "exc": {
+          "value": 2
+        },
+        "hr": {
+          "subs": {
+            "s1": "a",
+            "s2": "a",
+            "s3": "g"
+          },
+          "value": 7
+        },
+        "idt": {
+          "subs": {
+            "s1": "g",
+            "s2": "a",
+            "s3": "a",
+            "s4": "g",
+            "s5": "g"
+          },
+          "value": 5
+        },
+        "pp": {
+          "subs": {
+            "s1": "a",
+            "s2": "g",
+            "s3": "a"
+          },
+          "value": 9
+        },
+        "secops": {
+          "subs": {
+            "s1": "a",
+            "s2": "g"
+          },
+          "value": 19
+        },
+        "ssc": {
+          "subs": {
+            "s1": "g",
+            "s2": "a",
+            "s3": "a",
+            "s4": "a",
+            "s5": "a"
+          },
+          "value": 24
+        }
+      },
+      "incidents": {
+        "counts": {
+          "P0": 0,
+          "P1": 2,
+          "P2": 9,
+          "P3": 18
+        },
+        "regulatory": 0,
+        "ttc": 9,
+        "items": [
+          {
+            "id": "n1",
+            "title": "Staff mailbox compromised through phishing",
+            "severity": "P1",
+            "categoryId": "hr",
+            "riskId": "lib0",
+            "description": "A finance team member entered credentials on a spoofed login page. The account was locked within two hours and no payments were affected.",
+            "reportable": false,
+            "ttc": 2
+          },
+          {
+            "id": "n2",
+            "title": "Storage bucket exposed in a test environment",
+            "severity": "P1",
+            "categoryId": "pp",
+            "riskId": "r5",
+            "description": "A test bucket containing masked client records was publicly readable for four days. Access logs show no external downloads.",
+            "reportable": false,
+            "ttc": 16
+          }
+        ]
+      },
+      "initiatives": {
+        "i1": {
+          "include": true,
+          "milestone": "Supplier patch agreement",
+          "progress": 10,
+          "status": "on"
+        },
+        "i2": {
+          "include": true,
+          "milestone": "Pipelines 8 to 11 signed",
+          "progress": 45,
+          "status": "on"
+        },
+        "i3": {
+          "include": true,
+          "milestone": "Log source design",
+          "progress": 5,
+          "status": "ns"
+        },
+        "i4": {
+          "include": true,
+          "milestone": "Retire five systems",
+          "progress": 40,
+          "status": "risk"
+        },
+        "i7": {
+          "include": true,
+          "milestone": "First drill",
+          "progress": 20,
+          "status": "on"
+        }
+      },
+      "label": "Q2 2026",
+      "maturity": {
+        "scores": {
+          "de": 2.4,
+          "gv": 2.7,
+          "id": 3,
+          "pr": 3,
+          "rc": 2.2,
+          "rs": 2.6
+        }
+      },
+      "period": "April to June",
+      "q": 2,
+      "topRisks": [
+        {
+          "movement": "auto",
+          "rating": "High",
+          "riskId": "r1"
+        },
+        {
+          "movement": "auto",
+          "rating": "High",
+          "riskId": "r3"
+        },
+        {
+          "movement": "auto",
+          "rating": "High",
+          "riskId": "r6"
+        },
+        {
+          "movement": "auto",
+          "rating": "High",
+          "riskId": "r5"
+        },
+        {
+          "movement": "auto",
+          "rating": "Medium",
+          "riskId": "r2"
+        }
+      ],
+      "vulns": {
+        "app": {
+          "counts": {
+            "Critical": 4,
+            "High": 40,
+            "Medium": 190,
+            "Low": 260
+          },
+          "note": ""
+        },
+        "infra": {
+          "counts": {
+            "Critical": 4,
+            "High": 45,
+            "Medium": 208,
+            "Low": 400
+          },
+          "note": ""
+        }
+      },
+      "year": 2026
+    },
+    "2026-Q3": {
+      "categories": {
+        "assur": {
+          "note": "Two actions from the annual control attestation went past their due date.",
+          "subs": {
+            "s1": "g",
+            "s2": "a",
+            "s3": "a"
+          },
+          "value": 2
+        },
+        "data": {
+          "subs": {
+            "s1": "g",
+            "s2": "a"
+          },
+          "value": 0
+        },
+        "debt": {
+          "value": 81
+        },
+        "ei": {
+          "note": "The legacy migration retired five unsupported systems this quarter.",
+          "subs": {
+            "s1": "g",
+            "s2": "g",
+            "s3": "a",
+            "s4": "a"
+          },
+          "value": 4
+        },
+        "exc": {
+          "value": 6
+        },
+        "hr": {
+          "subs": {
+            "s1": "g",
+            "s2": "a",
+            "s3": "g"
+          },
+          "value": 4
+        },
+        "idt": {
+          "subs": {
+            "s1": "g",
+            "s2": "g",
+            "s3": "a",
+            "s4": "a",
+            "s5": "a"
+          },
+          "value": 7
+        },
+        "pp": {
+          "note": "The vendor patch for the supplier platform slipped to October, so nine criticals stay open.",
+          "subs": {
+            "s1": "a",
+            "s2": "g",
+            "s3": "r"
+          },
+          "value": 14
+        },
+        "secops": {
+          "subs": {
+            "s1": "a",
+            "s2": "g"
+          },
+          "value": 18
+        },
+        "ssc": {
+          "subs": {
+            "s1": "g",
+            "s2": "a",
+            "s3": "g",
+            "s4": "a",
+            "s5": "a"
+          },
+          "value": 22
+        }
+      },
+      "incidents": {
+        "counts": {
+          "P0": 0,
+          "P1": 1,
+          "P2": 7,
+          "P3": 14
+        },
+        "regulatory": 0,
+        "ttc": 6,
+        "items": [
+          {
+            "id": "n1",
+            "title": "Credential-stuffing attempt on the client portal",
+            "severity": "P1",
+            "categoryId": "idt",
+            "riskId": "r3",
+            "description": "Automated login attempts against client accounts from a residential proxy network. Rate limiting and forced resets contained it within six hours, with no client losses.",
+            "reportable": false,
+            "ttc": 6
+          }
+        ]
+      },
+      "initiatives": {
+        "i1": {
+          "include": true,
+          "milestone": "Vendor fix for supplier platform",
+          "note": "Delivery depends on the supplier platform patch, now due in October.",
+          "progress": 30,
+          "status": "risk"
+        },
+        "i2": {
+          "include": true,
+          "milestone": "Final three pipelines",
+          "progress": 75,
+          "status": "on"
+        },
+        "i3": {
+          "include": true,
+          "milestone": "Onboard first legacy platform",
+          "progress": 25,
+          "status": "on"
+        },
+        "i4": {
+          "include": true,
+          "milestone": "Retire remaining four systems",
+          "progress": 60,
+          "status": "on"
+        },
+        "i5": {
+          "include": true,
+          "milestone": "Review high-privilege integrations",
+          "progress": 15,
+          "status": "on"
+        },
+        "i6": {
+          "include": true,
+          "milestone": "Renew or close six lapsed exceptions",
+          "note": "Owners of the six lapsed exceptions have not responded. Escalated to the COO.",
+          "progress": 10,
+          "status": "off"
+        },
+        "i7": {
+          "include": true,
+          "milestone": "Second drill",
+          "progress": 55,
+          "status": "on"
+        }
+      },
+      "label": "Q3 2026",
+      "maturity": {
+        "notes": {
+          "de": "Central logging now covers the first legacy platform."
+        },
+        "scores": {
+          "de": 2.6,
+          "gv": 2.9,
+          "id": 3.1,
+          "pr": 3.2,
+          "rc": 2.4,
+          "rs": 2.9
+        }
+      },
+      "period": "July to September",
+      "q": 3,
+      "topRisks": [
+        {
+          "movement": "auto",
+          "rating": "High",
+          "riskId": "r1"
+        },
+        {
+          "movement": "auto",
+          "note": "Two critical suppliers failed their annual assessment in August.",
+          "rating": "High",
+          "riskId": "r2"
+        },
+        {
+          "movement": "auto",
+          "rating": "High",
+          "riskId": "r3"
+        },
+        {
+          "movement": "auto",
+          "note": "Finance staff received two deepfake voice calls impersonating the CFO.",
+          "rating": "Medium",
+          "riskId": "r4"
+        },
+        {
+          "movement": "auto",
+          "rating": "Medium",
+          "riskId": "r5"
+        }
+      ],
+      "vulns": {
+        "app": {
+          "counts": {
+            "Critical": 5,
+            "High": 30,
+            "Medium": 170,
+            "Low": 270
+          },
+          "note": "Two criticals found in the client portal penetration test, both being fixed this sprint."
+        },
+        "infra": {
+          "counts": {
+            "Critical": 4,
+            "High": 40,
+            "Medium": 190,
+            "Low": 390
+          },
+          "note": "A new critical on the supplier trading platform is waiting for a vendor patch."
+        }
+      },
+      "year": 2026
+    }
+  }
+}

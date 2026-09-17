@@ -1,0 +1,387 @@
+/* Shared components: tiles, pills, status shapes, reference chips, buttons and segmented controls. */
+
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card);
+}
+.seg button {
+  border: 0;
+  background: none;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.seg button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--card);
+  font-weight: 600;
+}
+select,
+input[type='text'],
+input[type='number'] {
+  background: var(--field);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 14px;
+  min-width: 0;
+}
+input[type='number'] {
+  width: 90px;
+}
+.btn {
+  border: 1px solid var(--rule);
+  background: var(--card);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.btn:hover {
+  border-color: var(--ink-3);
+}
+.btn.primary {
+  background: var(--ink);
+  color: var(--card);
+  border-color: var(--ink);
+  font-weight: 600;
+}
+.btn.danger {
+  color: var(--red);
+}
+.btn.danger.armed {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+.btn.link {
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  color: var(--accent);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.tile {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.25s ease;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+.desc {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 2px 0 0;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.pill.g::before,
+.pill.a::before,
+.pill.r::before,
+.sh {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  flex: none;
+}
+.pill.g {
+  background: var(--green-bg);
+  color: var(--green);
+}
+.pill.g::before {
+  border-radius: 50%;
+}
+.pill.a {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+.pill.a::before {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.pill.r {
+  background: var(--red-bg);
+  color: var(--red);
+}
+.pill.on {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.pill.off {
+  background: transparent;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1.5px var(--ghost);
+}
+.pill.n {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.pill.x {
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 500;
+}
+.sh {
+  width: 10px;
+  height: 10px;
+}
+.sh.g {
+  color: var(--green);
+  border-radius: 50%;
+}
+.sh.a {
+  color: var(--amber);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.sh.r {
+  color: var(--red);
+}
+.value {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.value small {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-3);
+  letter-spacing: 0;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.good {
+  color: var(--green);
+}
+.bad {
+  color: var(--red);
+}
+.al {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.empty {
+  padding: 40px 0;
+  color: var(--ink-2);
+}
+.seg.sm button {
+  padding: 4px 10px;
+  font-size: 13px;
+}
+.hlchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.hlchips .al {
+  width: 100%;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12.5px;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.chip[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--card);
+  border-color: var(--ink);
+}
+.sh.on {
+  color: var(--accent);
+  border-radius: 50%;
+}
+.ity {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 1px 7px;
+}
+input[type='file'] {
+  font-size: 13.5px;
+}
+.ndot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-left: 6px;
+  vertical-align: middle;
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+.tile.span {
+  display: flex;
+  flex-direction: column;
+}
+.value .vd {
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 10px;
+  letter-spacing: 0;
+  display: inline-block;
+}
+.btn.icon {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn.add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--rule));
+}
+.btn.add span {
+  font-size: 16px;
+  line-height: 1;
+}
+.btn.add:hover {
+  background: var(--accent-bg);
+}
+.trd {
+  white-space: nowrap;
+}
+.tile .head .desc {
+  margin-top: 1px;
+}
+.value .cu {
+  white-space: nowrap;
+}
+.lbn {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c) 32%, transparent);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.ref {
+  --refc: var(--ink-2);
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--refc) 55%, transparent);
+  border-radius: 999px;
+  font-size: 11.5px;
+  line-height: 1.25;
+  color: var(--ink);
+  background: var(--card);
+  padding: 1px 8px 1px 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: inherit;
+  vertical-align: middle;
+  cursor: default;
+}
+.ref .rb {
+  flex: none;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--refc);
+  color: var(--card);
+  font-size: 9.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+.ref .rt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.ref-cat {
+  --refc: var(--accent);
+}
+.ref-risk {
+  --refc: var(--riskc);
+}
+.ref-risk:not(.top) .rb {
+  background: transparent;
+  color: var(--refc);
+  box-shadow: inset 0 0 0 1.5px var(--refc);
+}
+.ref-init {
+  --refc: var(--initc);
+}
+.ref-inc {
+  --refc: var(--amber);
+}
+button.ref {
+  cursor: pointer;
+}
+button.ref:hover,
+button.ref:focus-visible {
+  background: color-mix(in srgb, var(--refc) 14%, var(--card));
+}
+.ref.jump {
+  align-self: flex-start;
+}
+.attr.ity.t0 {
+  background: var(--ink);
+  color: var(--card);
+}

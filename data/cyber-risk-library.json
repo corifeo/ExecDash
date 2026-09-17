@@ -1,0 +1,493 @@
+{
+  "format": "cyber-dashboard",
+  "version": 1,
+  "type": "risks",
+  "exportedAt": "2026-09-17T00:00:00Z",
+  "risks": [
+    {
+      "id": "lib0",
+      "name": "Credential phishing leading to staff account compromise",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "id": "lib1",
+      "name": "Business email compromise and payment diversion",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "id": "lib2",
+      "name": "Deepfake-enabled payment fraud",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "id": "lib3",
+      "name": "Social engineering of the service desk to reset credentials",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "id": "lib4",
+      "name": "Malicious insider exfiltrating client data",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib5",
+      "name": "Accidental disclosure of client data by staff",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib6",
+      "name": "Insider misuse of privileged access",
+      "categoryId": "hr",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "id": "lib7",
+      "name": "Takeover of client accounts",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "id": "lib8",
+      "name": "Compromise through a critical supplier",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib9",
+      "name": "Compromise of privileged administrator accounts",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib10",
+      "name": "Abuse of over-privileged integrations and API tokens",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "id": "lib11",
+      "name": "Leaked or unrotated machine credentials and secrets",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib12",
+      "name": "Unmanaged SaaS applications holding client data",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib13",
+      "name": "MFA bypass through session hijacking or token theft",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "id": "lib14",
+      "name": "Orphaned access from weak joiner, mover and leaver controls",
+      "categoryId": "idt",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib15",
+      "name": "Malicious or compromised open-source dependency",
+      "categoryId": "ssc",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib16",
+      "name": "Known-vulnerable third-party components in production",
+      "categoryId": "ssc",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib17",
+      "name": "Compromise of build pipelines or CI/CD tooling",
+      "categoryId": "ssc",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib18",
+      "name": "Tampered release artefacts reaching production",
+      "categoryId": "ssc",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    },
+    {
+      "id": "lib19",
+      "name": "Incomplete software inventory slowing vulnerability response",
+      "categoryId": "ssc",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib20",
+      "name": "Client data exposed through cloud misconfiguration",
+      "categoryId": "pp",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib21",
+      "name": "Exploitation of internet-facing vulnerabilities",
+      "categoryId": "pp",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational",
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib22",
+      "name": "Application logic flaws enabling unauthorised transactions",
+      "categoryId": "pp",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "id": "lib23",
+      "name": "Insecure APIs exposing client data",
+      "categoryId": "pp",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib24",
+      "name": "Unknown or unmanaged external attack surface",
+      "categoryId": "pp",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Reputational"
+      ]
+    },
+    {
+      "id": "lib25",
+      "name": "Automated credential stuffing against client platforms",
+      "categoryId": "pp",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "id": "lib26",
+      "name": "End-of-support legacy platform",
+      "categoryId": "ei",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib27",
+      "name": "Malware compromise of staff endpoints",
+      "categoryId": "ei",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib28",
+      "name": "Unpatched servers and endpoints",
+      "categoryId": "ei",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib29",
+      "name": "Lateral movement across a flat corporate network",
+      "categoryId": "ei",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib30",
+      "name": "Compromise of on-premises directory services",
+      "categoryId": "ei",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib31",
+      "name": "Data theft and extortion by criminal groups",
+      "categoryId": "data",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Financial loss"
+      ]
+    },
+    {
+      "id": "lib32",
+      "name": "Client data leaving through unsanctioned channels",
+      "categoryId": "data",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib33",
+      "name": "Weak protection of sensitive data at rest and in transit",
+      "categoryId": "data",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib34",
+      "name": "Excessive retention of client data increasing breach impact",
+      "categoryId": "data",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib35",
+      "name": "Client data exposed in non-production environments",
+      "categoryId": "data",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib36",
+      "name": "Delayed detection of intrusions due to logging gaps",
+      "categoryId": "secops",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib37",
+      "name": "Slow or ineffective incident response",
+      "categoryId": "secops",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Reputational"
+      ]
+    },
+    {
+      "id": "lib38",
+      "name": "Alert fatigue causing missed threats",
+      "categoryId": "secops",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Operational"
+      ]
+    },
+    {
+      "id": "lib39",
+      "name": "Missed regulatory notification deadlines after an incident",
+      "categoryId": "secops",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib40",
+      "name": "Controls failing without being detected",
+      "categoryId": "assur",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib41",
+      "name": "Failure to meet regulatory security obligations",
+      "categoryId": "assur",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib42",
+      "name": "Insufficient evidence of control operation",
+      "categoryId": "assur",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Regulatory"
+      ]
+    },
+    {
+      "id": "lib43",
+      "name": "New services launched without security validation",
+      "categoryId": "assur",
+      "tags": [],
+      "enabled": false,
+      "source": "library",
+      "impacts": [
+        "Client detriment"
+      ]
+    }
+  ]
+}
