@@ -16,6 +16,8 @@ var UNITS = [
   ['h', 'Hours'],
   ['£k', '£ thousands']
 ];
+// Most described incidents listed in section 2 before the rest collapse into '+N more'.
+var INC_LIST_MAX = 2;
 var C = { g: 'var(--green)', a: 'var(--amber)', r: 'var(--red)' };
 var DS = [
   ['ns', 'Not started'],

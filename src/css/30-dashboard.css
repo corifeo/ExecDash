@@ -1031,12 +1031,14 @@
 .irow .it {
   font-weight: 500;
 }
-.irow .itags {
-  grid-column: 2;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 6px;
+.irow.imore {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 4px;
+}
+.irow.imore .it {
+  font-weight: 400;
+  color: var(--ink-3);
+  font-size: 12.5px;
 }
 .sev .shd .sh {
   width: 8px;
@@ -1138,9 +1140,6 @@
 }
 .cpt .drow.vrow {
   padding: 6px 4px;
-}
-.cpt .ilist .itags {
-  display: none;
 }
 .cpt .irow {
   padding: 4px;

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- **Header key:** two rows (appetite, links). The target key is removed.
+- **Incidents:** Notable incidents lists at most two, most severe first, one line each. The rest collapse into "+N more" with a tooltip. Category and risk are in the tooltip.
+- **Sample data:** `data/sample-large.json` has 19 initiatives and 11 described incidents for layout testing. Import it from Configure, Data.
+
 ## 1.0.0 (2026-09-17)
 
 Minimum viable product, published as **ExecDash**. The dashboard, configuration and data handling are complete for quarterly board and committee use.

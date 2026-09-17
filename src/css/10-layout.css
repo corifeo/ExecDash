@@ -41,15 +41,15 @@ h1 {
 .keys {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .keyrow {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   justify-content: flex-end;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--ink-3);
 }
 .band {

@@ -301,7 +301,38 @@ function incTile(cfg, q, prev, pl, tot, ptot) {
         num(q.incidents.regulatory) +
         '</b><small>&nbsp;</small></div>'
       : '';
-  var list = items
+  // Only the most severe described incidents are listed, so the section does not grow; the rest go in a tooltip.
+  var ranked = items
+    .map(function (x, i) {
+      return [x, i];
+    })
+    .sort(function (a, b) {
+      var sa = all.indexOf(a[0].severity),
+        sb = all.indexOf(b[0].severity);
+      return (sa < 0 ? all.length : sa) - (sb < 0 ? all.length : sb) || a[1] - b[1];
+    })
+    .map(function (x) {
+      return x[0];
+    });
+  var shown = ranked.slice(0, INC_LIST_MAX),
+    rest = ranked.slice(INC_LIST_MAX);
+  var more = rest.length
+    ? '<div class="irow imore stg" tabindex="0" style="--i:' +
+      (shown.length + 3) +
+      '"' +
+      tip(
+        tipHtml(
+          rest.length + ' more described',
+          rest.map(function (x) {
+            return [esc(x.severity || 'Not set'), esc(x.title || 'Untitled incident')];
+          })
+        )
+      ) +
+      '><span class="it">+' +
+      rest.length +
+      ' more</span></div>'
+    : '';
+  var list = shown
     .map(function (x, i) {
       var l = incLinks(cfg, x),
         si = sevs.indexOf(x.severity);
@@ -316,29 +347,10 @@ function incTile(cfg, q, prev, pl, tot, ptot) {
         (si < 0 ? 4 : si) +
         '" aria-hidden="true"></i><span class="it">' +
         esc(x.title || 'Untitled incident') +
-        '</span><span class="itags">' +
-        (l.c ? ref('cat', l.c.name) : '') +
-        (l.r
-          ? ref('risk', l.r.name, {
-              badge: (function () {
-                var ti = q.topRisks
-                  .map(function (t) {
-                    return t.riskId;
-                  })
-                  .indexOf(l.r.id);
-                return ti >= 0 ? ti + 1 : 'R';
-              })(),
-              cls: q.topRisks.some(function (t) {
-                return t.riskId === l.r.id;
-              })
-                ? 'top'
-                : ''
-            })
-          : '') +
         '</span></div>'
       );
     })
-    .join('');
+    .join('') + more;
   return (
     '<article class="tile">' +
     tileHead('Incidents', '', 'Security incidents this quarter, by priority') +
