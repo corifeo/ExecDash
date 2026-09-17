@@ -36,12 +36,12 @@ function renderHeader() {
   }
   var keys =
     view === 'dashboard' && config
-      ? '<div class="keys" aria-label="Status keys"><div class="keyrow"><span>Risk against appetite</span><span class="pill g" data-hlst="g">Within appetite</span><span class="pill a" data-hlst="a">Within tolerance</span><span class="pill r" data-hlst="r">Outside tolerance</span></div><div class="keyrow"><span>Links</span>' +
+      ? '<div class="keys" aria-label="Status keys"><div class="keyrow"><span>Appetite</span><span class="pill g" data-hlst="g" title="Within appetite">Within</span><span class="pill a" data-hlst="a" title="Within tolerance">Tolerance</span><span class="pill r" data-hlst="r" title="Outside tolerance">Outside</span></div><div class="keyrow"><span>Links</span>' +
         ref('cat', 'Category') +
         ref('risk', 'Risk') +
         ref('init', 'Initiative') +
         ref('inc', 'Incident') +
-        '</div><div class="keyrow"><span>Performance against target</span><span class="pill on">On target</span><span class="pill off" data-hlst="off">Behind target</span></div></div>'
+        '</div></div>'
       : '';
   $('#hdr').innerHTML =
     '<div><h1>' +
