@@ -1,0 +1,187 @@
+/* Responsive adjustments for narrower screens. */
+
+@media (max-width: 900px) {
+  .ihead {
+    display: none;
+  }
+  .init {
+    grid-template-columns: 1fr 1fr;
+  }
+  .imain {
+    grid-column: 1/-1;
+  }
+  .ids {
+    text-align: left;
+  }
+}
+@media (max-width: 820px) {
+  .band .rail {
+    grid-row: auto;
+  }
+  .sbody,
+  .csum {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .fbar {
+    position: static;
+  }
+}
+@media (max-width: 620px) {
+  .snav {
+    margin: 0 -14px;
+    padding: 0 14px;
+  }
+}
+@media (max-width: 900px) {
+  .g11 {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 820px) {
+  .band {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .g2 {
+    grid-template-columns: 1fr;
+  }
+  .g2 .span {
+    grid-row: auto;
+  }
+  h1 {
+    font-size: 27px;
+  }
+  .hright {
+    align-items: flex-start;
+  }
+  .keyrow,
+  .tools {
+    justify-content: flex-start;
+  }
+}
+.pulse {
+  gap: 8px;
+}
+[data-density='compact'] .tile {
+  padding: 13px 14px;
+  gap: 8px;
+}
+@media (max-width: 620px) {
+  .wrap {
+    padding: 20px 14px 40px;
+  }
+  .fld input[type='text'] {
+    min-width: 0;
+    width: 100%;
+  }
+  .fld {
+    flex: 1 1 100%;
+  }
+}
+.apcell input[type='number'] {
+  width: 80px;
+}
+@media (max-width: 1100px) {
+  .qcat {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+@media (max-width: 620px) {
+  .qcat {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 900px) {
+  #l4view.cpt .imain {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 900px) {
+  .init {
+    grid-template-areas: 'main main' 'links links' 'prog prog' 'proj del';
+  }
+  #l4view.cpt .init {
+    grid-template-areas: 'main main' 'prog prog' 'proj del';
+  }
+}
+.init {
+  grid-template-areas: 'main prog proj del' 'links links val del';
+}
+@media (max-width: 900px) {
+  #l4view.cpt .init {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 900px) {
+  #l4view.cpt .pvals {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+}
+@media (max-width: 820px) {
+  .g2.cpt {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 900px) {
+  .init {
+    grid-template-areas: 'main main' 'links links' 'prog prog' 'proj del' 'val val';
+  }
+}
+@media (max-width: 900px) {
+  #l1view {
+    grid-template-rows: auto;
+  }
+  #l1view > .tile:first-child {
+    grid-row: auto;
+  }
+}
+@media (max-width: 620px) {
+  .xcard.wide {
+    grid-column: auto;
+  }
+}
+@media (max-width: 620px) {
+  #l1view .plist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  #l1view .prow {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'l m' 'v v';
+    border: 1px solid var(--rule);
+    padding: 6px 8px;
+    gap: 0 6px;
+  }
+  #l1view .prow .pl {
+    grid-area: l;
+    font-size: 12px;
+  }
+  #l1view .prow .pv {
+    grid-area: v;
+  }
+  #l1view .prow .pm {
+    grid-area: m;
+  }
+  #l1view .prow .pm .lbn,
+  #l1view .prow .pm .attr,
+  #l1view .prow .pgo,
+  #l1view .prow .pm .rratio {
+    display: none;
+  }
+  #l1view .prow .pm .pill {
+    font-size: 0;
+    padding: 4px;
+    gap: 0;
+  }
+}
+@media (max-width: 1100px) {
+  .snl:not(.on) .snt {
+    display: none;
+  }
+  .snl:not(.on) {
+    padding-right: 6px;
+  }
+}

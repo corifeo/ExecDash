@@ -1,0 +1,45 @@
+/* Appearance options set from Structure (corners and spacing). */
+
+[data-corners='square']
+  :is(
+    .tile,
+    .ccard,
+    .qcat,
+    .dialcell,
+    .rlist,
+    .fbar,
+    .xcard,
+    .incard,
+    .apcell,
+    .bandcell,
+    .roisum,
+    .savebar,
+    .tscroll,
+    .ipreview,
+    .fair,
+    .delpanel,
+    .stylepreview,
+    .qtabs button,
+    .sev > div,
+    .seg,
+    .btn,
+    .tagedit,
+    .ph
+  ) {
+  border-radius: 3px;
+}
+[data-density='compact'] .band {
+  padding: 20px 0;
+  gap: 22px;
+}
+[data-density='compact'] .g11,
+[data-density='compact'] .g2,
+[data-density='compact'] .gauges {
+  gap: 12px;
+}
+[data-density='compact'] .risks li {
+  padding: 8px 4px;
+}
+[data-density='compact'] .init {
+  padding: 7px 8px;
+}

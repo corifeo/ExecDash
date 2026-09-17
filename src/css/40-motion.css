@@ -1,0 +1,194 @@
+/* Animation: keyframes, reveal on scroll and reduced-motion overrides. */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+.anim .band > div > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.rail .num::after {
+  content: '';
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -5px;
+  border-right: 1.5px solid var(--ink-3);
+  border-bottom: 1.5px solid var(--ink-3);
+  transform: rotate(45deg);
+  transition: transform 0.25s;
+}
+.anim .band .rail {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.anim .band.in > div > *,
+.anim .band.in .rail {
+  opacity: 1;
+  transform: none;
+}
+.anim .band:not(.in) .stg {
+  opacity: 0;
+}
+.anim .band.in .stg {
+  animation: rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms + 150ms);
+}
+.anim .band:not(.in) .pop {
+  opacity: 0;
+}
+.anim .band.in .pop {
+  animation: pop 0.45s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 60ms + 250ms);
+}
+.anim .band.in .kcard.stg {
+  animation-delay: calc(var(--i, 0) * 55ms + 100ms);
+}
+.anim .sev .sv {
+  transform: scaleX(0);
+}
+.anim .band.in .sev .sv {
+  transform: scaleX(1);
+}
+.anim .sbar span {
+  transform: scaleX(0);
+}
+.anim .band.in .sbar span {
+  transform: scaleX(1);
+}
+.anim .radar .rg {
+  transform: scale(0.02);
+}
+.anim .band.in .radar .rg {
+  transform: scale(1);
+}
+.anim .band.in .radar .prvg {
+  transition-delay: 0.1s;
+}
+.anim .anim .band.in .rctl {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.anim .zbar .bm {
+  left: 0;
+}
+.anim .band.in .zbar .bm {
+  left: var(--x);
+}
+.anim .zbar .tf {
+  transform: scaleX(0);
+}
+.anim .band.in .zbar .tf {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .kcard:hover,
+  .kcard.hl {
+    transform: none;
+  }
+  .gauge:hover {
+    transform: none;
+  }
+}
+.anim .pf {
+  transform: scaleX(0);
+}
+.anim .band.in .pf {
+  transform: scaleX(1);
+}
+.anim .band.in .arr {
+  animation: nudge 1.6s ease-in-out 1s 2;
+}
+@keyframes nudge {
+  50% {
+    transform: translateX(3px);
+  }
+}
+.anim .band.in .ndot {
+  animation: pop 0.4s ease 1s backwards;
+}
+.anim #dash .lbar .lm,
+.anim #dash .lbar .lw {
+  left: 0;
+}
+.anim #dash .lbar .lw {
+  transform: scaleX(0);
+}
+.anim #dash .band.in .lbar .lm,
+.anim #dash .band.in .lbar .lw {
+  left: var(--x);
+}
+.anim #dash .band.in .lbar .lw {
+  transform: scaleX(1);
+}
+.anim .band:not(.in) .vfill {
+  transform: scaleX(0);
+}
+.anim #dash .band:not(.in) .lbk .lb {
+  background: var(--track);
+  transform: none;
+}
+.anim #dash .band:not(.in) .vbt i {
+  transform: scaleX(0);
+}
+.anim #dash .band:not(.in) .vline .va {
+  transform: scaleX(0);
+}
+.anim #dash .band:not(.in) .mf {
+  transform: scaleX(0);
+}

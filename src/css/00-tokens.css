@@ -1,0 +1,105 @@
+/* Design tokens (light and dark), base elements and focus styles. */
+
+:root {
+  --fh: 'Source Serif 4', Georgia, serif;
+  --paper: #f4f6f8;
+  --card: #ffffff;
+  --ink: #172131;
+  --ink-2: #465264;
+  --ink-3: #6a7485;
+  --rule: #dce1e8;
+  --track: #e4e8ee;
+  --accent: #2f4b7c;
+  --accent-bg: #e4eaf5;
+  --ghost: #a3abb8;
+  --field: #ffffff;
+  --sev0: #6e1410;
+  --riskc: #5b3f97;
+  --initc: #0e7c66;
+  --green: #1d7447;
+  --green-bg: #e2f1e8;
+  --amber: #9a5200;
+  --amber-bg: #fbebd5;
+  --red: #b42318;
+  --red-bg: #fbe5e2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #0f141b;
+    --card: #161d27;
+    --ink: #e7ebf1;
+    --ink-2: #b6bfcc;
+    --ink-3: #8e98a7;
+    --rule: #2a3441;
+    --track: #27313e;
+    --accent: #93b2e8;
+    --accent-bg: #1e2b42;
+    --ghost: #5e6878;
+    --field: #10161f;
+    --sev0: #ff9a8f;
+    --riskc: #b9a2ea;
+    --initc: #4fc4a8;
+    --green: #62c695;
+    --green-bg: #133325;
+    --amber: #f1ac52;
+    --amber-bg: #3a2a13;
+    --red: #f48b80;
+    --red-bg: #3e1b18;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #0f141b;
+  --card: #161d27;
+  --ink: #e7ebf1;
+  --ink-2: #b6bfcc;
+  --ink-3: #8e98a7;
+  --rule: #2a3441;
+  --track: #27313e;
+  --accent: #93b2e8;
+  --accent-bg: #1e2b42;
+  --ghost: #5e6878;
+  --field: #10161f;
+  --sev0: #ff9a8f;
+  --riskc: #b9a2ea;
+  --initc: #4fc4a8;
+  --green: #62c695;
+  --green-bg: #133325;
+  --amber: #f1ac52;
+  --amber-bg: #3a2a13;
+  --red: #f48b80;
+  --red-bg: #3e1b18;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    'Public Sans',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+[data-headings='sans'] {
+  --fh: 'Public Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+[data-headings='sans'] h1 {
+  letter-spacing: -0.01em;
+}
