@@ -569,6 +569,10 @@ input[type='number'] {
 .sh.r {
   color: var(--red);
 }
+.sh.n {
+  color: var(--ghost);
+  clip-path: polygon(0 35%, 100% 35%, 100% 65%, 0 65%);
+}
 .value {
   font-size: 34px;
   font-weight: 600;
@@ -1566,7 +1570,20 @@ button.ref:focus-visible {
   align-items: center;
   gap: 10px;
   margin-top: 6px;
-  max-width: 280px;
+  max-width: 400px;
+}
+.rloss .rll {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.rloss .lbk {
+  flex: 0 0 210px;
+  max-width: 210px;
+}
+.rloss .lbk .lb {
+  height: 12px;
+  border-radius: 4px;
 }
 .rloss .lv {
   white-space: nowrap;
@@ -1657,6 +1674,31 @@ button.ref:focus-visible {
 }
 .lbk .lb.past {
   background: color-mix(in srgb, var(--c) 30%, var(--track));
+}
+/* On a highlighted row the track matches the background, so lift the unlit buckets. */
+.lbk:hover .lb,
+.lbk:focus-visible .lb,
+.hl .lbk .lb,
+.rhl .lbk .lb,
+.risks li:hover .lbk .lb,
+.risks li:focus-visible .lbk .lb {
+  background: var(--card);
+}
+.lbk:hover .lb.past,
+.lbk:focus-visible .lb.past,
+.hl .lbk .lb.past,
+.rhl .lbk .lb.past,
+.risks li:hover .lbk .lb.past,
+.risks li:focus-visible .lbk .lb.past {
+  background: color-mix(in srgb, var(--c) 30%, var(--card));
+}
+.lbk:hover .lb.on,
+.lbk:focus-visible .lb.on,
+.hl .lbk .lb.on,
+.rhl .lbk .lb.on,
+.risks li:hover .lbk .lb.on,
+.risks li:focus-visible .lbk .lb.on {
+  background: var(--c);
 }
 .lbk .lb.on {
   background: var(--c);
@@ -3503,26 +3545,116 @@ button.tg:hover {
 .fhead .btn {
   margin-left: auto;
 }
-.fgroups {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 28px;
+/* Quantified loss: three steps side by side, so the panel stays short. */
+.fsteps {
+  display: grid;
+  grid-template-columns: auto auto minmax(260px, 1fr);
+  gap: 12px 24px;
+  align-items: start;
 }
-.fgrp .dials {
-  display: flex;
-  gap: 6px;
-}
-.fres {
+.fstep {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-width: 560px;
+  gap: 4px;
+  min-width: 0;
 }
-.fnums {
+.fstep + .fstep {
+  border-left: 1px solid var(--rule);
+  padding-left: 24px;
+}
+.fsh {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
+  align-items: center;
+  gap: 8px;
   font-size: 13.5px;
+}
+.fsn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--card);
+  font-size: 11.5px;
+  font-weight: 700;
+  flex: none;
+}
+.fq,
+.fsay {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-3);
+  max-width: 330px;
+}
+.fsay {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.fstep .dials {
+  display: flex;
+  gap: 4px;
+}
+.fstep .knob.sm {
+  width: 104px;
+}
+.fcost .knob .kval {
+  stroke: var(--green);
+}
+.fout .fsn {
+  background: var(--green);
+}
+.fstats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 4px 0 10px;
+}
+.fstat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 7px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  line-height: 1.25;
+}
+.fstat b {
+  font-size: 17px;
+  color: var(--green);
+}
+.fstat span {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.fstat em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.fstat.on {
+  border-color: color-mix(in srgb, var(--green) 45%, var(--rule));
+  background: var(--green-bg);
+}
+.fair .lbar {
+  flex: none;
+}
+.fair .lbar .lz {
+  cursor: help;
+  opacity: 0.7;
+}
+.fair .lbar .lz:hover,
+.fair .lbar .lz:focus-visible {
+  opacity: 1;
+}
+.fair .lbar .lm,
+.fair .lbar .lw {
+  cursor: help;
+}
+.fair .lbl span {
+  padding: 4px 0 0;
 }
 .tg.loss {
   color: var(--ink);
@@ -4003,6 +4135,11 @@ table.ct tbody th {
   font-weight: 600;
   flex-wrap: wrap;
 }
+.qc-meas {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+}
 .qc-val,
 .qc-st {
   display: flex;
@@ -4426,6 +4563,286 @@ details.ccard > summary .pill {
 .rconfirm .tools {
   justify-content: flex-start;
 }
+.fbtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+.fhead .fbtns .btn {
+  margin-left: 0;
+}
+/* Modal panel. */
+.mback {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 16px;
+  overflow-y: auto;
+}
+.modal {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  max-width: 820px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+.mhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.mhead h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.mbody {
+  padding: 14px 20px 20px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+/* Initiative value: linked risks, reduction and a before and after comparison. */
+.vred .slider {
+  margin-top: 2px;
+}
+.vrisks {
+  list-style: none;
+  margin: 2px 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  max-width: 330px;
+}
+.vrisks li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.vrisks li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.vrisks li b {
+  white-space: nowrap;
+  font-weight: 600;
+}
+.fstat b.low {
+  color: var(--amber);
+}
+.vbrow {
+  display: grid;
+  grid-template-columns: 62px minmax(60px, 1fr) 54px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  cursor: help;
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+.vbrow:hover,
+.vbrow:focus-visible {
+  background: var(--accent-bg);
+}
+.vbrow:hover .vbt,
+.vbrow:focus-visible .vbt {
+  background: var(--card);
+}
+.vbrow b {
+  text-align: right;
+  white-space: nowrap;
+}
+.vbrow .vbt {
+  height: 10px;
+}
+.vbrow .vbt i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w);
+  border-radius: 4px;
+}
+.vbt .vnow {
+  background: var(--ghost);
+}
+.vbt .vafter {
+  background: var(--green);
+}
+.vbt .vcost {
+  background: var(--ink-2);
+}
+/* Compact, visual loss guide. */
+.modal.sm {
+  max-width: 640px;
+}
+.glead {
+  margin: 0 0 10px;
+}
+.gsteps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.gstep {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.gstep b {
+  color: var(--ink);
+  font-size: 13px;
+}
+.gi svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.gex2 {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+}
+.gtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+.gpane {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.gpane.on {
+  display: flex;
+}
+.gwhen,
+.gscale {
+  margin: 0;
+  font-size: 12.5px;
+}
+.gscale {
+  color: var(--ink-3);
+}
+.gscale b {
+  color: var(--ink-2);
+}
+.rviz {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 2px 10px;
+  align-items: center;
+  width: 100%;
+  font-size: 12px;
+}
+.rvl {
+  color: var(--ink-3);
+  grid-row: span 2;
+}
+.rvt {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--track);
+}
+.rvr {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.rvc .rvr {
+  background: color-mix(in srgb, var(--green) 45%, transparent);
+}
+.rvm {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--card);
+}
+.rvc .rvm {
+  background: var(--green);
+}
+.rvv {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-3);
+}
+.rvv b {
+  color: var(--ink);
+}
+.gnote {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+}
+@media (max-width: 560px) {
+  .gsteps {
+    grid-template-columns: 1fr;
+  }
+}
+.gmatch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: var(--green-bg);
+  font-size: 13px;
+}
+.gtabs .chip.gbest {
+  border-color: var(--green);
+}
+.gtabs .chip.gbest::after {
+  content: ' \2605';
+  color: var(--green);
+}
+.gtabs .chip.gbest[aria-pressed='true']::after {
+  color: inherit;
+}
+.rvs {
+  display: flex;
+  overflow: hidden;
+  gap: 2px;
+}
+.rvs .rvd {
+  background: var(--green);
+}
+.rvs .rvr2 {
+  background: color-mix(in srgb, var(--green) 40%, var(--track));
+}
+.rvv b {
+  font-weight: 600;
+}
 
 /* Appearance options set from Structure (corners and spacing). */
 
@@ -4485,6 +4902,27 @@ details.ccard > summary .pill {
   }
   #l4view:not(.cpt) .ihead span:nth-child(2) {
     display: none;
+  }
+}
+@media (max-width: 1180px) {
+  .fsteps {
+    grid-template-columns: auto auto;
+  }
+  .fstep.fout {
+    grid-column: 1/-1;
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .fsteps {
+    grid-template-columns: 1fr;
+  }
+  .fstep + .fstep {
+    border-left: 0;
+    padding-left: 0;
   }
 }
 @media (max-width: 900px) {
@@ -4741,11 +5179,12 @@ function move(arr, i, d) {
 /* ===== src/js/02-constants.js ===== */
 /* Fixed labels and enumerations shared across the app. */
 
-var W = { g: 'Within', a: 'Tolerance', r: 'Outside', on: 'On target', off: 'Behind target' };
+var W = { g: 'Within', a: 'Tolerance', r: 'Outside', n: 'n/a', on: 'On target', off: 'Behind target' };
 var WL = {
   g: 'Within appetite',
   a: 'Within tolerance',
   r: 'Outside tolerance',
+  n: 'Not applicable or no data',
   on: 'On target',
   off: 'Behind target'
 };
@@ -4915,6 +5354,7 @@ function normalizeConfig(c) {
   c.initiatives.forEach(function (r) {
     if (r.enabled === undefined) r.enabled = true;
     r.tags = r.tags || [];
+    if (num(r.runCost) == null) r.runCost = 0;
     r.riskIds = (r.riskIds || []).filter(function (id) {
       return c.risks.some(function (x) {
         return x.id === id;
@@ -5118,7 +5558,7 @@ function activeInits(cfg, q, catId) {
   });
 }
 function counts(list) {
-  var c = { g: 0, a: 0, r: 0, on: 0, off: 0 };
+  var c = { g: 0, a: 0, r: 0, n: 0, on: 0, off: 0 };
   list.forEach(function (s) {
     if (c[s] != null) c[s]++;
   });
@@ -5228,6 +5668,12 @@ function thrText(ind) {
     return 'Appetite ' + fmt(a, u) + ' or more. Tolerance down to ' + fmt(t, u) + '.';
   var ap = a === 0 && cnt ? 'Appetite 0.' : 'Appetite ' + fmt(a, u) + ' or ' + (cnt ? 'fewer' : 'less') + '.';
   return ap + ' Tolerance up to ' + fmt(t, u) + '.';
+}
+// Plain sentence saying what a category's number measures and which way is better.
+function measureText(ind) {
+  var u = unitName(ind.unit).toLowerCase(),
+    dir = ind.direction === 'higher' ? 'Higher is better' : 'Lower is better';
+  return 'Measured in ' + (u === 'count' ? 'counts' : u) + '. ' + dir + '. ' + thrText(ind);
 }
 function trendHtml(d, prevLabel, u, higherBetter) {
   if (d == null) return '';
@@ -5633,7 +6079,7 @@ function delWarn(kind, id) {
 }
 
 /* ===== src/js/13-fair.js ===== */
-/* Simplified FAIR simulation, loss bands and initiative value (avoided loss). */
+/* Simplified FAIR simulation, loss bands and initiative value (avoided loss, net of running cost). */
 
 function hashStr(s) {
   var h = 2166136261;
@@ -5779,13 +6225,24 @@ function initValue(cfg, it) {
       est++;
     }
   });
-  var v = { risks: risks.length, est: est, base: base, cost: cost, red: red, avoided: null };
+  var run = num(it.runCost) || 0;
+  var v = {
+    risks: risks.length,
+    est: est,
+    base: base,
+    cost: cost,
+    run: run,
+    red: red,
+    avoided: null,
+    net: null
+  };
   if (red != null && est) {
     v.avoided = (base * red) / 100;
+    v.net = v.avoided - run;
     if (cost) {
-      v.ratio = v.avoided / cost;
-      v.rosi = ((v.avoided - cost) / cost) * 100;
-      v.payback = v.avoided > 0 ? (cost / v.avoided) * 12 : null;
+      v.ratio = v.net / cost;
+      v.rosi = ((v.net - cost) / cost) * 100;
+      v.payback = v.net > 0 ? (cost / v.net) * 12 : null;
     }
   }
   return v;
@@ -5793,9 +6250,11 @@ function initValue(cfg, it) {
 function portfolioValue(cfg, list) {
   var red = {},
     cost = 0,
+    run = 0,
     anyCost = false;
   list.forEach(function (it) {
     var r = num(it.reduction);
+    run += num(it.runCost) || 0;
     if (num(it.cost) != null) {
       cost += +it.cost;
       anyCost = true;
@@ -5818,10 +6277,12 @@ function portfolioValue(cfg, list) {
   });
   return {
     avoided: n ? avoided : null,
+    net: n ? avoided - run : null,
+    run: run,
     base: base,
     cost: anyCost ? cost : null,
     risks: n,
-    ratio: n && anyCost && cost ? avoided / cost : null
+    ratio: n && anyCost && cost ? (avoided - run) / cost : null
   };
 }
 function bandName(bands, v) {
@@ -5994,7 +6455,7 @@ function onHover(target, x, y) {
   var t = inDash
     ? target.closest('[data-tip]')
     : target && target.closest
-      ? target.closest('#cfg .info')
+      ? target.closest('#cfg .info, #cfg .fair [data-tip]')
       : null;
   if (t !== curTip) {
     curTip = t;
@@ -6284,7 +6745,9 @@ function valueRows(v, done) {
         ? 'Not available'
         : esc(money(v.avoided)) + ' a year' + (done ? '' : ' when delivered')
     ],
-    ['Cost', v.cost == null ? 'Not set' : esc(money(v.cost))]
+    ['Cost', v.cost == null ? 'Not set' : esc(money(v.cost))],
+    v.run ? ['Running cost', esc(money(v.run)) + ' a year'] : null,
+    v.run && v.net != null ? ['Net avoided loss', esc(money(v.net)) + ' a year'] : null
   ];
   if (v.ratio != null)
     rows.push(
@@ -6839,16 +7302,35 @@ function lossTracker(bands, res, opts) {
     '">' +
     bands
       .map(function (b, i) {
-        return '<span class="lz" style="background:' + bandCol(i, bands.length) + '"></span>';
+        return (
+          '<span class="lz" style="background:' +
+          bandCol(i, bands.length) +
+          '"' +
+          (opts.bandTips
+            ? ' tabindex="0"' +
+              tip(
+                tipHtml(b.name + ' loss', [
+                  ['Range a year', esc(bandRange(bands, i))],
+                  i === bandIdx(bands, res.mean) ? ['Typical year', esc(money(res.mean))] : null,
+                  i === bandIdx(bands, res.p90) ? ['1 in 10 year', esc(money(res.p90))] : null
+                ])
+              )
+            : '') +
+          '></span>'
+        );
       })
       .join('') +
     '<i class="lw" style="--x:' +
     x +
     '%;--w:' +
     Math.max(0, x9 - x) +
-    '%"></i><i class="lm" style="--x:' +
+    '%"' +
+    (opts.bandTips ? tip(tipHtml('1 in 10 year loss', [['A bad year', esc(money(res.p90))]])) : '') +
+    '></i><i class="lm" style="--x:' +
     x +
-    '%"></i></div>' +
+    '%"' +
+    (opts.bandTips ? tip(tipHtml('Typical year', [['Expected loss', esc(money(res.mean))]])) : '') +
+    '></i></div>' +
     (opts.labels
       ? '<div class="lbl">' +
         bands
@@ -7243,7 +7725,7 @@ function subCounts(e, cat) {
       return e.subs[s.id] || 'g';
     })
   );
-  return c.g + ' within, ' + c.a + ' in tolerance, ' + c.r + ' outside';
+  return c.g + ' within, ' + c.a + ' in tolerance, ' + c.r + ' outside' + (c.n ? ', ' + c.n + ' n/a' : '');
 }
 function catTip(cat, q, prev, pl) {
   var e = catEntry(q, cat),
@@ -7573,7 +8055,7 @@ function pulseTile(cfg, q, prev, pl) {
           }).length;
           return n ? [d2[1], String(n)] : null;
         }).concat([
-          val.avoided != null ? ['Projected avoided loss', esc(money(val.avoided)) + ' a year'] : null,
+          val.net != null ? ['Projected avoided loss, net', esc(money(val.net)) + ' a year'] : null,
           val.cost != null ? ['Total cost', esc(money(val.cost))] : null
         ]),
         val.avoided != null ? AVOID_NOTE : '',
@@ -7731,7 +8213,7 @@ function layer2(cfg, q, prev, pl) {
           : '') +
         '</span>';
       var loss = res
-        ? '<div class="rloss">' +
+        ? '<div class="rloss"><span class="rll">Loss estimate</span>' +
           lossBucket(cfg.lossBands, res) +
           '<span class="lv">' +
           esc(bandName(cfg.lossBands, res.mean)) +
@@ -7953,25 +8435,26 @@ function incTile(cfg, q, prev, pl, tot, ptot) {
       rest.length +
       ' more</span></div>'
     : '';
-  var list = shown
-    .map(function (x, i) {
-      var l = incLinks(cfg, x),
-        si = sevs.indexOf(x.severity);
-      return (
-        '<div class="irow stg" tabindex="0" style="--i:' +
-        (i + 3) +
-        '"' +
-        (l.c ? ' data-link="' + esc(l.c.id) + '"' : '') +
-        (l.r ? ' data-risks="' + esc(l.r.id) + '"' : '') +
-        tip(tipHtml(x.title || 'Incident', incRows(cfg, x), x.description, 'Description')) +
-        '><i class="vs s' +
-        (si < 0 ? 4 : si) +
-        '" aria-hidden="true"></i><span class="it">' +
-        esc(x.title || 'Untitled incident') +
-        '</span></div>'
-      );
-    })
-    .join('') + more;
+  var list =
+    shown
+      .map(function (x, i) {
+        var l = incLinks(cfg, x),
+          si = sevs.indexOf(x.severity);
+        return (
+          '<div class="irow stg" tabindex="0" style="--i:' +
+          (i + 3) +
+          '"' +
+          (l.c ? ' data-link="' + esc(l.c.id) + '"' : '') +
+          (l.r ? ' data-risks="' + esc(l.r.id) + '"' : '') +
+          tip(tipHtml(x.title || 'Incident', incRows(cfg, x), x.description, 'Description')) +
+          '><i class="vs s' +
+          (si < 0 ? 4 : si) +
+          '" aria-hidden="true"></i><span class="it">' +
+          esc(x.title || 'Untitled incident') +
+          '</span></div>'
+        );
+      })
+      .join('') + more;
   return (
     '<article class="tile">' +
     tileHead('Incidents', '', 'Security incidents this quarter, by priority') +
@@ -8392,10 +8875,10 @@ function initRow(cfg, q, prev, pl, it, i) {
         valTip +
         '>' +
         '<span class="ivtop">' +
-        (val.avoided == null
+        (val.net == null
           ? '<span class="al">No estimate</span>'
           : '<b class="ivsum">' +
-            esc(money(val.avoided)) +
+            esc(money(val.net)) +
             '<small> a year ' +
             (done ? 'avoided' : 'when done') +
             '</small></b>') +
@@ -8403,7 +8886,7 @@ function initRow(cfg, q, prev, pl, it, i) {
           ? '<b class="rratio' + (val.ratio < 1 ? ' low' : '') + '">' + esc(ratioTxt(val.ratio)) + '</b>'
           : '') +
         '</span>' +
-        valueLine(val.avoided, val.cost) +
+        valueLine(val.net, val.cost) +
         '</div>'
       : '<div class="ival"><span class="al">No estimate</span></div>';
   var impact =
@@ -8432,25 +8915,29 @@ function initRow(cfg, q, prev, pl, it, i) {
       : '<div class="proj"><span class="al">No projection set</span></div>';
   // Expanded: where the avoided loss comes from, not a repeat of the row bar.
   var vfig = function (lab, v, cls) {
-    return '<div class="vfig"><span>' + lab + '</span><b' + (cls ? ' class="' + cls + '"' : '') + '>' + v + '</b></div>';
+    return (
+      '<div class="vfig"><span>' +
+      lab +
+      '</span><b' +
+      (cls ? ' class="' + cls + '"' : '') +
+      '>' +
+      v +
+      '</b></div>'
+    );
   };
   var vbar =
     val.avoided != null || val.cost != null
       ? '<div class="idetv">' +
-        vfig(
-          'Expected loss now',
-          val.est ? esc(money(val.base)) + ' a year' : 'No estimate'
-        ) +
+        vfig('Expected loss now', val.est ? esc(money(val.base)) + ' a year' : 'No estimate') +
         vfig(
           done ? 'Since delivery' : 'After delivery',
-          val.avoided == null
-            ? 'Not available'
-            : esc(money(val.base - val.avoided)) + ' a year',
+          val.avoided == null ? 'Not available' : esc(money(val.base - val.avoided)) + ' a year',
           'good'
         ) +
         vfig(
           'Cost',
           (val.cost == null ? 'Not set' : esc(money(val.cost))) +
+            (val.run ? ' + ' + esc(money(val.run)) + ' a year' : '') +
             (val.payback != null ? ', back in ' + esc(paybackTxt(val.payback).toLowerCase()) : '')
         ) +
         '</div>'
@@ -8611,6 +9098,8 @@ function layer4(cfg, q, prev, pl) {
                 'Avoided loss when delivered',
                 pvv.avoided == null ? 'Not available' : esc(money(pvv.avoided)) + ' a year'
               ],
+              pvv.run ? ['Running costs', esc(money(pvv.run)) + ' a year'] : null,
+              pvv.run && pvv.net != null ? ['Net avoided loss', esc(money(pvv.net)) + ' a year'] : null,
               ['Total cost', pvv.cost == null ? 'Not set' : esc(money(pvv.cost))],
               pvv.ratio != null ? ['Avoided loss against cost', esc(ratioTxt(pvv.ratio))] : null,
               ['Shared risks', 'Counted once, with reductions combined']
@@ -8624,7 +9113,7 @@ function layer4(cfg, q, prev, pl) {
           ? '<b class="rratio' + (pvv.ratio < 1 ? ' low' : '') + '">' + esc(ratioTxt(pvv.ratio)) + '</b>'
           : '') +
         '</div>' +
-        valueBars(pvv.avoided, pvv.cost, true) +
+        valueBars(pvv.net, pvv.cost, true) +
         '<p class="al">Estimated fall in expected annual loss on linked risks once delivered. This is avoided loss, not a measure of overall cyber improvement.</p></div>'
       : '';
   var head =
@@ -8665,7 +9154,7 @@ function layer4(cfg, q, prev, pl) {
 }
 
 /* ===== src/js/40-controls.js ===== */
-/* Configuration form controls: fields, selects, switches, tag editors, sliders, commentary and buttons. */
+/* Configuration form controls: fields, selects, switches, tag editors, sliders, commentary, buttons and the modal. */
 
 function tagEditor(path, list, opts) {
   opts = opts || {};
@@ -9236,7 +9725,8 @@ function ragPick(path, val, label) {
     [
       ['g', 'Within appetite'],
       ['a', 'Within tolerance'],
-      ['r', 'Outside tolerance']
+      ['r', 'Outside tolerance'],
+      ['n', 'Not applicable or no data']
     ]
       .map(function (o) {
         return (
@@ -9312,6 +9802,30 @@ function chgLabel(d, u, sNow, sPrev) {
   if (d) parts.push((d > 0 ? 'Up ' : 'Down ') + fmtAbs(d, u));
   return parts.join(', ');
 }
+// Modal panel: one at a time, closed by its button, Escape or a click on the backdrop.
+var modalBack = null;
+function openModal(title, body, cls) {
+  closeModal();
+  modalBack = document.createElement('div');
+  modalBack.className = 'mback';
+  modalBack.innerHTML =
+    '<div class="modal' +
+    (cls ? ' ' + cls : '') +
+    '" role="dialog" aria-modal="true" aria-labelledby="mtitle"><div class="mhead"><h2 id="mtitle">' +
+    esc(title) +
+    '</h2><button class="btn icon" data-act="mclose" aria-label="Close">&#215;</button></div><div class="mbody">' +
+    body +
+    '</div></div>';
+  document.body.appendChild(modalBack);
+  modalBack.querySelector('[data-act="mclose"]').focus();
+}
+function closeModal() {
+  if (modalBack) modalBack.remove();
+  modalBack = null;
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && modalBack) closeModal();
+});
 
 /* ===== src/js/41-dials.js ===== */
 /* Rotary dial control used for scores, money and event frequency. */
@@ -9424,7 +9938,7 @@ function knob(path, val, kind, label, opts) {
     '">' +
     knobSvg(f, i >= 0, mi) +
     '<span class="kv">' +
-    esc(i < 0 ? 'Drag to set' : knobFmt(kind, steps[i])) +
+    esc(i < 0 ? 'Drag to set' : knobFmt(kind, num(val))) +
     '</span><span class="kl">' +
     esc(label) +
     '</span></div>'
@@ -9542,6 +10056,7 @@ document.addEventListener('keydown', function (e) {
 /* Configure view shell: tabs, save bar and re-rendering. */
 
 function renderConfig() {
+  TIPS = []; // Configure reuses the registry for the loss bar tooltips.
   var el = $('#cfg');
   if (wcfg) applyStyle(wcfg.style);
   if (!wcfg) {
@@ -9739,11 +10254,18 @@ function cfgData() {
             (cur ? '<span class="pill ' + cur + '">' + W[cur] + '</span>' : '') +
             '</div><span class="al">' +
             esc(ind.desc) +
+            '</span><span class="al qc-meas">' +
+            esc(measureText(ind)) +
             '</span>' +
             cnote +
             '</div>' +
             '<div class="qc-val">' +
-            fld('Value', valueCtl + prevHint(prev, pe ? num(pe.value) : null, ind.unit)) +
+            fld(
+              'Value, ' + unitName(ind.unit).toLowerCase(),
+              valueCtl + prevHint(prev, pe ? num(pe.value) : null, ind.unit),
+              '',
+              ind.desc + '. ' + measureText(ind)
+            ) +
             fld(
               'Change',
               trendCtl(p + '.trend', e.trend, prev ? autoDelta(v, num(pe.value)) : null, ind.unit),
@@ -10774,7 +11296,7 @@ document.addEventListener(
 );
 
 /* ===== src/js/45-config-registers.js ===== */
-/* Configure, Risks and initiatives tab: registers, filters, bulk actions, loss and value editors. */
+/* Configure, Risks and initiatives tab: registers, filters, bulk actions, loss and value editors and their guides. */
 
 var regView = 'risks',
   RF = { q: '', cat: '', impact: '', tag: '', src: '', used: '', en: '', page: 0 },
@@ -10969,46 +11491,358 @@ function rowHead(k, id, enabled, name, chips, open, editAct) {
     '</button></div>'
   );
 }
+// Worked examples for the loss estimate guide. Values sit on the dial steps so they apply exactly.
+// Tags use the register vocabulary, so the guide can suggest the example that fits the risk being edited.
+var FAIR_EX = [
+  {
+    key: 'gdpr',
+    title: 'Personal data breach',
+    tags: ['Data loss', 'Regulatory', 'Encryption', 'Retention', 'Non-production', 'Human error'],
+    when: 'Client personal data is exposed or stolen and the breach must be reported to the ICO within 72 hours.',
+    anchor:
+      'UK GDPR fines reach \u00a317.5m or 4% of global annual turnover. The ICO fined British Airways \u00a320m and Marriott \u00a318.4m in 2020, and Ticketmaster \u00a31.25m. Most breaches end with no fine but still cost hundreds of thousands to handle.',
+    f: [0.1, 0.3, 1],
+    l: [100000, 1000000, 20000000]
+  },
+  {
+    key: 'ato',
+    title: 'Stolen customer accounts',
+    tags: ['Identity', 'Client-facing', 'Session security'],
+    when: 'Attackers take over client accounts, usually with reused passwords, and move money or change details.',
+    anchor:
+      'The FCA fined Tesco Bank \u00a316.4m in 2018 after a 2016 attack took about \u00a32.26m from customer accounts. That was an extreme case; most account takeover waves cost far less.',
+    f: [0.5, 1, 3],
+    l: [50000, 250000, 3000000]
+  },
+  {
+    key: 'ransom',
+    title: 'Ransomware outage',
+    tags: ['Ransomware', 'Malware', 'Endpoints', 'Network', 'Privileged access'],
+    when: 'Systems are encrypted and key services are down for days while they are rebuilt.',
+    anchor:
+      'Recovery usually takes weeks, and the outage, not any ransom, drives most of the cost. Firms must also show they stayed within impact tolerances for important business services.',
+    f: [0.05, 0.2, 0.5],
+    l: [500000, 3000000, 15000000]
+  },
+  {
+    key: 'bec',
+    title: 'Payment diversion or fraud',
+    tags: ['Fraud', 'Phishing', 'AI', 'Social engineering'],
+    when: 'A mailbox is spoofed or taken over, or a caller impersonates an executive, and a payment goes to the wrong account.',
+    anchor:
+      'Individual losses are often tens of thousands of pounds, occasionally over a million when a large supplier payment is redirected.',
+    f: [0.5, 1, 3],
+    l: [25000, 100000, 1000000]
+  },
+  {
+    key: 'supplier',
+    title: 'Breach at a critical supplier',
+    tags: [
+      'Third party',
+      'Supply chain',
+      'Open source',
+      'Build pipeline',
+      'Release integrity',
+      'Integrations',
+      'Shadow IT'
+    ],
+    when: 'A supplier or software you depend on is compromised, and your data or service is caught up in it.',
+    anchor:
+      'In 2023 a flaw in the MOVEit file transfer tool exposed data at hundreds of organisations. Staff at British Airways, the BBC and Boots were affected through their payroll provider.',
+    f: [0.05, 0.2, 1],
+    l: [100000, 750000, 10000000]
+  },
+  {
+    key: 'insider',
+    title: 'Insider takes client data',
+    tags: ['Insider', 'Joiners and leavers'],
+    when: 'An employee or contractor copies client data out of the firm, for gain or out of grievance.',
+    anchor:
+      'The Supreme Court ruled in 2020 that Morrisons was not liable for an employee who leaked payroll data on about 100,000 staff, but the case took six years to settle.',
+    f: [0.05, 0.2, 0.5],
+    l: [50000, 500000, 5000000]
+  },
+  {
+    key: 'vuln',
+    title: 'Exploited internet-facing flaw',
+    tags: ['Patching', 'Attack surface', 'Legacy', 'Cloud', 'API', 'Asset inventory', 'Secrets'],
+    when: 'A known weakness in an exposed system is used to get in before it is fixed.',
+    anchor:
+      'Flaws such as Log4j in 2021 and MOVEit in 2023 were exploited within days of being published, so the patching window is short.',
+    f: [0.2, 0.5, 2],
+    l: [100000, 750000, 7500000]
+  },
+  {
+    key: 'detect',
+    title: 'Intrusion found late',
+    tags: ['Detection', 'Logging', 'Incident response', 'Assurance', 'Control failure', 'Evidence', 'Change'],
+    when: 'An attacker is inside for weeks before anyone notices, so the damage and the clean-up are larger.',
+    anchor:
+      'The longer an intrusion runs, the more it costs: more systems to rebuild, more data to review and a harder conversation with the regulator.',
+    f: [0.1, 0.3, 1],
+    l: [100000, 1000000, 10000000]
+  }
+];
+// Log-scale position, so a range from \u00a310k to \u00a320m reads evenly.
+function logPos(v, lo, hi) {
+  var x = Math.log10(Math.max(v, lo)),
+    a = Math.log10(lo),
+    b = Math.log10(hi);
+  return Math.max(0, Math.min(100, ((x - a) / (b - a)) * 100));
+}
+// A range bar: shaded from low to worst, a dot at the typical value.
+function rangeViz(label, vals, lo, hi, fmtFn, cls) {
+  var a = logPos(vals[0], lo, hi),
+    m = logPos(vals[1], lo, hi),
+    b = logPos(vals[2], lo, hi);
+  return (
+    '<div class="rviz ' +
+    cls +
+    '"><span class="rvl">' +
+    label +
+    '</span><span class="rvt"><i class="rvr" style="left:' +
+    a +
+    '%;width:' +
+    Math.max(1, b - a) +
+    '%"></i><i class="rvm" style="left:' +
+    m +
+    '%"></i></span><span class="rvv"><span>' +
+    esc(fmtFn(vals[0])) +
+    '</span><b>' +
+    esc(fmtFn(vals[1])) +
+    '</b><span>' +
+    esc(fmtFn(vals[2])) +
+    '</span></span></div>'
+  );
+}
+var GICON = {
+  freq: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  cost: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6.5A3.5 3.5 0 0 0 9 9v9M7 13h6M7 18h10"/></svg>',
+  who: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 14c3 0 6 1.5 6 4.5"/></svg>',
+  cut: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h5"/></svg>',
+  ratio:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l6-6 4 4 6-8"/><path d="M15 8h5v5"/></svg>'
+};
+// The example whose tags overlap most with the record being edited, or null.
+function bestExample(list, tags) {
+  var best = null,
+    top = 0;
+  list.forEach(function (x) {
+    var n = x.tags.filter(function (t) {
+      return tags.indexOf(t) >= 0;
+    }).length;
+    if (n > top) {
+      top = n;
+      best = x;
+    }
+  });
+  return best;
+}
+// Shared guide template: a lead line, three icon cards, then one example at a time.
+// o: { lead, steps: [[icon, title, text]], examples, pane(x), current: { name, tags }, useAct, idx, note }
+function guideModal(o) {
+  var pick = o.current ? bestExample(o.examples, o.current.tags) : null,
+    on = pick ? pick.key : o.examples[0].key;
+  var match = pick
+    ? '<div class="gmatch"><span><b>Closest example for \u201c' +
+      esc(o.current.name) +
+      '\u201d:</b> ' +
+      esc(pick.title) +
+      '</span><button class="btn primary" data-act="' +
+      o.useAct +
+      '" data-a="' +
+      o.idx +
+      '" data-d="' +
+      pick.key +
+      '">Fill in this ' +
+      esc(o.kind) +
+      '</button></div>'
+    : '';
+  return (
+    '<p class="glead">' +
+    o.lead +
+    '</p><div class="gsteps">' +
+    o.steps
+      .map(function (x) {
+        return (
+          '<div class="gstep"><span class="gi">' +
+          GICON[x[0]] +
+          '</span><b>' +
+          x[1] +
+          '</b><span>' +
+          x[2] +
+          '</span></div>'
+        );
+      })
+      .join('') +
+    '</div>' +
+    match +
+    '<div class="gex2"><span class="al">Examples</span><div class="gtabs" role="tablist">' +
+    o.examples
+      .map(function (x) {
+        return (
+          '<button class="chip' +
+          (pick && x.key === pick.key ? ' gbest' : '') +
+          '" role="tab" data-act="gtab" data-a="' +
+          x.key +
+          '" aria-pressed="' +
+          (x.key === on) +
+          '">' +
+          esc(x.title) +
+          '</button>'
+        );
+      })
+      .join('') +
+    '</div>' +
+    o.examples
+      .map(function (x) {
+        return (
+          '<div class="gpane' +
+          (x.key === on ? ' on' : '') +
+          '" data-g="' +
+          x.key +
+          '"><p class="gwhen">' +
+          esc(x.when) +
+          '</p>' +
+          o.pane(x) +
+          '<p class="gscale"><b>For scale.</b> ' +
+          esc(x.anchor) +
+          '</p>' +
+          (o.idx != null
+            ? '<button class="btn" data-act="' +
+              o.useAct +
+              '" data-a="' +
+              o.idx +
+              '" data-d="' +
+              x.key +
+              '">Use these values</button>'
+            : '') +
+          '</div>'
+        );
+      })
+      .join('') +
+    '</div><p class="al gnote">' +
+    o.note +
+    '</p>'
+  );
+}
+function fairGuide(i) {
+  var r = i != null && wcfg ? wcfg.risks[i] : null;
+  return guideModal({
+    kind: 'risk',
+    lead: '<b>Give a range, not one number:</b> the lowest you would believe, the most likely, and the worst you can reasonably imagine.',
+    steps: [
+      ['freq', 'How often', 'Only events that cost money. A blocked phish is not one; a refund is.'],
+      ['cost', 'What it costs', 'One event, end to end: response, recovery, redress and fines.'],
+      ['who', 'Who knows', 'Security for how often. Finance, legal and op risk for cost.']
+    ],
+    examples: FAIR_EX,
+    pane: function (x) {
+      return (
+        rangeViz('How often', x.f, 0.02, 20, freqTxt, 'rvf') +
+        rangeViz('Each time', x.l, 10000, 50000000, money, 'rvc')
+      );
+    },
+    current: r ? { name: r.name, tags: tagList(r) } : null,
+    useAct: 'fairex',
+    idx: i,
+    note: 'Illustrative. Fines and incidents are public outcomes; check current figures before relying on them.'
+  });
+}
 function fairEditor(c, r, i) {
   var p = 'c:risks.' + i + '.fair',
     f = r.fair;
   if (!f)
     return (
       '<div class="fair empty"><div><b>Quantified loss</b><p class="desc">No estimate yet. Add one to show this risk on the loss tracker.</p></div>' +
+      '<span class="fbtns"><button class="btn" data-act="fairguide" data-a="' +
+      i +
+      '">How to estimate</button>' +
       addBtn('addfair', 'Add loss estimate', ' data-a="' + i + '"') +
+      '</span>' +
       '</div>'
     );
   var res = simRisk(r);
+  var fr = function (v) {
+      return v == null ? '?' : freqTxt(+v);
+    },
+    mo = function (v) {
+      return v == null ? '?' : money(+v);
+    };
+  // Each step reads its answer back as a sentence, so mistakes show as they are made.
+  var freqSay =
+    f.fMin != null && f.fMl != null && f.fMax != null
+      ? 'Between ' + fr(f.fMin) + ' and ' + fr(f.fMax) + ', most likely ' + fr(f.fMl) + '.'
+      : 'Set all three dials.';
+  var costSay =
+    f.lMin != null && f.lMl != null && f.lMax != null
+      ? 'Between ' + mo(f.lMin) + ' and ' + mo(f.lMax) + ' each time, most likely ' + mo(f.lMl) + '.'
+      : 'Set all three dials.';
+  var step = function (n, title, q, dials, say, cls) {
+    return (
+      '<div class="fstep' +
+      (cls ? ' ' + cls : '') +
+      '"><div class="fsh"><span class="fsn">' +
+      n +
+      '</span><b>' +
+      title +
+      '</b></div><p class="fq">' +
+      q +
+      '</p><div class="dials">' +
+      dials +
+      '</div><p class="fsay">' +
+      esc(say) +
+      '</p></div>'
+    );
+  };
+  var result = res
+    ? '<div class="fstep fout"><div class="fsh"><span class="fsn">3</span><b>What this means</b>' +
+      info(
+        'The tool simulates ' +
+          SIMN.toLocaleString('en-GB') +
+          ' years. In each year it draws how many loss events happen from your frequency range, then a cost for each event from your cost range. The results are averaged. Expected loss is the average year; the 1 in 10 year figure is a bad year that is beaten only one year in ten.'
+      ) +
+      '</div><div class="fstats">' +
+      '<div class="fstat on"><b>' +
+      esc(money(res.mean)) +
+      '</b><span>typical year</span><em>On dashboard</em></div>' +
+      '<div class="fstat"><b>' +
+      esc(money(res.p90)) +
+      '</b><span>1 in 10 year</span></div>' +
+      '<div class="fstat"><b>' +
+      Math.round(res.pEvent * 100) +
+      '%</b><span>chance of a loss</span></div></div>' +
+      lossTracker(c.lossBands, res, { big: true, labels: true, bandTips: true }) +
+      '</div>'
+    : '<div class="fstep fout"><div class="fsh"><span class="fsn">3</span><b>What this means</b></div><p class="fq">Set all six dials to see the result.</p></div>';
   return (
-    '<div class="fair"><div class="fhead"><b>Quantified loss' +
-    info(
-      'Simplified FAIR. Event frequency is how often a loss event happens in a year. Loss per event is the total cost of one event. Low, most likely and high form a range, and 5,000 simulated years give the expected annual loss and the 1 in 10 year loss.'
-    ) +
-    '</b><span class="desc">Simplified FAIR. Set a low, most likely and high value for each factor.</span><button class="btn danger" data-act="clearfair" data-a="' +
+    '<div class="fair"><div class="fhead"><b>Quantified loss</b><span class="desc">Estimate how often this risk costs money and how much, as a range. The dashboard uses the result.</span><span class="fbtns"><button class="btn" data-act="fairguide" data-a="' +
     i +
-    '">Delete estimate</button></div>' +
-    '<div class="fgroups"><div class="fgrp"><span class="al">How often a loss event happens</span><div class="dials">' +
-    knob(p + '.fMin', f.fMin, 'freq', 'Low', { small: true }) +
-    knob(p + '.fMl', f.fMl, 'freq', 'Most likely', { small: true }) +
-    knob(p + '.fMax', f.fMax, 'freq', 'High', { small: true }) +
-    '</div></div>' +
-    '<div class="fgrp"><span class="al">Loss per event</span><div class="dials">' +
-    knob(p + '.lMin', f.lMin, 'money', 'Low', { small: true }) +
-    knob(p + '.lMl', f.lMl, 'money', 'Most likely', { small: true }) +
-    knob(p + '.lMax', f.lMax, 'money', 'High', { small: true }) +
-    '</div></div></div>' +
-    (res
-      ? '<div class="fres"><div class="fnums"><span><b>' +
-        esc(money(res.mean)) +
-        '</b> expected a year</span><span><b>' +
-        esc(money(res.p90)) +
-        '</b> in a 1 in 10 year</span><span><b>' +
-        Math.round(res.pEvent * 100) +
-        '%</b> chance of an event each year</span></div>' +
-        lossTracker(c.lossBands, res, { big: true, labels: true }) +
-        '</div>'
-      : '<p class="desc">Set all six dials to see the result.</p>') +
-    '</div>'
+    '">How to estimate</button>' +
+    delBtn('fair:' + i, 'Delete estimate', 'Removes this loss estimate. The risk stays.') +
+    '</span></div>' +
+    '<div class="fsteps">' +
+    step(
+      1,
+      'How often does it cause a loss?',
+      'Count events that cost money, not every attempt.',
+      knob(p + '.fMin', f.fMin, 'freq', 'Rarely', { small: true }) +
+        knob(p + '.fMl', f.fMl, 'freq', 'Typically', { small: true }) +
+        knob(p + '.fMax', f.fMax, 'freq', 'At worst', { small: true }),
+      freqSay
+    ) +
+    step(
+      2,
+      'What does each loss cost?',
+      'End to end: response, recovery, compensation and fines.',
+      knob(p + '.lMin', f.lMin, 'money', 'Low', { small: true }) +
+        knob(p + '.lMl', f.lMl, 'money', 'Typical', { small: true }) +
+        knob(p + '.lMax', f.lMax, 'money', 'Worst', { small: true }),
+      costSay,
+      'fcost'
+    ) +
+    result +
+    '</div></div>'
   );
 }
 function riskReg(c) {
@@ -11333,55 +12167,285 @@ function linkEditor(c, it, i) {
     '</div>'
   );
 }
+// Typical initiatives with their cost, running cost and reduction, on the dial steps.
+var VAL_EX = [
+  {
+    key: 'mfa',
+    title: 'Phishing-resistant MFA',
+    tags: ['Identity', 'Phishing', 'Session security', 'Client-facing'],
+    when: 'Replaces passwords and codes with passkeys or security keys for staff, so stolen credentials stop working.',
+    anchor:
+      'One of the strongest single controls against account takeover. Licences and hardware keep a running cost.',
+    cost: 250000,
+    run: 75000,
+    red: 50
+  },
+  {
+    key: 'pam',
+    title: 'Privileged access management',
+    tags: ['Privileged access', 'Secrets', 'Integrations', 'Insider'],
+    when: 'Puts administrator accounts and secrets in a vault, with approval and recording for their use.',
+    anchor: 'Cuts how far an attacker or insider can go once inside. Takes a year or more to roll out fully.',
+    cost: 500000,
+    run: 100000,
+    red: 40
+  },
+  {
+    key: 'aware',
+    title: 'Awareness and drills',
+    tags: ['Social engineering', 'Phishing', 'Fraud', 'AI', 'Human error'],
+    when: 'Targeted training, phishing simulations and call-back drills for the teams most at risk.',
+    anchor: 'Cheap and worth doing, but people still make mistakes, so expect a modest reduction.',
+    cost: 50000,
+    run: 25000,
+    red: 15
+  },
+  {
+    key: 'legacy',
+    title: 'Retire a legacy platform',
+    tags: ['Legacy', 'Patching', 'Endpoints'],
+    when: 'Moves services off an unsupported system and switches it off.',
+    anchor:
+      'Removes the exposure rather than reducing it, so the reduction is high. Often no extra running cost.',
+    cost: 750000,
+    run: 0,
+    red: 75
+  },
+  {
+    key: 'dlp',
+    title: 'Data loss prevention',
+    tags: ['Data loss', 'Shadow IT', 'Encryption', 'Retention'],
+    when: 'Detects and blocks client data leaving by email, web upload or removable media.',
+    anchor:
+      'Catches accidents well and determined insiders less well. Needs tuning and people to review alerts.',
+    cost: 150000,
+    run: 50000,
+    red: 30
+  },
+  {
+    key: 'seg',
+    title: 'Network segmentation',
+    tags: ['Network', 'Ransomware', 'Malware'],
+    when: 'Splits the network so an infection in one area cannot spread to critical systems.',
+    anchor: 'Limits how much a ransomware attack can take down, which is where most of its cost comes from.',
+    cost: 500000,
+    run: 50000,
+    red: 40
+  },
+  {
+    key: 'mdr',
+    title: 'Detection and response service',
+    tags: ['Detection', 'Logging', 'Incident response'],
+    when: 'A monitored service that watches logs around the clock and contains intrusions quickly.',
+    anchor: 'Does not stop attacks, but finding them in hours rather than weeks cuts what each one costs.',
+    cost: 250000,
+    run: 150000,
+    red: 30
+  },
+  {
+    key: 'patch',
+    title: 'Faster patching',
+    tags: ['Patching', 'Attack surface', 'Asset inventory', 'Cloud', 'API'],
+    when: 'Automates patching and sets tight deadlines for internet-facing systems.',
+    anchor: 'Shrinks the window in which known flaws can be used against you.',
+    cost: 150000,
+    run: 50000,
+    red: 35
+  },
+  {
+    key: 'tprm',
+    title: 'Supplier assurance',
+    tags: ['Third party', 'Supply chain', 'Assurance', 'Evidence'],
+    when: 'Tiers suppliers, checks the critical ones properly and plans for their failure.',
+    anchor: 'You cannot control a supplier, so the reduction comes mostly from being ready when one fails.',
+    cost: 100000,
+    run: 50000,
+    red: 20
+  }
+];
+// Three-year cost as one stacked bar (deliver, then running), then the reduction as a share.
+function valueViz(x) {
+  var tot = x.cost + x.run * 3 || 1;
+  return (
+    '<div class="rviz rvc"><span class="rvl">3-year cost</span><span class="rvt rvs"><i class="rvd" style="width:' +
+    (x.cost / tot) * 100 +
+    '%"></i><i class="rvr2" style="width:' +
+    ((x.run * 3) / tot) * 100 +
+    '%"></i></span><span class="rvv"><span><b>' +
+    esc(money(x.cost)) +
+    '</b> to deliver</span><span>' +
+    (x.run ? '<b>' + esc(money(x.run)) + '</b> a year to run' : 'Nothing to run') +
+    '</span></span></div>' +
+    '<div class="rviz rvf"><span class="rvl">Reduction</span><span class="rvt"><i class="rvr" style="left:0;width:' +
+    x.red +
+    '%"></i></span><span class="rvv"><span><b>' +
+    x.red +
+    '%</b> of the linked risks\u2019 loss</span><span></span></span></div>'
+  );
+}
+function valueGuide(i) {
+  var it = i != null && wcfg ? wcfg.initiatives[i] : null;
+  return guideModal({
+    kind: 'initiative',
+    lead: '<b>Avoided loss is what the linked risks stop costing once this is delivered, less what it costs to run.</b> Link the risks it really reduces, and make sure they have loss estimates.',
+    steps: [
+      ['cost', 'What it costs', 'Once to deliver, then each year to run: licences, support and people.'],
+      [
+        'cut',
+        'How much it removes',
+        'Share of the linked risks\u2019 loss that goes away. Few controls remove more than half.'
+      ],
+      [
+        'ratio',
+        'Is it worth it',
+        'Net avoided loss a year against the cost to deliver. Above 1\u00d7 it pays back within a year.'
+      ]
+    ],
+    examples: VAL_EX,
+    pane: valueViz,
+    current: it ? { name: it.name, tags: tagList(it) } : null,
+    useAct: 'ivex',
+    idx: i,
+    note: 'Illustrative figures for a mid-sized UK financial services firm. Scale them to your own size and quotes.'
+  });
+}
 function valueEditor(c, it, i) {
   var p = 'c:initiatives.' + i,
-    v = initValue(c, it);
-  var msg2 = !v.risks
-    ? 'Link at least one risk to calculate avoided loss.'
-    : !v.est
-      ? 'None of the linked risks has a loss estimate yet. Add one in the risk register.'
-      : '';
+    v = initValue(c, it),
+    cost = num(it.cost),
+    red = num(it.reduction);
+  var btns =
+    '<span class="fbtns"><button class="btn" data-act="valguide" data-a="' + i + '">How to estimate</button>';
+  if (cost == null && red == null)
+    return (
+      '<div class="fair empty"><div><b>Avoided loss against cost</b><p class="desc">No estimate yet. Add one to show what this initiative saves on the dashboard.</p></div>' +
+      btns +
+      addBtn('addival', 'Add value estimate', ' data-a="' + i + '"') +
+      '</span></div>'
+    );
+  var lr = (it.riskIds || [])
+    .map(function (id) {
+      return findRisk(c, id);
+    })
+    .filter(Boolean);
+  // Linked risks with their expected loss, so the reduction has something concrete to act on.
+  var riskList = lr.length
+    ? '<ul class="vrisks">' +
+      lr
+        .map(function (r) {
+          var sm = simRisk(r);
+          return (
+            '<li><span>' +
+            esc(r.name) +
+            '</span><b>' +
+            (sm ? esc(money(sm.mean)) + ' a year' : '<span class="al">No estimate</span>') +
+            '</b></li>'
+          );
+        })
+        .join('') +
+      '</ul>'
+    : '<p class="fq">No risks linked. Link them above to calculate avoided loss.</p>';
+  var run = num(it.runCost) || 0;
+  var costSay =
+    cost == null
+      ? 'Set the cost.'
+      : esc(money(cost)) +
+        ' to deliver' +
+        (run ? ', then ' + esc(money(run)) + ' a year to run.' : ', nothing to run.');
+  var redSay =
+    red == null
+      ? 'Set the reduction.'
+      : v.est
+        ? 'Removes ' + red + '% of ' + esc(money(v.base)) + ' a year.'
+        : 'Removes ' + red + '% of the linked risks\u2019 loss, once they have estimates.';
+  var after = v.avoided != null ? v.base - v.avoided : null;
+  var mx = Math.max(v.base || 0, cost || 0, 1);
+  var after2 = after != null ? after + run : null;
+  var bar = function (cls, lab, val, tipTitle, rows) {
+    return (
+      '<div class="vbrow" tabindex="0"' +
+      tip(tipHtml(tipTitle, rows)) +
+      '><span class="vbl">' +
+      lab +
+      '</span><span class="vbt"><i class="' +
+      cls +
+      '" style="--w:' +
+      ((val || 0) / mx) * 100 +
+      '%"></i></span><b>' +
+      (val == null ? '' : esc(money(val))) +
+      '</b></div>'
+    );
+  };
+  var result =
+    v.avoided != null
+      ? '<div class="fstats">' +
+        '<div class="fstat on"><b' +
+        (v.net < 0 ? ' class="low"' : '') +
+        '>' +
+        esc(money(v.net)) +
+        '</b><span>' +
+        (run ? 'net a year' : 'avoided a year') +
+        '</span><em>On dashboard</em></div>' +
+        '<div class="fstat"><b class="' +
+        (v.ratio != null && v.ratio < 1 ? 'low' : '') +
+        '">' +
+        (v.ratio != null ? esc(ratioTxt(v.ratio)) : 'Set cost') +
+        '</b><span>avoided loss against cost</span></div>' +
+        '<div class="fstat"><b>' +
+        (v.payback != null ? esc(paybackTxt(v.payback)) : 'n/a') +
+        '</b><span>to pay back</span></div></div>' +
+        '<div class="vbars">' +
+        bar('vnow', 'Loss now', v.base, 'Expected loss now', [
+          ['Linked risks', v.est + ' of ' + v.risks + ' with estimates'],
+          ['Expected loss', esc(money(v.base)) + ' a year']
+        ]) +
+        bar('vafter', 'After', after2, 'Loss and running cost after delivery', [
+          ['Reduction', red + '%'],
+          ['Avoided', esc(money(v.avoided)) + ' a year'],
+          ['Loss left', esc(money(after)) + ' a year'],
+          run ? ['Running cost', esc(money(run)) + ' a year'] : null,
+          ['Net saving', esc(money(v.net)) + ' a year']
+        ]) +
+        bar('vcost', 'Cost', cost, 'Cost to deliver', [
+          ['One-off cost', cost == null ? 'Not set' : esc(money(cost))],
+          run ? ['Running cost', esc(money(run)) + ' a year'] : null,
+          v.payback != null ? ['Pays back in', esc(paybackTxt(v.payback))] : null
+        ]) +
+        '</div>'
+      : '<p class="fq">' +
+        (!v.risks
+          ? 'Link at least one risk to calculate avoided loss.'
+          : !v.est
+            ? 'None of the linked risks has a loss estimate yet. Add one in the risk register.'
+            : 'Set the reduction to see the result.') +
+        '</p>';
   return (
-    '<div class="fair"><div class="fhead"><b>Value' +
-    info(AVOID_NOTE) +
-    '</b><span class="desc">Uses the loss estimates of the linked risks.</span></div>' +
-    '<div class="fgroups"><div class="fgrp"><span class="al">Cost' +
-    info('The one-off cost of delivering the initiative, used to compare against avoided loss.') +
-    '</span><div class="dials">' +
-    knob(p + '.cost', it.cost, 'money', 'One-off cost', { small: true }) +
-    '</div></div>' +
-    '<div class="fgrp" style="flex:1;min-width:240px"><span class="al">Expected reduction in the linked risks\u2019 annual loss once delivered' +
-    info('How much of the linked risks\u2019 expected annual loss this initiative removes once delivered.') +
-    '</span>' +
+    '<div class="fair"><div class="fhead"><b>Avoided loss against cost</b><span class="desc">What this initiative costs, and how much of the linked risks\u2019 loss it removes.</span>' +
+    btns +
+    delBtn('ival:' + i, 'Delete estimate', 'Removes the cost and reduction. The initiative stays.') +
+    '</span></div><div class="fsteps">' +
+    '<div class="fstep"><div class="fsh"><span class="fsn">1</span><b>What does it cost?</b></div><p class="fq">To deliver once, then to run each year: licences, support and people.</p><div class="dials">' +
+    knob(p + '.cost', it.cost, 'money', 'To deliver', { small: true }) +
+    knob(p + '.runCost', run, 'money', 'To run a year', { small: true }) +
+    '</div><p class="fsay">' +
+    costSay +
+    '</p></div>' +
+    '<div class="fstep vred"><div class="fsh"><span class="fsn">2</span><b>How much risk does it remove?</b></div><p class="fq">Share of the linked risks\u2019 expected annual loss that goes away.</p>' +
+    riskList +
     slider(p + '.reduction', it.reduction, {
       max: 100,
       step: 5,
       rr: true,
       label: 'Expected loss reduction'
     }) +
-    '<p class="al" style="margin-top:6px">Linked risks with estimates: ' +
-    v.est +
-    ' of ' +
-    v.risks +
-    (v.est ? ', expected loss ' + esc(money(v.base)) + ' a year' : '') +
-    '</p></div></div>' +
-    (msg2
-      ? '<p class="desc">' + esc(msg2) + '</p>'
-      : '<div class="fres">' +
-        (v.ratio != null
-          ? '<div class="fnums"><span><b>' +
-            esc(money(v.avoided)) +
-            '</b> avoided a year</span><span><b>' +
-            esc(ratioTxt(v.ratio)) +
-            '</b></span><span>Payback <b>' +
-            esc(paybackTxt(v.payback)) +
-            '</b></span></div>'
-          : '') +
-        valueBars(v.avoided, v.cost, true) +
-        '</div>') +
-    '<p class="al">' +
-    esc(AVOID_NOTE) +
-    '</p></div>'
+    '<p class="fsay">' +
+    redSay +
+    '</p></div>' +
+    '<div class="fstep fout"><div class="fsh"><span class="fsn">3</span><b>What this means</b>' +
+    info(AVOID_NOTE) +
+    '</div>' +
+    result +
+    '</div></div></div>'
   );
 }
 function initReg(c) {
@@ -11568,8 +12632,8 @@ function initReg(c) {
         (function () {
           var vv = initValue(c, it);
           return vv.ratio != null
-            ? '<span class="tg loss" title="Projected avoided loss ' +
-                esc(money(vv.avoided)) +
+            ? '<span class="tg loss" title="Projected net avoided loss ' +
+                esc(money(vv.net)) +
                 ' a year for ' +
                 esc(money(vv.cost)) +
                 '">' +
@@ -11935,6 +12999,7 @@ function cleanInit(r) {
     due: str(r.due, 40),
     projected: num(r.projected),
     cost: num(r.cost),
+    runCost: Math.max(0, num(r.runCost) || 0),
     reduction: num(r.reduction) == null ? null : Math.max(0, Math.min(100, num(r.reduction))),
     tags: strList(r.tags),
     riskIds: Array.isArray(r.riskIds)
@@ -12924,6 +13989,10 @@ document.addEventListener('change', function (e) {
   }
 });
 document.addEventListener('click', function (e) {
+  if (e.target.classList && e.target.classList.contains('mback')) {
+    closeModal();
+    return;
+  }
   var row = e.target.closest && e.target.closest('#dash .arow');
   if (row) {
     jumpTo(row.dataset.cat);
@@ -13301,8 +14370,55 @@ document.addEventListener('click', function (e) {
       };
       dirtyCfg = true;
       break;
-    case 'clearfair':
-      delete wcfg.risks[+a].fair;
+    case 'valguide':
+      openModal('How to estimate avoided loss', valueGuide(+a), 'sm');
+      return;
+    case 'ivex':
+      var vx = VAL_EX.filter(function (x) {
+        return x.key === d;
+      })[0];
+      if (!vx) return;
+      wcfg.initiatives[+a].cost = vx.cost;
+      wcfg.initiatives[+a].runCost = vx.run;
+      wcfg.initiatives[+a].reduction = vx.red;
+      closeModal();
+      dirtyCfg = true;
+      break;
+    case 'addival':
+      wcfg.initiatives[+a].cost = 100000;
+      wcfg.initiatives[+a].runCost = 0;
+      wcfg.initiatives[+a].reduction = 30;
+      dirtyCfg = true;
+      break;
+    case 'fairguide':
+      openModal('How to estimate a cyber loss', fairGuide(a === '' || a == null ? null : +a), 'sm');
+      return;
+    case 'gtab':
+      if (!modalBack) return;
+      modalBack.querySelectorAll('[data-act="gtab"]').forEach(function (x) {
+        x.setAttribute('aria-pressed', String(x.dataset.a === a));
+      });
+      modalBack.querySelectorAll('.gpane').forEach(function (x) {
+        x.classList.toggle('on', x.dataset.g === a);
+      });
+      return;
+    case 'mclose':
+      closeModal();
+      return;
+    case 'fairex':
+      var ex = FAIR_EX.filter(function (x) {
+        return x.key === d;
+      })[0];
+      if (!ex) return;
+      wcfg.risks[+a].fair = {
+        fMin: ex.f[0],
+        fMl: ex.f[1],
+        fMax: ex.f[2],
+        lMin: ex.l[0],
+        lMl: ex.l[1],
+        lMax: ex.l[2]
+      };
+      closeModal();
       dirtyCfg = true;
       break;
     case 'addband':
@@ -13430,6 +14546,18 @@ document.addEventListener('click', function (e) {
       if (kind === 'q') {
         deleteQuarter(id);
         return;
+      }
+      if (kind === 'fair') {
+        delete wcfg.risks[+id].fair;
+        dirtyCfg = true;
+        break;
+      }
+      if (kind === 'ival') {
+        wcfg.initiatives[+id].cost = null;
+        wcfg.initiatives[+id].runCost = 0;
+        wcfg.initiatives[+id].reduction = null;
+        dirtyCfg = true;
+        break;
       }
       var list = {
         cat: 'categories',

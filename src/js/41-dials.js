@@ -108,7 +108,7 @@ function knob(path, val, kind, label, opts) {
     '">' +
     knobSvg(f, i >= 0, mi) +
     '<span class="kv">' +
-    esc(i < 0 ? 'Drag to set' : knobFmt(kind, steps[i])) +
+    esc(i < 0 ? 'Drag to set' : knobFmt(kind, num(val))) +
     '</span><span class="kl">' +
     esc(label) +
     '</span></div>'

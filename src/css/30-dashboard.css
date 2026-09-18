@@ -781,7 +781,20 @@
   align-items: center;
   gap: 10px;
   margin-top: 6px;
-  max-width: 280px;
+  max-width: 400px;
+}
+.rloss .rll {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.rloss .lbk {
+  flex: 0 0 210px;
+  max-width: 210px;
+}
+.rloss .lbk .lb {
+  height: 12px;
+  border-radius: 4px;
 }
 .rloss .lv {
   white-space: nowrap;
@@ -872,6 +885,31 @@
 }
 .lbk .lb.past {
   background: color-mix(in srgb, var(--c) 30%, var(--track));
+}
+/* On a highlighted row the track matches the background, so lift the unlit buckets. */
+.lbk:hover .lb,
+.lbk:focus-visible .lb,
+.hl .lbk .lb,
+.rhl .lbk .lb,
+.risks li:hover .lbk .lb,
+.risks li:focus-visible .lbk .lb {
+  background: var(--card);
+}
+.lbk:hover .lb.past,
+.lbk:focus-visible .lb.past,
+.hl .lbk .lb.past,
+.rhl .lbk .lb.past,
+.risks li:hover .lbk .lb.past,
+.risks li:focus-visible .lbk .lb.past {
+  background: color-mix(in srgb, var(--c) 30%, var(--card));
+}
+.lbk:hover .lb.on,
+.lbk:focus-visible .lb.on,
+.hl .lbk .lb.on,
+.rhl .lbk .lb.on,
+.risks li:hover .lbk .lb.on,
+.risks li:focus-visible .lbk .lb.on {
+  background: var(--c);
 }
 .lbk .lb.on {
   background: var(--c);

@@ -12,6 +12,27 @@
     display: none;
   }
 }
+@media (max-width: 1180px) {
+  .fsteps {
+    grid-template-columns: auto auto;
+  }
+  .fstep.fout {
+    grid-column: 1/-1;
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .fsteps {
+    grid-template-columns: 1fr;
+  }
+  .fstep + .fstep {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
 @media (max-width: 900px) {
   .ihead {
     display: none;

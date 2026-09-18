@@ -1,10 +1,11 @@
 /* Fixed labels and enumerations shared across the app. */
 
-var W = { g: 'Within', a: 'Tolerance', r: 'Outside', on: 'On target', off: 'Behind target' };
+var W = { g: 'Within', a: 'Tolerance', r: 'Outside', n: 'n/a', on: 'On target', off: 'Behind target' };
 var WL = {
   g: 'Within appetite',
   a: 'Within tolerance',
   r: 'Outside tolerance',
+  n: 'Not applicable or no data',
   on: 'On target',
   off: 'Behind target'
 };

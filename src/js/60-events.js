@@ -125,6 +125,10 @@ document.addEventListener('change', function (e) {
   }
 });
 document.addEventListener('click', function (e) {
+  if (e.target.classList && e.target.classList.contains('mback')) {
+    closeModal();
+    return;
+  }
   var row = e.target.closest && e.target.closest('#dash .arow');
   if (row) {
     jumpTo(row.dataset.cat);
@@ -502,8 +506,55 @@ document.addEventListener('click', function (e) {
       };
       dirtyCfg = true;
       break;
-    case 'clearfair':
-      delete wcfg.risks[+a].fair;
+    case 'valguide':
+      openModal('How to estimate avoided loss', valueGuide(+a), 'sm');
+      return;
+    case 'ivex':
+      var vx = VAL_EX.filter(function (x) {
+        return x.key === d;
+      })[0];
+      if (!vx) return;
+      wcfg.initiatives[+a].cost = vx.cost;
+      wcfg.initiatives[+a].runCost = vx.run;
+      wcfg.initiatives[+a].reduction = vx.red;
+      closeModal();
+      dirtyCfg = true;
+      break;
+    case 'addival':
+      wcfg.initiatives[+a].cost = 100000;
+      wcfg.initiatives[+a].runCost = 0;
+      wcfg.initiatives[+a].reduction = 30;
+      dirtyCfg = true;
+      break;
+    case 'fairguide':
+      openModal('How to estimate a cyber loss', fairGuide(a === '' || a == null ? null : +a), 'sm');
+      return;
+    case 'gtab':
+      if (!modalBack) return;
+      modalBack.querySelectorAll('[data-act="gtab"]').forEach(function (x) {
+        x.setAttribute('aria-pressed', String(x.dataset.a === a));
+      });
+      modalBack.querySelectorAll('.gpane').forEach(function (x) {
+        x.classList.toggle('on', x.dataset.g === a);
+      });
+      return;
+    case 'mclose':
+      closeModal();
+      return;
+    case 'fairex':
+      var ex = FAIR_EX.filter(function (x) {
+        return x.key === d;
+      })[0];
+      if (!ex) return;
+      wcfg.risks[+a].fair = {
+        fMin: ex.f[0],
+        fMl: ex.f[1],
+        fMax: ex.f[2],
+        lMin: ex.l[0],
+        lMl: ex.l[1],
+        lMax: ex.l[2]
+      };
+      closeModal();
       dirtyCfg = true;
       break;
     case 'addband':
@@ -631,6 +682,18 @@ document.addEventListener('click', function (e) {
       if (kind === 'q') {
         deleteQuarter(id);
         return;
+      }
+      if (kind === 'fair') {
+        delete wcfg.risks[+id].fair;
+        dirtyCfg = true;
+        break;
+      }
+      if (kind === 'ival') {
+        wcfg.initiatives[+id].cost = null;
+        wcfg.initiatives[+id].runCost = 0;
+        wcfg.initiatives[+id].reduction = null;
+        dirtyCfg = true;
+        break;
       }
       var list = {
         cat: 'categories',
