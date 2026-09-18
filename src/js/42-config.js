@@ -1,6 +1,7 @@
 /* Configure view shell: tabs, save bar and re-rendering. */
 
 function renderConfig() {
+  TIPS = []; // Configure reuses the registry for the loss bar tooltips.
   var el = $('#cfg');
   if (wcfg) applyStyle(wcfg.style);
   if (!wcfg) {

@@ -100,6 +100,7 @@ All documents are kept in the browser under a single local storage key, `cyberda
   "due": "Q4 2026",
   "projected": 3,
   "cost": 60000,
+  "runCost": 0,
   "reduction": 35,
   "riskIds": ["r2", "lib12"],
   "tags": [],
@@ -109,6 +110,7 @@ All documents are kept in the browser under a single local storage key, `cyberda
 
 - `projected` is the expected value of the category indicator once delivered.
 - `riskIds` is optional and can be empty.
+- `runCost` (pounds a year, default 0) is the running cost after delivery. It is taken off the avoided loss: net avoided loss = avoided loss − `runCost`. The ratio, return and payback use the net figure.
 - `cost` (pounds, one-off) and `reduction` (0 to 100, the expected cut in the linked risks' annual loss once delivered) are optional. Together with the linked risks' `fair` estimates they give the avoided loss: expected annual loss of the linked risks × `reduction`. The section total combines initiatives that share a risk as 1 − ∏(1 − reduction) for that risk, so it is not double counted.
 
 ## Quarter

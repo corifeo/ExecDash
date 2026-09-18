@@ -83,6 +83,7 @@ function cleanInit(r) {
     due: str(r.due, 40),
     projected: num(r.projected),
     cost: num(r.cost),
+    runCost: Math.max(0, num(r.runCost) || 0),
     reduction: num(r.reduction) == null ? null : Math.max(0, Math.min(100, num(r.reduction))),
     tags: strList(r.tags),
     riskIds: Array.isArray(r.riskIds)

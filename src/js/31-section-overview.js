@@ -6,7 +6,7 @@ function subCounts(e, cat) {
       return e.subs[s.id] || 'g';
     })
   );
-  return c.g + ' within, ' + c.a + ' in tolerance, ' + c.r + ' outside';
+  return c.g + ' within, ' + c.a + ' in tolerance, ' + c.r + ' outside' + (c.n ? ', ' + c.n + ' n/a' : '');
 }
 function catTip(cat, q, prev, pl) {
   var e = catEntry(q, cat),
@@ -336,7 +336,7 @@ function pulseTile(cfg, q, prev, pl) {
           }).length;
           return n ? [d2[1], String(n)] : null;
         }).concat([
-          val.avoided != null ? ['Projected avoided loss', esc(money(val.avoided)) + ' a year'] : null,
+          val.net != null ? ['Projected avoided loss, net', esc(money(val.net)) + ' a year'] : null,
           val.cost != null ? ['Total cost', esc(money(val.cost))] : null
         ]),
         val.avoided != null ? AVOID_NOTE : '',

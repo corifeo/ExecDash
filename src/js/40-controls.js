@@ -1,4 +1,4 @@
-/* Configuration form controls: fields, selects, switches, tag editors, sliders, commentary and buttons. */
+/* Configuration form controls: fields, selects, switches, tag editors, sliders, commentary, buttons and the modal. */
 
 function tagEditor(path, list, opts) {
   opts = opts || {};
@@ -569,7 +569,8 @@ function ragPick(path, val, label) {
     [
       ['g', 'Within appetite'],
       ['a', 'Within tolerance'],
-      ['r', 'Outside tolerance']
+      ['r', 'Outside tolerance'],
+      ['n', 'Not applicable or no data']
     ]
       .map(function (o) {
         return (
@@ -645,3 +646,27 @@ function chgLabel(d, u, sNow, sPrev) {
   if (d) parts.push((d > 0 ? 'Up ' : 'Down ') + fmtAbs(d, u));
   return parts.join(', ');
 }
+// Modal panel: one at a time, closed by its button, Escape or a click on the backdrop.
+var modalBack = null;
+function openModal(title, body, cls) {
+  closeModal();
+  modalBack = document.createElement('div');
+  modalBack.className = 'mback';
+  modalBack.innerHTML =
+    '<div class="modal' +
+    (cls ? ' ' + cls : '') +
+    '" role="dialog" aria-modal="true" aria-labelledby="mtitle"><div class="mhead"><h2 id="mtitle">' +
+    esc(title) +
+    '</h2><button class="btn icon" data-act="mclose" aria-label="Close">&#215;</button></div><div class="mbody">' +
+    body +
+    '</div></div>';
+  document.body.appendChild(modalBack);
+  modalBack.querySelector('[data-act="mclose"]').focus();
+}
+function closeModal() {
+  if (modalBack) modalBack.remove();
+  modalBack = null;
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && modalBack) closeModal();
+});

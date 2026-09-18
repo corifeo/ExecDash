@@ -22,6 +22,12 @@ function thrText(ind) {
   var ap = a === 0 && cnt ? 'Appetite 0.' : 'Appetite ' + fmt(a, u) + ' or ' + (cnt ? 'fewer' : 'less') + '.';
   return ap + ' Tolerance up to ' + fmt(t, u) + '.';
 }
+// Plain sentence saying what a category's number measures and which way is better.
+function measureText(ind) {
+  var u = unitName(ind.unit).toLowerCase(),
+    dir = ind.direction === 'higher' ? 'Higher is better' : 'Lower is better';
+  return 'Measured in ' + (u === 'count' ? 'counts' : u) + '. ' + dir + '. ' + thrText(ind);
+}
 function trendHtml(d, prevLabel, u, higherBetter) {
   if (d == null) return '';
   var lab = prevLabel ? ' since ' + esc(prevLabel) : '';

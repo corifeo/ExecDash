@@ -100,6 +100,7 @@ function normalizeConfig(c) {
   c.initiatives.forEach(function (r) {
     if (r.enabled === undefined) r.enabled = true;
     r.tags = r.tags || [];
+    if (num(r.runCost) == null) r.runCost = 0;
     r.riskIds = (r.riskIds || []).filter(function (id) {
       return c.risks.some(function (x) {
         return x.id === id;
@@ -303,7 +304,7 @@ function activeInits(cfg, q, catId) {
   });
 }
 function counts(list) {
-  var c = { g: 0, a: 0, r: 0, on: 0, off: 0 };
+  var c = { g: 0, a: 0, r: 0, n: 0, on: 0, off: 0 };
   list.forEach(function (s) {
     if (c[s] != null) c[s]++;
   });

@@ -85,7 +85,7 @@ function onHover(target, x, y) {
   var t = inDash
     ? target.closest('[data-tip]')
     : target && target.closest
-      ? target.closest('#cfg .info')
+      ? target.closest('#cfg .info, #cfg .fair [data-tip]')
       : null;
   if (t !== curTip) {
     curTip = t;

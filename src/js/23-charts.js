@@ -397,16 +397,35 @@ function lossTracker(bands, res, opts) {
     '">' +
     bands
       .map(function (b, i) {
-        return '<span class="lz" style="background:' + bandCol(i, bands.length) + '"></span>';
+        return (
+          '<span class="lz" style="background:' +
+          bandCol(i, bands.length) +
+          '"' +
+          (opts.bandTips
+            ? ' tabindex="0"' +
+              tip(
+                tipHtml(b.name + ' loss', [
+                  ['Range a year', esc(bandRange(bands, i))],
+                  i === bandIdx(bands, res.mean) ? ['Typical year', esc(money(res.mean))] : null,
+                  i === bandIdx(bands, res.p90) ? ['1 in 10 year', esc(money(res.p90))] : null
+                ])
+              )
+            : '') +
+          '></span>'
+        );
       })
       .join('') +
     '<i class="lw" style="--x:' +
     x +
     '%;--w:' +
     Math.max(0, x9 - x) +
-    '%"></i><i class="lm" style="--x:' +
+    '%"' +
+    (opts.bandTips ? tip(tipHtml('1 in 10 year loss', [['A bad year', esc(money(res.p90))]])) : '') +
+    '></i><i class="lm" style="--x:' +
     x +
-    '%"></i></div>' +
+    '%"' +
+    (opts.bandTips ? tip(tipHtml('Typical year', [['Expected loss', esc(money(res.mean))]])) : '') +
+    '></i></div>' +
     (opts.labels
       ? '<div class="lbl">' +
         bands

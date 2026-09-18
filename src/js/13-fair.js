@@ -1,4 +1,4 @@
-/* Simplified FAIR simulation, loss bands and initiative value (avoided loss). */
+/* Simplified FAIR simulation, loss bands and initiative value (avoided loss, net of running cost). */
 
 function hashStr(s) {
   var h = 2166136261;
@@ -144,13 +144,24 @@ function initValue(cfg, it) {
       est++;
     }
   });
-  var v = { risks: risks.length, est: est, base: base, cost: cost, red: red, avoided: null };
+  var run = num(it.runCost) || 0;
+  var v = {
+    risks: risks.length,
+    est: est,
+    base: base,
+    cost: cost,
+    run: run,
+    red: red,
+    avoided: null,
+    net: null
+  };
   if (red != null && est) {
     v.avoided = (base * red) / 100;
+    v.net = v.avoided - run;
     if (cost) {
-      v.ratio = v.avoided / cost;
-      v.rosi = ((v.avoided - cost) / cost) * 100;
-      v.payback = v.avoided > 0 ? (cost / v.avoided) * 12 : null;
+      v.ratio = v.net / cost;
+      v.rosi = ((v.net - cost) / cost) * 100;
+      v.payback = v.net > 0 ? (cost / v.net) * 12 : null;
     }
   }
   return v;
@@ -158,9 +169,11 @@ function initValue(cfg, it) {
 function portfolioValue(cfg, list) {
   var red = {},
     cost = 0,
+    run = 0,
     anyCost = false;
   list.forEach(function (it) {
     var r = num(it.reduction);
+    run += num(it.runCost) || 0;
     if (num(it.cost) != null) {
       cost += +it.cost;
       anyCost = true;
@@ -183,10 +196,12 @@ function portfolioValue(cfg, list) {
   });
   return {
     avoided: n ? avoided : null,
+    net: n ? avoided - run : null,
+    run: run,
     base: base,
     cost: anyCost ? cost : null,
     risks: n,
-    ratio: n && anyCost && cost ? avoided / cost : null
+    ratio: n && anyCost && cost ? (avoided - run) / cost : null
   };
 }
 function bandName(bands, v) {

@@ -60,14 +60,14 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 | `10-model` | `defaultConfig`, `normalizeConfig`, `normalizeQ`, lookups (`findCat`, `findRisk`…), status rules (`statusFor`, `catStatus`, `movement`), totals |
 | `11-format` | `fmt`, `nf`, `money`, `pctChange`/`pctHtml`, `deltaLabel`, `thrText` |
 | `12-integrity` | Usage counts, `cfgFixes`/`qFixes` (clean-up on save), `QFIX` queue, Data health |
-| `13-fair` | Simplified FAIR simulation (`simRisk`, `simPortfolio`), loss bands, `initValue`/`portfolioValue` |
+| `13-fair` | Simplified FAIR simulation (`simRisk`, `simPortfolio`), loss bands, `initValue`/`portfolioValue` (net of `runCost`) |
 | `20-motion` | `ANIM`, count-ups (`tween`, `runAnims`), reveal on scroll |
 | `21-tooltips` | `tip()`/`TIPS` registry, `tipHtml`, hover and focus handling, cross-highlighting (`applyHl`, `applyInitFilter`) |
 | `22-components` | `ref()` link chips, `attr()`, `cu()` counters, `tileHead`, `sevGrid`, value bars, view toggles (`secView`, `applySecView`, `allViewSeg`) |
 | `23-charts` | Gauges, radar, maturity bars, loss tracker and buckets |
 | `30-dashboard` | Header, `band()` section wrapper, navigation bar, collapse state, `renderDashboard` |
 | `31`–`34-section-*` | One file per dashboard section (`layer1`…`layer4`) |
-| `40-controls` | Form controls: `fld`, `sel`, `inp`, `swb`, `info`, `delBtn`, `multiPick`, `tagEditor`, `slider`, `noteCtl` |
+| `40-controls` | Form controls: `fld`, `sel`, `inp`, `swb`, `info`, `delBtn`, `multiPick`, `tagEditor`, `slider`, `noteCtl`, `openModal`/`closeModal` |
 | `41-dials` | Rotary dial (`knob`) for scores, money and frequency |
 | `42-config` | `renderConfig`, tabs, save bar (`updateBar`), `rerenderConfig` |
 | `43`–`47-config-*` | One file per Configure tab: Quarter data, Structure, Risks and initiatives, Quarters, Data |
@@ -128,7 +128,7 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 **Strings, not a framework.** Markup is built by string concatenation. Rules that must always hold:
 
 - **Escaping:** every piece of user or data text goes through `esc()`.
-- **Tooltips:** call `tip(html)`, which returns a `data-tip="N"` attribute pointing into `TIPS`. `TIPS` is reset on each dashboard render. Build tooltip content with `tipHtml(title, rows, note, noteLabel)`.
+- **Tooltips:** call `tip(html)`, which returns a `data-tip="N"` attribute pointing into `TIPS`. `TIPS` is reset on each dashboard and Configure render. In Configure, only `.info` and elements inside `.fair` show tooltips. Build tooltip content with `tipHtml(title, rows, note, noteLabel)`.
 - **Clicks:** use `data-act="name"` plus `data-a`/`data-d` arguments, and handle them in the `switch` in `60-events.js`.
   - Actions that edit the draft set `dirtyCfg` or `dirtyQ` themselves, then `break`. The shared tail clears the save bar message and calls `rerenderConfig()`.
   - Actions that only change the view should `return`.

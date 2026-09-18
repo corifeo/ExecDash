@@ -111,7 +111,7 @@ function layer2(cfg, q, prev, pl) {
           : '') +
         '</span>';
       var loss = res
-        ? '<div class="rloss">' +
+        ? '<div class="rloss"><span class="rll">Loss estimate</span>' +
           lossBucket(cfg.lossBands, res) +
           '<span class="lv">' +
           esc(bandName(cfg.lossBands, res.mean)) +
@@ -333,25 +333,26 @@ function incTile(cfg, q, prev, pl, tot, ptot) {
       rest.length +
       ' more</span></div>'
     : '';
-  var list = shown
-    .map(function (x, i) {
-      var l = incLinks(cfg, x),
-        si = sevs.indexOf(x.severity);
-      return (
-        '<div class="irow stg" tabindex="0" style="--i:' +
-        (i + 3) +
-        '"' +
-        (l.c ? ' data-link="' + esc(l.c.id) + '"' : '') +
-        (l.r ? ' data-risks="' + esc(l.r.id) + '"' : '') +
-        tip(tipHtml(x.title || 'Incident', incRows(cfg, x), x.description, 'Description')) +
-        '><i class="vs s' +
-        (si < 0 ? 4 : si) +
-        '" aria-hidden="true"></i><span class="it">' +
-        esc(x.title || 'Untitled incident') +
-        '</span></div>'
-      );
-    })
-    .join('') + more;
+  var list =
+    shown
+      .map(function (x, i) {
+        var l = incLinks(cfg, x),
+          si = sevs.indexOf(x.severity);
+        return (
+          '<div class="irow stg" tabindex="0" style="--i:' +
+          (i + 3) +
+          '"' +
+          (l.c ? ' data-link="' + esc(l.c.id) + '"' : '') +
+          (l.r ? ' data-risks="' + esc(l.r.id) + '"' : '') +
+          tip(tipHtml(x.title || 'Incident', incRows(cfg, x), x.description, 'Description')) +
+          '><i class="vs s' +
+          (si < 0 ? 4 : si) +
+          '" aria-hidden="true"></i><span class="it">' +
+          esc(x.title || 'Untitled incident') +
+          '</span></div>'
+        );
+      })
+      .join('') + more;
   return (
     '<article class="tile">' +
     tileHead('Incidents', '', 'Security incidents this quarter, by priority') +

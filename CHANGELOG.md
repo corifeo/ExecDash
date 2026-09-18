@@ -12,6 +12,16 @@
   - Section 4 is about half its previous height with 19 initiatives.
 - **Tooltips:** rows are grouped into labelled sections. Money sections (FAIR loss estimates, avoided loss and cost) are green, using a new `--green-tip` token for the inverted panel.
 - **Fix:** a highlighted row no longer hides the empty part of its progress and value bars.
+- **Subcategory status:** a fourth option, n/a (grey bar), for no data or no capability.
+- **Quarter data:** each category says what its number measures, its unit and which way is better.
+- **Tags:** every risk in the library and samples, and every sample initiative, has tags from one shared vocabulary.
+- **Top risks:** each row's loss bar is labelled Loss estimate and is larger.
+- **Quantified loss:** three steps (how often, what it costs, what this means) with read-back sentences, result tiles and an interactive loss bar. A How to estimate guide gives worked examples that fill the dials.
+- **Initiative value:** the same three-step journey, a guide with typical reductions, and a Delete estimate with confirmation.
+- **Running cost:** initiatives have `runCost` (a year, default 0). It is taken off avoided loss; ratio, return and payback use the net figure.
+- **Fix:** dials show the stored value instead of the nearest step.
+- **Estimation guides:** the risk and initiative guides share one compact template: icon cards, example tabs with range bars, and a suggested example matched on tags that fills in the record being edited. The risk guide has 8 examples; the initiative guide has 9.
+- **Confirmations:** deleting a loss estimate or a value estimate now asks first.
 
 ## 1.0.0 (2026-09-17)
 

@@ -590,26 +590,116 @@ button.tg:hover {
 .fhead .btn {
   margin-left: auto;
 }
-.fgroups {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 28px;
+/* Quantified loss: three steps side by side, so the panel stays short. */
+.fsteps {
+  display: grid;
+  grid-template-columns: auto auto minmax(260px, 1fr);
+  gap: 12px 24px;
+  align-items: start;
 }
-.fgrp .dials {
-  display: flex;
-  gap: 6px;
-}
-.fres {
+.fstep {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-width: 560px;
+  gap: 4px;
+  min-width: 0;
 }
-.fnums {
+.fstep + .fstep {
+  border-left: 1px solid var(--rule);
+  padding-left: 24px;
+}
+.fsh {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
+  align-items: center;
+  gap: 8px;
   font-size: 13.5px;
+}
+.fsn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--card);
+  font-size: 11.5px;
+  font-weight: 700;
+  flex: none;
+}
+.fq,
+.fsay {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-3);
+  max-width: 330px;
+}
+.fsay {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.fstep .dials {
+  display: flex;
+  gap: 4px;
+}
+.fstep .knob.sm {
+  width: 104px;
+}
+.fcost .knob .kval {
+  stroke: var(--green);
+}
+.fout .fsn {
+  background: var(--green);
+}
+.fstats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 4px 0 10px;
+}
+.fstat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 7px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  line-height: 1.25;
+}
+.fstat b {
+  font-size: 17px;
+  color: var(--green);
+}
+.fstat span {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.fstat em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.fstat.on {
+  border-color: color-mix(in srgb, var(--green) 45%, var(--rule));
+  background: var(--green-bg);
+}
+.fair .lbar {
+  flex: none;
+}
+.fair .lbar .lz {
+  cursor: help;
+  opacity: 0.7;
+}
+.fair .lbar .lz:hover,
+.fair .lbar .lz:focus-visible {
+  opacity: 1;
+}
+.fair .lbar .lm,
+.fair .lbar .lw {
+  cursor: help;
+}
+.fair .lbl span {
+  padding: 4px 0 0;
 }
 .tg.loss {
   color: var(--ink);
@@ -1090,6 +1180,11 @@ table.ct tbody th {
   font-weight: 600;
   flex-wrap: wrap;
 }
+.qc-meas {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+}
 .qc-val,
 .qc-st {
   display: flex;
@@ -1512,4 +1607,284 @@ details.ccard > summary .pill {
 }
 .rconfirm .tools {
   justify-content: flex-start;
+}
+.fbtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+.fhead .fbtns .btn {
+  margin-left: 0;
+}
+/* Modal panel. */
+.mback {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 16px;
+  overflow-y: auto;
+}
+.modal {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  max-width: 820px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+.mhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.mhead h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.mbody {
+  padding: 14px 20px 20px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+/* Initiative value: linked risks, reduction and a before and after comparison. */
+.vred .slider {
+  margin-top: 2px;
+}
+.vrisks {
+  list-style: none;
+  margin: 2px 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  max-width: 330px;
+}
+.vrisks li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.vrisks li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.vrisks li b {
+  white-space: nowrap;
+  font-weight: 600;
+}
+.fstat b.low {
+  color: var(--amber);
+}
+.vbrow {
+  display: grid;
+  grid-template-columns: 62px minmax(60px, 1fr) 54px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  cursor: help;
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+.vbrow:hover,
+.vbrow:focus-visible {
+  background: var(--accent-bg);
+}
+.vbrow:hover .vbt,
+.vbrow:focus-visible .vbt {
+  background: var(--card);
+}
+.vbrow b {
+  text-align: right;
+  white-space: nowrap;
+}
+.vbrow .vbt {
+  height: 10px;
+}
+.vbrow .vbt i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w);
+  border-radius: 4px;
+}
+.vbt .vnow {
+  background: var(--ghost);
+}
+.vbt .vafter {
+  background: var(--green);
+}
+.vbt .vcost {
+  background: var(--ink-2);
+}
+/* Compact, visual loss guide. */
+.modal.sm {
+  max-width: 640px;
+}
+.glead {
+  margin: 0 0 10px;
+}
+.gsteps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.gstep {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.gstep b {
+  color: var(--ink);
+  font-size: 13px;
+}
+.gi svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.gex2 {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+}
+.gtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+.gpane {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.gpane.on {
+  display: flex;
+}
+.gwhen,
+.gscale {
+  margin: 0;
+  font-size: 12.5px;
+}
+.gscale {
+  color: var(--ink-3);
+}
+.gscale b {
+  color: var(--ink-2);
+}
+.rviz {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 2px 10px;
+  align-items: center;
+  width: 100%;
+  font-size: 12px;
+}
+.rvl {
+  color: var(--ink-3);
+  grid-row: span 2;
+}
+.rvt {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--track);
+}
+.rvr {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.rvc .rvr {
+  background: color-mix(in srgb, var(--green) 45%, transparent);
+}
+.rvm {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--card);
+}
+.rvc .rvm {
+  background: var(--green);
+}
+.rvv {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-3);
+}
+.rvv b {
+  color: var(--ink);
+}
+.gnote {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+}
+@media (max-width: 560px) {
+  .gsteps {
+    grid-template-columns: 1fr;
+  }
+}
+.gmatch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: var(--green-bg);
+  font-size: 13px;
+}
+.gtabs .chip.gbest {
+  border-color: var(--green);
+}
+.gtabs .chip.gbest::after {
+  content: ' \2605';
+  color: var(--green);
+}
+.gtabs .chip.gbest[aria-pressed='true']::after {
+  color: inherit;
+}
+.rvs {
+  display: flex;
+  overflow: hidden;
+  gap: 2px;
+}
+.rvs .rvd {
+  background: var(--green);
+}
+.rvs .rvr2 {
+  background: color-mix(in srgb, var(--green) 40%, var(--track));
+}
+.rvv b {
+  font-weight: 600;
 }

@@ -149,7 +149,9 @@ function valueRows(v, done) {
         ? 'Not available'
         : esc(money(v.avoided)) + ' a year' + (done ? '' : ' when delivered')
     ],
-    ['Cost', v.cost == null ? 'Not set' : esc(money(v.cost))]
+    ['Cost', v.cost == null ? 'Not set' : esc(money(v.cost))],
+    v.run ? ['Running cost', esc(money(v.run)) + ' a year'] : null,
+    v.run && v.net != null ? ['Net avoided loss', esc(money(v.net)) + ' a year'] : null
   ];
   if (v.ratio != null)
     rows.push(

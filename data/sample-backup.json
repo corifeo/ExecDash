@@ -421,7 +421,10 @@
       "id": "lib0",
       "name": "Credential phishing leading to staff account compromise",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Phishing",
+        "Identity"
+      ],
       "impacts": [
         "Financial loss"
       ]
@@ -432,7 +435,10 @@
       "id": "lib1",
       "name": "Business email compromise and payment diversion",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Fraud",
+        "Phishing"
+      ],
       "impacts": [
         "Financial loss"
       ]
@@ -451,7 +457,10 @@
       "id": "r4",
       "name": "Deepfake-enabled payment fraud",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Fraud",
+        "AI"
+      ],
       "impacts": [
         "Financial loss"
       ]
@@ -462,7 +471,10 @@
       "id": "lib3",
       "name": "Social engineering of the service desk to reset credentials",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Social engineering",
+        "Identity"
+      ],
       "impacts": [
         "Client detriment"
       ]
@@ -473,7 +485,10 @@
       "id": "lib4",
       "name": "Malicious insider exfiltrating client data",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Insider",
+        "Data loss"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -484,7 +499,10 @@
       "id": "lib5",
       "name": "Accidental disclosure of client data by staff",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Data loss",
+        "Human error"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -495,7 +513,10 @@
       "id": "lib6",
       "name": "Insider misuse of privileged access",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Insider",
+        "Privileged access"
+      ],
       "impacts": [
         "Client detriment"
       ]
@@ -514,7 +535,10 @@
       "id": "r3",
       "name": "Takeover of client accounts",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Identity",
+        "Client-facing"
+      ],
       "impacts": [
         "Client detriment",
         "Financial loss"
@@ -534,7 +558,10 @@
       "id": "r2",
       "name": "Compromise through a critical supplier",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Third party",
+        "Identity"
+      ],
       "impacts": [
         "Operational",
         "Client detriment"
@@ -554,7 +581,10 @@
       "id": "lib9",
       "name": "Compromise of privileged administrator accounts",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Privileged access",
+        "Identity"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -565,7 +595,10 @@
       "id": "lib10",
       "name": "Abuse of over-privileged integrations and API tokens",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Privileged access",
+        "Integrations"
+      ],
       "impacts": [
         "Client detriment"
       ]
@@ -576,7 +609,10 @@
       "id": "lib11",
       "name": "Leaked or unrotated machine credentials and secrets",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Secrets",
+        "Identity"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -595,7 +631,10 @@
       "id": "lib12",
       "name": "Unmanaged SaaS applications holding client data",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Shadow IT",
+        "Cloud"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -606,7 +645,10 @@
       "id": "lib13",
       "name": "MFA bypass through session hijacking or token theft",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Identity",
+        "Session security"
+      ],
       "impacts": [
         "Client detriment"
       ]
@@ -617,7 +659,10 @@
       "id": "lib14",
       "name": "Orphaned access from weak joiner, mover and leaver controls",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Identity",
+        "Joiners and leavers"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -628,7 +673,10 @@
       "id": "lib15",
       "name": "Malicious or compromised open-source dependency",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Supply chain",
+        "Open source"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -639,7 +687,10 @@
       "id": "lib16",
       "name": "Known-vulnerable third-party components in production",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Supply chain",
+        "Patching"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -650,7 +701,10 @@
       "id": "lib17",
       "name": "Compromise of build pipelines or CI/CD tooling",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Supply chain",
+        "Build pipeline"
+      ],
       "fair": {
         "fMin": 0.05,
         "fMl": 0.1,
@@ -669,7 +723,10 @@
       "id": "lib18",
       "name": "Tampered release artefacts reaching production",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Supply chain",
+        "Release integrity"
+      ],
       "fair": {
         "fMin": 0.02,
         "fMl": 0.05,
@@ -688,7 +745,10 @@
       "id": "lib19",
       "name": "Incomplete software inventory slowing vulnerability response",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Supply chain",
+        "Asset inventory"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -707,7 +767,10 @@
       "id": "r5",
       "name": "Client data exposed through cloud misconfiguration",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Cloud",
+        "Data loss"
+      ],
       "impacts": [
         "Regulatory",
         "Reputational"
@@ -727,7 +790,10 @@
       "id": "lib21",
       "name": "Exploitation of internet-facing vulnerabilities",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Attack surface",
+        "Patching"
+      ],
       "impacts": [
         "Operational",
         "Regulatory"
@@ -747,7 +813,10 @@
       "id": "lib22",
       "name": "Application logic flaws enabling unauthorised transactions",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Client-facing",
+        "Fraud"
+      ],
       "impacts": [
         "Financial loss"
       ]
@@ -766,7 +835,10 @@
       "id": "lib23",
       "name": "Insecure APIs exposing client data",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "API",
+        "Data loss"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -777,7 +849,10 @@
       "id": "lib24",
       "name": "Unknown or unmanaged external attack surface",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Attack surface",
+        "Asset inventory"
+      ],
       "impacts": [
         "Reputational"
       ]
@@ -788,7 +863,10 @@
       "id": "lib25",
       "name": "Automated credential stuffing against client platforms",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Client-facing",
+        "Identity"
+      ],
       "impacts": [
         "Financial loss"
       ]
@@ -807,7 +885,10 @@
       "id": "r6",
       "name": "End-of-support legacy platform",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Legacy",
+        "Patching"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -818,7 +899,10 @@
       "id": "lib27",
       "name": "Malware compromise of staff endpoints",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Malware",
+        "Endpoints"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -829,7 +913,10 @@
       "id": "lib28",
       "name": "Unpatched servers and endpoints",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Patching",
+        "Endpoints"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -840,7 +927,10 @@
       "id": "lib29",
       "name": "Lateral movement across a flat corporate network",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Network",
+        "Ransomware"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -851,7 +941,10 @@
       "id": "lib30",
       "name": "Compromise of on-premises directory services",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Privileged access",
+        "Legacy"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -870,7 +963,10 @@
       "id": "r1",
       "name": "Data theft and extortion by criminal groups",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Ransomware",
+        "Data loss"
+      ],
       "impacts": [
         "Financial loss",
         "Regulatory",
@@ -883,7 +979,10 @@
       "id": "lib32",
       "name": "Client data leaving through unsanctioned channels",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Data loss",
+        "Shadow IT"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -894,7 +993,10 @@
       "id": "lib33",
       "name": "Weak protection of sensitive data at rest and in transit",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Data loss",
+        "Encryption"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -905,7 +1007,10 @@
       "id": "lib34",
       "name": "Excessive retention of client data increasing breach impact",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Data loss",
+        "Retention"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -916,7 +1021,10 @@
       "id": "lib35",
       "name": "Client data exposed in non-production environments",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Data loss",
+        "Non-production"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -935,7 +1043,10 @@
       "id": "lib36",
       "name": "Delayed detection of intrusions due to logging gaps",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Detection",
+        "Logging"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -946,7 +1057,10 @@
       "id": "lib37",
       "name": "Slow or ineffective incident response",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Incident response",
+        "Detection"
+      ],
       "impacts": [
         "Reputational"
       ]
@@ -957,7 +1071,10 @@
       "id": "lib38",
       "name": "Alert fatigue causing missed threats",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Detection",
+        "Logging"
+      ],
       "impacts": [
         "Operational"
       ]
@@ -968,7 +1085,10 @@
       "id": "lib39",
       "name": "Missed regulatory notification deadlines after an incident",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Regulatory",
+        "Incident response"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -979,7 +1099,10 @@
       "id": "lib40",
       "name": "Controls failing without being detected",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Assurance",
+        "Control failure"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -990,7 +1113,10 @@
       "id": "lib41",
       "name": "Failure to meet regulatory security obligations",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Regulatory",
+        "Assurance"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -1001,7 +1127,10 @@
       "id": "lib42",
       "name": "Insufficient evidence of control operation",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Assurance",
+        "Evidence"
+      ],
       "impacts": [
         "Regulatory"
       ]
@@ -1012,7 +1141,10 @@
       "id": "lib43",
       "name": "New services launched without security validation",
       "source": "library",
-      "tags": [],
+      "tags": [
+        "Assurance",
+        "Change"
+      ],
       "impacts": [
         "Client detriment"
       ]
@@ -1032,10 +1164,14 @@
       ],
       "start": "Q2 2026",
       "subId": "s3",
-      "tags": [],
+      "tags": [
+        "Patching",
+        "Attack surface"
+      ],
       "type": "strategic",
       "cost": 350000,
-      "reduction": 60
+      "reduction": 60,
+      "runCost": 0
     },
     {
       "categoryId": "ssc",
@@ -1050,10 +1186,14 @@
       ],
       "start": "Q1 2026",
       "subId": "s4",
-      "tags": [],
+      "tags": [
+        "Supply chain",
+        "Build pipeline"
+      ],
       "type": "strategic",
       "cost": 180000,
-      "reduction": 50
+      "reduction": 50,
+      "runCost": 100000
     },
     {
       "categoryId": "secops",
@@ -1068,10 +1208,15 @@
       ],
       "start": "Q2 2026",
       "subId": "s1",
-      "tags": [],
+      "tags": [
+        "Detection",
+        "Logging",
+        "Legacy"
+      ],
       "type": "strategic",
       "cost": 400000,
-      "reduction": 40
+      "reduction": 40,
+      "runCost": 100000
     },
     {
       "categoryId": "ei",
@@ -1085,10 +1230,14 @@
       ],
       "start": "Q4 2025",
       "subId": "s4",
-      "tags": [],
+      "tags": [
+        "Legacy",
+        "Patching"
+      ],
       "type": "strategic",
       "cost": 900000,
-      "reduction": 70
+      "reduction": 70,
+      "runCost": 0
     },
     {
       "categoryId": "idt",
@@ -1103,10 +1252,14 @@
       ],
       "start": "Q3 2026",
       "subId": "s4",
-      "tags": [],
+      "tags": [
+        "Privileged access",
+        "Integrations"
+      ],
       "type": "ci",
       "cost": 60000,
-      "reduction": 35
+      "reduction": 35,
+      "runCost": 0
     },
     {
       "categoryId": "exc",
@@ -1118,10 +1271,14 @@
       "riskIds": [],
       "start": "Q3 2026",
       "subId": "",
-      "tags": [],
+      "tags": [
+        "Assurance",
+        "Control failure"
+      ],
       "type": "ci",
       "cost": null,
-      "reduction": null
+      "reduction": null,
+      "runCost": 0
     },
     {
       "categoryId": "hr",
@@ -1135,10 +1292,14 @@
       ],
       "start": "Q2 2026",
       "subId": "s2",
-      "tags": [],
+      "tags": [
+        "Social engineering",
+        "Fraud"
+      ],
       "type": "ci",
       "cost": 25000,
-      "reduction": 30
+      "reduction": 30,
+      "runCost": 0
     }
   ],
   "initiativeTypes": [

@@ -90,11 +90,18 @@ function cfgData() {
             (cur ? '<span class="pill ' + cur + '">' + W[cur] + '</span>' : '') +
             '</div><span class="al">' +
             esc(ind.desc) +
+            '</span><span class="al qc-meas">' +
+            esc(measureText(ind)) +
             '</span>' +
             cnote +
             '</div>' +
             '<div class="qc-val">' +
-            fld('Value', valueCtl + prevHint(prev, pe ? num(pe.value) : null, ind.unit)) +
+            fld(
+              'Value, ' + unitName(ind.unit).toLowerCase(),
+              valueCtl + prevHint(prev, pe ? num(pe.value) : null, ind.unit),
+              '',
+              ind.desc + '. ' + measureText(ind)
+            ) +
             fld(
               'Change',
               trendCtl(p + '.trend', e.trend, prev ? autoDelta(v, num(pe.value)) : null, ind.unit),

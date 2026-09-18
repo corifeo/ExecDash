@@ -79,10 +79,10 @@ function initRow(cfg, q, prev, pl, it, i) {
         valTip +
         '>' +
         '<span class="ivtop">' +
-        (val.avoided == null
+        (val.net == null
           ? '<span class="al">No estimate</span>'
           : '<b class="ivsum">' +
-            esc(money(val.avoided)) +
+            esc(money(val.net)) +
             '<small> a year ' +
             (done ? 'avoided' : 'when done') +
             '</small></b>') +
@@ -90,7 +90,7 @@ function initRow(cfg, q, prev, pl, it, i) {
           ? '<b class="rratio' + (val.ratio < 1 ? ' low' : '') + '">' + esc(ratioTxt(val.ratio)) + '</b>'
           : '') +
         '</span>' +
-        valueLine(val.avoided, val.cost) +
+        valueLine(val.net, val.cost) +
         '</div>'
       : '<div class="ival"><span class="al">No estimate</span></div>';
   var impact =
@@ -119,25 +119,29 @@ function initRow(cfg, q, prev, pl, it, i) {
       : '<div class="proj"><span class="al">No projection set</span></div>';
   // Expanded: where the avoided loss comes from, not a repeat of the row bar.
   var vfig = function (lab, v, cls) {
-    return '<div class="vfig"><span>' + lab + '</span><b' + (cls ? ' class="' + cls + '"' : '') + '>' + v + '</b></div>';
+    return (
+      '<div class="vfig"><span>' +
+      lab +
+      '</span><b' +
+      (cls ? ' class="' + cls + '"' : '') +
+      '>' +
+      v +
+      '</b></div>'
+    );
   };
   var vbar =
     val.avoided != null || val.cost != null
       ? '<div class="idetv">' +
-        vfig(
-          'Expected loss now',
-          val.est ? esc(money(val.base)) + ' a year' : 'No estimate'
-        ) +
+        vfig('Expected loss now', val.est ? esc(money(val.base)) + ' a year' : 'No estimate') +
         vfig(
           done ? 'Since delivery' : 'After delivery',
-          val.avoided == null
-            ? 'Not available'
-            : esc(money(val.base - val.avoided)) + ' a year',
+          val.avoided == null ? 'Not available' : esc(money(val.base - val.avoided)) + ' a year',
           'good'
         ) +
         vfig(
           'Cost',
           (val.cost == null ? 'Not set' : esc(money(val.cost))) +
+            (val.run ? ' + ' + esc(money(val.run)) + ' a year' : '') +
             (val.payback != null ? ', back in ' + esc(paybackTxt(val.payback).toLowerCase()) : '')
         ) +
         '</div>'
@@ -298,6 +302,8 @@ function layer4(cfg, q, prev, pl) {
                 'Avoided loss when delivered',
                 pvv.avoided == null ? 'Not available' : esc(money(pvv.avoided)) + ' a year'
               ],
+              pvv.run ? ['Running costs', esc(money(pvv.run)) + ' a year'] : null,
+              pvv.run && pvv.net != null ? ['Net avoided loss', esc(money(pvv.net)) + ' a year'] : null,
               ['Total cost', pvv.cost == null ? 'Not set' : esc(money(pvv.cost))],
               pvv.ratio != null ? ['Avoided loss against cost', esc(ratioTxt(pvv.ratio))] : null,
               ['Shared risks', 'Counted once, with reductions combined']
@@ -311,7 +317,7 @@ function layer4(cfg, q, prev, pl) {
           ? '<b class="rratio' + (pvv.ratio < 1 ? ' low' : '') + '">' + esc(ratioTxt(pvv.ratio)) + '</b>'
           : '') +
         '</div>' +
-        valueBars(pvv.avoided, pvv.cost, true) +
+        valueBars(pvv.net, pvv.cost, true) +
         '<p class="al">Estimated fall in expected annual loss on linked risks once delivered. This is avoided loss, not a measure of overall cyber improvement.</p></div>'
       : '';
   var head =
