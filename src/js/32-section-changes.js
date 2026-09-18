@@ -28,6 +28,7 @@ function layer2(cfg, q, prev, pl) {
       var t = tipHtml(
         r.name,
         [
+          tsec('Risk'),
           ['Category', esc(c ? c.name : 'None')],
           [
             impList(r).length > 1 ? 'Impacts' : 'Impact',

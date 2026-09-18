@@ -29,6 +29,34 @@
   font-size: 13.5px;
   margin-bottom: 6px;
 }
+#tip .tsec {
+  margin-top: 7px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+#tip .tsec:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+#tip .tsh {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+  margin-bottom: 3px;
+}
+#tip .tsec.good .tsh {
+  color: var(--green-tip);
+  opacity: 1;
+}
+#tip .tsec.good dd {
+  color: var(--green-tip);
+}
+#tip .tsec.good dt {
+  color: var(--card);
+}
 #tip dl {
   display: grid;
   grid-template-columns: auto auto;

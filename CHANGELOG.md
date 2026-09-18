@@ -5,6 +5,13 @@
 - **Header key:** two rows (appetite, links). The target key is removed.
 - **Incidents:** Notable incidents lists at most two, most severe first, one line each. The rest collapse into "+N more" with a tooltip. Category and risk are in the tooltip.
 - **Sample data:** `data/sample-large.json` has 19 initiatives and 11 described incidents for layout testing. Import it from Configure, Data.
+- **Ongoing initiatives:** each initiative is one line, with the details behind a per-row expander. Clicking anywhere on the row opens it.
+  - The row reads: name and type, progress, avoided loss against cost, delivery status.
+  - Avoided loss leads with the money and keeps the bar with its cost marker. Expanding shows expected loss now, loss after delivery, and cost with payback.
+  - Expanding also shows the indicator (now and projected), and the category and risk links.
+  - Section 4 is about half its previous height with 19 initiatives.
+- **Tooltips:** rows are grouped into labelled sections. Money sections (FAIR loss estimates, avoided loss and cost) are green, using a new `--green-tip` token for the inverted panel.
+- **Fix:** a highlighted row no longer hides the empty part of its progress and value bars.
 
 ## 1.0.0 (2026-09-17)
 

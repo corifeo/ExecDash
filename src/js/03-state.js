@@ -32,3 +32,5 @@ var wcfg = null,
 
 // Dashboard render context ({cfg, q, prev, pl}) kept so sections can re-render in place.
 var CTX = null;
+// Initiative rows expanded in section 4, by initiative id.
+var initOpen = {};

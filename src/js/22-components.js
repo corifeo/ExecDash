@@ -139,6 +139,7 @@ function viewSeg(n) {
 }
 function valueRows(v, done) {
   var rows = [
+    tsec('Avoided loss and cost', 'good'),
     ['Linked risks with estimates', v.est + ' of ' + v.risks],
     ['Their expected loss', esc(money(v.base)) + ' a year'],
     ['Expected reduction', v.red == null ? 'Not set' : v.red + '%'],
@@ -190,6 +191,7 @@ function fairRows(bands, r0, res) {
   var f = r0.fair,
     bi = bandIdx(bands, res.mean);
   return [
+    tsec('Loss estimate, FAIR', 'good'),
     ['Loss bucket', esc(bands[bi].name) + ' <span class="tst">' + esc(bandRange(bands, bi)) + '</span>'],
     ['Expected annual loss', esc(money(res.mean))],
     [
