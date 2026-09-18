@@ -1,7 +1,7 @@
 /* Browser storage adapter with a small document API (doc, collection, onSnapshot). */
 
 function localStore() {
-  var KEY = 'cyberdash:store',
+  var KEY = SK + 'store',
     subs = [];
   function load() {
     try {

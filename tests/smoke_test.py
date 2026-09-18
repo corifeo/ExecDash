@@ -82,7 +82,7 @@ def main():
         with page.expect_download() as dl:
             page.click('button[data-act="export"][data-a="backup"]')
         data = json.loads(pathlib.Path(dl.value.path()).read_text())
-        results.append(check("backup export is valid", data.get("format") == "cyber-dashboard" and len(data.get("quarters", {})) >= 1))
+        results.append(check("backup export is valid", data.get("format") == "exec-dashboard" and len(data.get("quarters", {})) >= 1))
 
         # Editing: text, select, slider, tag list, dial, switch, then save.
         page.click('button[data-act="tab"][data-a="structure"]')
@@ -103,7 +103,7 @@ def main():
         page.click('button[data-act="swb"][data-a="q:initiatives.i7.include"]')
         page.click('button[data-act="save"]')
         page.wait_for_timeout(400)
-        stored = json.loads(page.evaluate("localStorage.getItem('cyberdash:store')"))
+        stored = json.loads(page.evaluate("localStorage.getItem('execdash:store')"))
         cfg = stored["dashboard/config"]
         q3 = stored["quarters/2026-Q3"]
         results.append(check("text, tag and select edits are saved", cfg["title"] == "Board cyber dashboard" and "Legal" in cfg["impacts"] and cfg["style"]["corners"] == "square"))
@@ -114,13 +114,13 @@ def main():
         page.click('button[data-act="resetarm"][data-a="risks"]')
         page.click('button[data-act="reset"][data-a="risks"]')
         page.wait_for_timeout(500)
-        stored = json.loads(page.evaluate("localStorage.getItem('cyberdash:store')"))
+        stored = json.loads(page.evaluate("localStorage.getItem('execdash:store')"))
         results.append(check("clearing risks keeps the structure", len(stored["dashboard/risks"]["items"]) == 0 and len(stored["dashboard/config"]["categories"]) > 0))
         results.append(check("reset needs confirmation", page.locator('button[data-act="reset"][data-a="empty"]').count() == 0))
         page.click('button[data-act="resetarm"][data-a="empty"]')
         page.click('button[data-act="reset"][data-a="empty"]')
         page.wait_for_selector('button[data-act="loadsample"]')
-        stored = page.evaluate("localStorage.getItem('cyberdash:store')")
+        stored = page.evaluate("localStorage.getItem('execdash:store')")
         results.append(check("reset clears stored data", stored in (None, "{}")))
         page.click('button[data-act="loadsample"]')
         page.wait_for_selector("#sec-4")

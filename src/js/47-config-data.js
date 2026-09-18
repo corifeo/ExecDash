@@ -8,7 +8,7 @@ var IMPORT = null,
 var QID = /^\d{4}-Q[1-4]$/,
   SID = /^[A-Za-z0-9_.~:@+-]{1,80}$/;
 function buildExport(type, qsel) {
-  var d = { format: 'cyber-dashboard', version: 1, type: type, exportedAt: new Date().toISOString() };
+  var d = { format: 'exec-dashboard', version: 1, type: type, exportedAt: new Date().toISOString() };
   if (type === 'structure' || type === 'backup') d.structure = stripCfg(config);
   if (type === 'risks' || type === 'backup') d.risks = clone(config.risks);
   if (type === 'initiatives' || type === 'backup') {
@@ -29,7 +29,7 @@ async function doExport(type) {
   var d = buildExport(type, qsel);
   var text = JSON.stringify(d, null, 2),
     name =
-      'cyber-dashboard-' +
+      'exec-dashboard-' +
       type +
       (qsel ? '-' + qsel : '') +
       '-' +
@@ -97,7 +97,7 @@ function cleanInit(r) {
   };
 }
 function validateImport(o) {
-  if (!o || typeof o !== 'object' || o.format !== 'cyber-dashboard')
+  if (!o || typeof o !== 'object' || o.format !== 'exec-dashboard')
     throw new Error('This file is not a dashboard export (format field missing).');
   var types = ['structure', 'risks', 'initiatives', 'quarters', 'backup'];
   if (types.indexOf(o.type) < 0) throw new Error('Unknown export type "' + str(o.type, 30) + '".');
@@ -337,7 +337,7 @@ async function factoryReset(mode) {
     await DB.doc('dashboard/initiatives').delete();
     await DB.doc('dashboard/config').delete();
     try {
-      ['cyberdash:collapsed'].concat(VIEW_SECTIONS.map(viewKey)).forEach(function (k) {
+      [SK + 'collapsed'].concat(VIEW_SECTIONS.map(viewKey)).forEach(function (k) {
         localStorage.removeItem(k);
       });
     } catch (e) {}
@@ -539,7 +539,7 @@ function cfgDataMgmt() {
     '</div>' +
     '<details class="paste"' +
     (pasteOpen ? ' open' : '') +
-    '><summary>Paste JSON instead</summary><textarea id="imptext" rows="8" placeholder="{ &quot;format&quot;: &quot;cyber-dashboard&quot;, ... }">' +
+    '><summary>Paste JSON instead</summary><textarea id="imptext" rows="8" placeholder="{ &quot;format&quot;: &quot;exec-dashboard&quot;, ... }">' +
     esc(pasteText) +
     '</textarea><button class="btn" data-act="checkimp">Check JSON</button></details>';
   if (IMPORT) {
@@ -607,7 +607,7 @@ function browserDownload(name, text) {
 }
 async function loadSample() {
   try {
-    var o = window.CYBERDASH_SAMPLE ? clone(window.CYBERDASH_SAMPLE) : null;
+    var o = window.EXECDASH_SAMPLE ? clone(window.EXECDASH_SAMPLE) : null;
     if (!o) {
       var r = await fetch('data/sample-backup.json', { cache: 'no-store' });
       if (!r.ok) throw new Error('HTTP ' + r.status);

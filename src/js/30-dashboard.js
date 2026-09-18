@@ -111,14 +111,14 @@ var SECTIONS = [
 ];
 function collapsedSet() {
   try {
-    return JSON.parse(localStorage.getItem('cyberdash:collapsed') || '[]');
+    return JSON.parse(localStorage.getItem(SK + 'collapsed') || '[]');
   } catch (e) {
     return [];
   }
 }
 function saveCollapsed(a) {
   try {
-    localStorage.setItem('cyberdash:collapsed', JSON.stringify(a));
+    localStorage.setItem(SK + 'collapsed', JSON.stringify(a));
   } catch (e) {}
 }
 function band(n, title, q, body, extra, summary) {

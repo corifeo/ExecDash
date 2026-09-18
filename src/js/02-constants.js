@@ -1,5 +1,7 @@
 /* Fixed labels and enumerations shared across the app. */
 
+// Prefix for every browser storage key.
+var SK = 'execdash:';
 var W = { g: 'Within', a: 'Tolerance', r: 'Outside', n: 'n/a', on: 'On target', off: 'Behind target' };
 var WL = {
   g: 'Within appetite',

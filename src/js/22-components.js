@@ -58,7 +58,7 @@ function cu(v, u, tag, cls, cmp) {
    Section 3 keeps its original key so existing preferences carry over. */
 var VIEW_SECTIONS = [1, 2, 3, 4];
 function viewKey(n) {
-  return n === 3 ? 'cyberdash:l3view' : 'cyberdash:view' + n;
+  return n === 3 ? SK + 'l3view' : SK + 'view' + n;
 }
 function secView(n) {
   try {

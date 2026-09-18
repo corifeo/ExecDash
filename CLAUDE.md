@@ -14,9 +14,9 @@ Version 1.0.0 is the MVP. The repository is `ExecDash` on GitHub, served by GitH
 
 **Names that must not change**, because saved data and existing exports depend on them:
 
-- storage keys prefixed `cyberdash:`
-- the export `format` value `cyber-dashboard`
-- export file names `cyber-dashboard-*.json`, which `.gitignore` excludes
+- storage keys prefixed `execdash:` (the `SK` constant)
+- the export `format` value `exec-dashboard`
+- export file names `exec-dashboard-*.json`, which `.gitignore` excludes
 
 The default in-app title, "Cyber security dashboard", is what the board sees and is set under Structure. See `README.md` for the product description and `docs/data-model.md` for the data formats and calculations.
 
@@ -94,13 +94,13 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 
 ### Data
 
-**Documents.** `localStorage['cyberdash:store']` holds a JSON object of documents:
+**Documents.** `localStorage['execdash:store']` holds a JSON object of documents:
 
 - `dashboard/config`: structure, lists and appearance. The registers are split out by `stripCfg`.
 - `dashboard/risks` and `dashboard/initiatives`: `{ items: [...] }`.
 - `quarters/<YYYY-Qn>`: one document per quarter.
 
-**View preferences** are kept under separate keys: `cyberdash:collapsed`, and `viewKey(n)` for each section.
+**View preferences** are kept under separate keys: `execdash:collapsed`, and `viewKey(n)` for each section.
 
 **Loading and migration.** At start-up, `70-app.js` subscribes to the documents, merges the registers into `config`, and calls `normalizeConfig`. Quarters are normalised on use with `normalizeQ(q, cfg)`.
 
