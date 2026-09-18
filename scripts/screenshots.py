@@ -55,6 +55,12 @@ def section(page, n, name, pad=16):
     page.evaluate("document.querySelector('.snav').style.visibility=''")
 
 
+def pin_config(page):
+    """Stop the save bar, filter bar and quarter tabs floating over full-page captures."""
+    page.add_style_tag(content=".savebar{visibility:hidden}.fbar,.qtabs{position:static!important}")
+    page.wait_for_timeout(100)
+
+
 def scroll_to_heading(page, text):
     page.evaluate(
         "t=>{const h=[...document.querySelectorAll('#cfg .csec h2')].find(x=>x.textContent.startsWith(t));"
@@ -108,6 +114,7 @@ def main():
 
             page.click('button[data-act="view"][data-a="config"]')
             page.wait_for_timeout(300)
+            pin_config(page)
             page.mouse.move(1, 1)
             page.evaluate("scrollTo(0,0)")
             page.screenshot(path=str(OUT / "configure-quarter-data.png"))
@@ -126,7 +133,8 @@ def main():
             page.click('button[data-act="regview"][data-a="inits"]')
             page.locator('button[data-act="editinit"]').first.click()
             page.wait_for_timeout(400)
-            page.evaluate("document.querySelector('.rrow.open').scrollIntoView({block:'start'}); scrollBy(0,-90)")
+            page.evaluate("document.querySelector('.rrow.open .fair').scrollIntoView({block:'end'}); scrollBy(0,40)")
+            page.wait_for_timeout(200)
             page.screenshot(path=str(OUT / "configure-initiative-value.png"))
 
             page.click('button[data-act="tab"][data-a="structure"]')
@@ -155,19 +163,40 @@ def main():
         page.screenshot(path=str(OUT / "mobile-what-has-changed.png"))
         ctx.close()
 
-        # Animated walkthrough: scroll from the overview into What has changed.
+        # Animated walkthrough: scroll through all four sections, holding only on What has changed.
         ctx = browser.new_context(viewport={"width": 1280, "height": 820})
         page = load(ctx, url)
         page.wait_for_timeout(300)
-        frames = []
-        for i in range(46):
-            if 8 <= i < 16:
-                page.evaluate(f"scrollTo(0,{(i - 7) * 95})")
+        tops = page.evaluate("[2,4].map(n=>document.getElementById('sec-'+n).getBoundingClientRect().top+scrollY-70)")
+        end = page.evaluate("document.documentElement.scrollHeight-innerHeight")
+        stop2, last = int(tops[0]), int(min(end, tops[1] + 200))
+        frames, durations = [], []
+
+        def grab(ms):
             png = page.screenshot(type="png")
             frames.append(Image.open(io.BytesIO(png)).convert("RGB").resize((800, 512), Image.LANCZOS))
+            durations.append(ms)
+
+        grab(1200)
+        for k in range(1, 10):
+            page.evaluate(f"scrollTo(0,{round(stop2 * k / 9)})")
             page.wait_for_timeout(70)
+            grab(90)
+        for _ in range(10):
+            page.wait_for_timeout(90)
+            grab(90)
+        durations[-1] = 2800
+        steps = max(12, (last - stop2) // 110)
+        for k in range(1, steps + 1):
+            page.evaluate(f"scrollTo(0,{round(stop2 + (last - stop2) * k / steps)})")
+            page.wait_for_timeout(70)
+            grab(90)
+        for _ in range(6):
+            page.wait_for_timeout(90)
+            grab(90)
+        durations[-1] = 900
         palette = [f.quantize(colors=128, method=Image.Quantize.MEDIANCUT) for f in frames]
-        palette[0].save(OUT / "demo.gif", save_all=True, append_images=palette[1:], duration=[900] + [110] * 44 + [2500], loop=0, optimize=True)
+        palette[0].save(OUT / "demo.gif", save_all=True, append_images=palette[1:], duration=durations, loop=0, optimize=True)
         ctx.close()
         browser.close()
     httpd.shutdown()
