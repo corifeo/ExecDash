@@ -131,7 +131,12 @@ document.addEventListener('click', function (e) {
     return;
   }
   var b = e.target.closest && e.target.closest('[data-act]');
-  if (!b) return;
+  if (!b) {
+    // Anywhere on an initiative row opens or closes its details.
+    var ini = e.target.closest && e.target.closest('#l4body .init');
+    if (ini && secView(4) !== 'compact') toggleInit(ini);
+    return;
+  }
   var act = b.getAttribute('data-act'),
     a = b.getAttribute('data-a'),
     d = b.getAttribute('data-d');
@@ -232,6 +237,9 @@ document.addEventListener('click', function (e) {
         x.setAttribute('aria-pressed', String(x.dataset.a === initFilter));
       });
       applyInitFilter();
+      return;
+    case 'iexp':
+      toggleInit(b.closest('.init'));
       return;
     case 'hl':
       hlStatus = a || null;
@@ -670,3 +678,9 @@ document.addEventListener('click', function (e) {
   msgErr = false;
   rerenderConfig();
 });
+function toggleInit(row) {
+  var id = row.querySelector('.iexp').getAttribute('data-a');
+  initOpen[id] = !initOpen[id];
+  row.classList.toggle('open', !!initOpen[id]);
+  row.querySelector('.iexp').setAttribute('aria-expanded', String(!!initOpen[id]));
+}

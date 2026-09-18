@@ -20,16 +20,20 @@ function initRow(cfg, q, prev, pl, it, i) {
     pv = num(it.projected),
     ps = ind && pv != null ? statusFor(ind, pv) : null;
   var rows = [
+    tsec('Initiative'),
     ['Type', esc(itName(it.type, cfg))],
     ['Area', esc(c ? c.name : 'None') + (sub ? ', ' + esc(sub.name) : '')],
     it.start ? ['Started', esc(it.start)] : null,
     it.due ? ['Due', esc(it.due)] : null,
+    tsec('Delivery'),
     ['Progress', p == null ? 'No data' : p + '%'],
     pl ? [pl, pp == null ? 'No data' : pp + '%'] : null,
     pl && p != null && pp != null ? ['Change', deltaLabel(p - pp, '%')] : null,
     ['Delivery', esc(dsName(e.status))],
+    c ? tsec('Indicator') : null,
     c ? ['Current value', esc(fmt(cv, ind.unit)) + tst(cs)] : null,
     c && pv != null ? ['Projected value', esc(fmt(pv, ind.unit)) + tst(ps)] : null,
+    c ? ['Indicator', esc(ind.desc)] : null,
     e.milestone ? ['Next milestone', esc(e.milestone)] : null
   ];
   var lr = (it.riskIds || [])
@@ -41,8 +45,8 @@ function initRow(cfg, q, prev, pl, it, i) {
       return t.riskId;
     });
   if (lr.length)
-    rows.push([
-      'Linked risks',
+    rows.push(tsec('Linked risks'), [
+      'Risks',
       lr
         .map(function (r) {
           return (
@@ -54,15 +58,6 @@ function initRow(cfg, q, prev, pl, it, i) {
         })
         .join('<br>')
     ]);
-  var ctx = c
-    ? '<span class="pctx" title="' +
-      esc(c.name + ': ' + ind.desc) +
-      '"><b>' +
-      esc(c.name) +
-      '</b> ' +
-      esc(ind.desc) +
-      '</span>'
-    : '';
   var lim = ind
     ? isTarget(ind)
       ? 'target ' + fmt(ind.target, ind.unit)
@@ -70,37 +65,44 @@ function initRow(cfg, q, prev, pl, it, i) {
     : '';
   var val = initValue(cfg, it),
     done = e.status === 'done';
+  var valTip = tip(
+    tipHtml(
+      (done ? 'Delivered value: ' : 'Projected value: ') + it.name,
+      valueRows(val, done),
+      AVOID_NOTE,
+      'About this figure'
+    )
+  );
   var roi =
     val.avoided != null || val.cost != null
-      ? '<div class="iroi" tabindex="0"' +
-        tip(
-          tipHtml(
-            (done ? 'Delivered value: ' : 'Projected value: ') + it.name,
-            valueRows(val, done),
-            AVOID_NOTE,
-            'About this figure'
-          )
-        ) +
-        '><span class="rlab"><span>' +
-        (done ? 'Delivered' : 'Projected') +
-        ': <b>' +
-        (val.avoided == null ? 'no estimate' : esc(money(val.avoided)) + '</b> a year avoided') +
-        (val.cost != null ? ' for <b>' + esc(money(val.cost)) + '</b>' : '') +
-        '</span></span><span class="vrow2">' +
-        valueLine(val.avoided, val.cost) +
+      ? '<div class="ival" tabindex="0"' +
+        valTip +
+        '>' +
+        '<span class="ivtop">' +
+        (val.avoided == null
+          ? '<span class="al">No estimate</span>'
+          : '<b class="ivsum">' +
+            esc(money(val.avoided)) +
+            '<small> a year ' +
+            (done ? 'avoided' : 'when done') +
+            '</small></b>') +
         (val.ratio != null
           ? '<b class="rratio' + (val.ratio < 1 ? ' low' : '') + '">' + esc(ratioTxt(val.ratio)) + '</b>'
           : '') +
-        '</span></div>'
-      : '';
+        '</span>' +
+        valueLine(val.avoided, val.cost) +
+        '</div>'
+      : '<div class="ival"><span class="al">No estimate</span></div>';
   var impact =
     c && pv != null
-      ? '<div class="proj">' +
-        ctx +
-        '<span class="pvals"><b class="pcn" title="' +
-        esc(c ? c.name : '') +
+      ? '<div class="proj"><span class="al">' +
+        esc(c.name + ': ' + ind.desc) +
+        '</span><span class="pline" title="' +
+        esc(ps ? 'Lands ' + WL[ps].toLowerCase() + (lim ? ', ' + lim : '') : 'Projected') +
+        '"><span class="pvals"><b class="pcn" title="' +
+        esc(c.name) +
         '">' +
-        esc(c ? c.name : '') +
+        esc(c.name) +
         '</b><span class="sh ' +
         (cs || '') +
         '" aria-hidden="true"></span>' +
@@ -111,13 +113,48 @@ function initRow(cfg, q, prev, pl, it, i) {
         esc(fmt(pv, ind.unit)) +
         '<small>' +
         (it.due ? 'by ' + esc(it.due) : 'projected') +
-        '</small></span><span class="al">' +
-        (ps ? 'Lands ' + esc(WL[ps].toLowerCase()) : 'Projected') +
-        (lim ? ', ' + esc(lim) : '') +
-        '</span></div>'
-      : '<div class="proj">' + ctx + '<span class="al">No projection set</span></div>';
+        '</small></span><span class="plands">' +
+        esc(ps ? 'Lands ' + WL[ps].toLowerCase() + (lim ? ', ' + lim : '') : 'Projected') +
+        '</span></span></div>'
+      : '<div class="proj"><span class="al">No projection set</span></div>';
+  // Expanded: where the avoided loss comes from, not a repeat of the row bar.
+  var vfig = function (lab, v, cls) {
+    return '<div class="vfig"><span>' + lab + '</span><b' + (cls ? ' class="' + cls + '"' : '') + '>' + v + '</b></div>';
+  };
+  var vbar =
+    val.avoided != null || val.cost != null
+      ? '<div class="idetv">' +
+        vfig(
+          'Expected loss now',
+          val.est ? esc(money(val.base)) + ' a year' : 'No estimate'
+        ) +
+        vfig(
+          done ? 'Since delivery' : 'After delivery',
+          val.avoided == null
+            ? 'Not available'
+            : esc(money(val.base - val.avoided)) + ' a year',
+          'good'
+        ) +
+        vfig(
+          'Cost',
+          (val.cost == null ? 'Not set' : esc(money(val.cost))) +
+            (val.payback != null ? ', back in ' + esc(paybackTxt(val.payback).toLowerCase()) : '')
+        ) +
+        '</div>'
+      : '';
+  var isOpen = !!initOpen[it.id];
+  var toggle =
+    '<button class="iexp" data-act="iexp" data-a="' +
+    esc(it.id) +
+    '" aria-expanded="' +
+    isOpen +
+    '" aria-label="Details for ' +
+    esc(it.name) +
+    '"></button>';
   return (
-    '<div class="init stg" tabindex="0" style="--i:' +
+    '<div class="init stg' +
+    (isOpen ? ' open' : '') +
+    '" tabindex="0" style="--i:' +
     i +
     '" data-itype="' +
     esc(it.type) +
@@ -156,6 +193,9 @@ function initRow(cfg, q, prev, pl, it, i) {
       ? '<span class="rlc roic" title="Avoided loss against cost">' + esc(ratioTxt(val0.ratio)) + '</span>'
       : '') +
     '</div></div>' +
+    impact +
+    vbar +
+    '<div class="idet">' +
     (c || lr.length
       ? '<div class="ilinks">' +
         (c ? ref('cat', c.name + (sub ? ', ' + sub.name : '')) : '') +
@@ -171,6 +211,7 @@ function initRow(cfg, q, prev, pl, it, i) {
           .join('') +
         '</div>'
       : '') +
+    '</div>' +
     '<div class="iprog"><div class="pbar"><span class="pf" style="--w:' +
     (p || 0) +
     '%"></span>' +
@@ -178,13 +219,14 @@ function initRow(cfg, q, prev, pl, it, i) {
     '</div>' +
     (p == null ? '<span class="al">n/a</span>' : cu(p, '%', 'span', 'pct')) +
     '</div>' +
-    impact +
     roi +
     '<div class="ids"><span class="ds ' +
     esc(e.status) +
     '">' +
     esc(dsName(e.status)) +
-    '</span></div></div>'
+    '</span></div>' +
+    toggle +
+    '</div>'
   );
 }
 function layer4(cfg, q, prev, pl) {
@@ -270,10 +312,10 @@ function layer4(cfg, q, prev, pl) {
           : '') +
         '</div>' +
         valueBars(pvv.avoided, pvv.cost, true) +
-        '<p class="al">Estimated fall in expected annual loss on linked risks once delivered. This is avoided loss, not a measure of overall cyber improvement.</p><div class="lkey"><span><i class="k3"></i>Avoided loss a year</span><span><i class="k4"></i>Cost, on each initiative</span></div></div>'
+        '<p class="al">Estimated fall in expected annual loss on linked risks once delivered. This is avoided loss, not a measure of overall cyber improvement.</p></div>'
       : '';
   var head =
-    '<div class="ihead" aria-hidden="true"><span>Initiative</span><span>Progress</span><span>Projected impact and value</span><span>Delivery</span></div>';
+    '<div class="ihead" aria-hidden="true"><span>Initiative</span><span>Progress</span><span class="ihi">Indicator, now and projected</span><span class="ihv">Avoided loss against cost</span><span>Delivery</span></div>';
   var sum4 =
     list.length +
     ' initiatives: ' +
@@ -290,7 +332,7 @@ function layer4(cfg, q, prev, pl) {
     'Ongoing initiatives',
     'What is reducing the risk?',
     '<article class="tile">' +
-      tileHead('Initiatives', '', 'Progress, projected impact, value and delivery status') +
+      tileHead('Initiatives', '', 'Progress, avoided loss against cost and delivery status') +
       strip +
       roiSum +
       head +

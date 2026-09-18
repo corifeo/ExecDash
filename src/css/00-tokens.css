@@ -18,6 +18,7 @@
   --initc: #0e7c66;
   --green: #1d7447;
   --green-bg: #e2f1e8;
+  --green-tip: #62c695;
   --amber: #9a5200;
   --amber-bg: #fbebd5;
   --red: #b42318;
@@ -41,6 +42,7 @@
     --initc: #4fc4a8;
     --green: #62c695;
     --green-bg: #133325;
+    --green-tip: #1d7447;
     --amber: #f1ac52;
     --amber-bg: #3a2a13;
     --red: #f48b80;
@@ -64,6 +66,7 @@
   --initc: #4fc4a8;
   --green: #62c695;
   --green-bg: #133325;
+  --green-tip: #1d7447;
   --amber: #f1ac52;
   --amber-bg: #3a2a13;
   --red: #f48b80;

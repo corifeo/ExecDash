@@ -1,11 +1,23 @@
 /* Responsive adjustments for narrower screens. */
 
+@media (max-width: 1180px) and (min-width: 901px) {
+  .ihead,
+  .init {
+    grid-template-columns: minmax(0, 1fr) 210px 92px 22px;
+  }
+  .init {
+    grid-template-areas: 'main val del exp' 'prog val del exp' 'proj vdet vdet vdet' 'det det det det';
+  }
+  #l4view:not(.cpt) .ihead span:nth-child(2) {
+    display: none;
+  }
+}
 @media (max-width: 900px) {
   .ihead {
     display: none;
   }
   .init {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 22px;
   }
   .imain {
     grid-column: 1/-1;
@@ -99,14 +111,11 @@
 }
 @media (max-width: 900px) {
   .init {
-    grid-template-areas: 'main main' 'links links' 'prog prog' 'proj del';
+    grid-template-areas: 'main main exp' 'prog prog prog' 'val val val' 'proj proj proj' 'vdet vdet vdet' 'det det det';
   }
   #l4view.cpt .init {
     grid-template-areas: 'main main' 'prog prog' 'proj del';
   }
-}
-.init {
-  grid-template-areas: 'main prog proj del' 'links links val del';
 }
 @media (max-width: 900px) {
   #l4view.cpt .init {
@@ -122,11 +131,6 @@
 @media (max-width: 820px) {
   .g2.cpt {
     grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 900px) {
-  .init {
-    grid-template-areas: 'main main' 'links links' 'prog prog' 'proj del' 'val val';
   }
 }
 @media (max-width: 900px) {

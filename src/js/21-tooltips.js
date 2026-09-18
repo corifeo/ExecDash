@@ -5,21 +5,37 @@ function tip(html) {
   TIPS.push(html);
   return ' data-tip="' + (TIPS.length - 1) + '"';
 }
+// Rows can be grouped: tsec(label, tone) starts a section, tone 'good' for money.
+function tsec(label, tone) {
+  return ['' + (tone || ''), label];
+}
 function tipHtml(title, rows, note, noteLabel) {
+  var body = '',
+    open = false;
+  (rows || []).filter(Boolean).forEach(function (r) {
+    if (String(r[0]).charAt(0) === '') {
+      if (open) body += '</dl></div>';
+      body +=
+        '<div class="tsec' +
+        (String(r[0]).slice(1) ? ' ' + String(r[0]).slice(1) : '') +
+        '"><span class="tsh">' +
+        esc(r[1]) +
+        '</span><dl>';
+      open = true;
+      return;
+    }
+    if (!open) {
+      body += '<div class="tsec"><dl>';
+      open = true;
+    }
+    body += '<dt>' + esc(r[0]) + '</dt><dd>' + r[1] + '</dd>';
+  });
+  if (open) body += '</dl></div>';
   return (
     '<div class="tt">' +
     esc(title) +
     '</div>' +
-    (rows && rows.length
-      ? '<dl>' +
-        rows
-          .filter(Boolean)
-          .map(function (r) {
-            return '<dt>' + esc(r[0]) + '</dt><dd>' + r[1] + '</dd>';
-          })
-          .join('') +
-        '</dl>'
-      : '') +
+    body +
     (note && String(note).trim()
       ? '<div class="tnote"><span>' +
         esc(noteLabel || 'What changed') +
@@ -29,6 +45,7 @@ function tipHtml(title, rows, note, noteLabel) {
       : '')
   );
 }
+
 function ndot(note) {
   return note && String(note).trim()
     ? '<span class="ndot" aria-label="Has commentary" title="Has commentary"></span>'
