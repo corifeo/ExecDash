@@ -98,8 +98,8 @@ function render() {
 render();
 (async function boot() {
   try {
-    localStorage.setItem('cyberdash:probe', '1');
-    localStorage.removeItem('cyberdash:probe');
+    localStorage.setItem(SK + 'probe', '1');
+    localStorage.removeItem(SK + 'probe');
     DB = localStore();
   } catch (e) {
     DB = null;

@@ -15,4 +15,4 @@ node_modules/
 
 # Local exports: never commit real dashboard data
 exports/
-cyber-dashboard-*.json
+exec-dashboard-*.json

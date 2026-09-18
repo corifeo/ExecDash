@@ -11,7 +11,7 @@ All data is plain JSON. The same shapes are used for storage and for import and 
 | `dashboard/initiatives` | `{ "items": [Initiative, ...] }` |
 | `quarters/<YYYY>-Q<n>` | One document per quarter, for example `quarters/2026-Q3` |
 
-All documents are kept in the browser under a single local storage key, `cyberdash:store`. View preferences use `cyberdash:collapsed` and `cyberdash:l3view`. A factory reset deletes all three.
+All documents are kept in the browser under a single local storage key, `execdash:store`. View preferences use `execdash:collapsed` and one `execdash:view` key per section (`execdash:l3view` for section 3). A factory reset deletes them all.
 
 ## Structure (`dashboard/config`)
 
@@ -161,7 +161,7 @@ All documents are kept in the browser under a single local storage key, `cyberda
 
 ```json
 {
-  "format": "cyber-dashboard",
+  "format": "exec-dashboard",
   "version": 1,
   "type": "backup",
   "exportedAt": "2026-09-17T00:00:00Z",

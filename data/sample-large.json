@@ -1,5 +1,5 @@
 {
-  "format": "cyber-dashboard",
+  "format": "exec-dashboard",
   "version": 1,
   "type": "backup",
   "exportedAt": "2026-09-17T09:00:00Z",

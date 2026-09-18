@@ -5179,6 +5179,8 @@ function move(arr, i, d) {
 /* ===== src/js/02-constants.js ===== */
 /* Fixed labels and enumerations shared across the app. */
 
+// Prefix for every browser storage key.
+var SK = 'execdash:';
 var W = { g: 'Within', a: 'Tolerance', r: 'Outside', n: 'n/a', on: 'On target', off: 'Behind target' };
 var WL = {
   g: 'Within appetite',
@@ -6654,7 +6656,7 @@ function cu(v, u, tag, cls, cmp) {
    Section 3 keeps its original key so existing preferences carry over. */
 var VIEW_SECTIONS = [1, 2, 3, 4];
 function viewKey(n) {
-  return n === 3 ? 'cyberdash:l3view' : 'cyberdash:view' + n;
+  return n === 3 ? SK + 'l3view' : SK + 'view' + n;
 }
 function secView(n) {
   try {
@@ -7555,14 +7557,14 @@ var SECTIONS = [
 ];
 function collapsedSet() {
   try {
-    return JSON.parse(localStorage.getItem('cyberdash:collapsed') || '[]');
+    return JSON.parse(localStorage.getItem(SK + 'collapsed') || '[]');
   } catch (e) {
     return [];
   }
 }
 function saveCollapsed(a) {
   try {
-    localStorage.setItem('cyberdash:collapsed', JSON.stringify(a));
+    localStorage.setItem(SK + 'collapsed', JSON.stringify(a));
   } catch (e) {}
 }
 function band(n, title, q, body, extra, summary) {
@@ -12924,7 +12926,7 @@ var IMPORT = null,
 var QID = /^\d{4}-Q[1-4]$/,
   SID = /^[A-Za-z0-9_.~:@+-]{1,80}$/;
 function buildExport(type, qsel) {
-  var d = { format: 'cyber-dashboard', version: 1, type: type, exportedAt: new Date().toISOString() };
+  var d = { format: 'exec-dashboard', version: 1, type: type, exportedAt: new Date().toISOString() };
   if (type === 'structure' || type === 'backup') d.structure = stripCfg(config);
   if (type === 'risks' || type === 'backup') d.risks = clone(config.risks);
   if (type === 'initiatives' || type === 'backup') {
@@ -12945,7 +12947,7 @@ async function doExport(type) {
   var d = buildExport(type, qsel);
   var text = JSON.stringify(d, null, 2),
     name =
-      'cyber-dashboard-' +
+      'exec-dashboard-' +
       type +
       (qsel ? '-' + qsel : '') +
       '-' +
@@ -13013,7 +13015,7 @@ function cleanInit(r) {
   };
 }
 function validateImport(o) {
-  if (!o || typeof o !== 'object' || o.format !== 'cyber-dashboard')
+  if (!o || typeof o !== 'object' || o.format !== 'exec-dashboard')
     throw new Error('This file is not a dashboard export (format field missing).');
   var types = ['structure', 'risks', 'initiatives', 'quarters', 'backup'];
   if (types.indexOf(o.type) < 0) throw new Error('Unknown export type "' + str(o.type, 30) + '".');
@@ -13253,7 +13255,7 @@ async function factoryReset(mode) {
     await DB.doc('dashboard/initiatives').delete();
     await DB.doc('dashboard/config').delete();
     try {
-      ['cyberdash:collapsed'].concat(VIEW_SECTIONS.map(viewKey)).forEach(function (k) {
+      [SK + 'collapsed'].concat(VIEW_SECTIONS.map(viewKey)).forEach(function (k) {
         localStorage.removeItem(k);
       });
     } catch (e) {}
@@ -13455,7 +13457,7 @@ function cfgDataMgmt() {
     '</div>' +
     '<details class="paste"' +
     (pasteOpen ? ' open' : '') +
-    '><summary>Paste JSON instead</summary><textarea id="imptext" rows="8" placeholder="{ &quot;format&quot;: &quot;cyber-dashboard&quot;, ... }">' +
+    '><summary>Paste JSON instead</summary><textarea id="imptext" rows="8" placeholder="{ &quot;format&quot;: &quot;exec-dashboard&quot;, ... }">' +
     esc(pasteText) +
     '</textarea><button class="btn" data-act="checkimp">Check JSON</button></details>';
   if (IMPORT) {
@@ -13523,7 +13525,7 @@ function browserDownload(name, text) {
 }
 async function loadSample() {
   try {
-    var o = window.CYBERDASH_SAMPLE ? clone(window.CYBERDASH_SAMPLE) : null;
+    var o = window.EXECDASH_SAMPLE ? clone(window.EXECDASH_SAMPLE) : null;
     if (!o) {
       var r = await fetch('data/sample-backup.json', { cache: 'no-store' });
       if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -13750,7 +13752,7 @@ function styleSection(c) {
 /* Browser storage adapter with a small document API (doc, collection, onSnapshot). */
 
 function localStore() {
-  var KEY = 'cyberdash:store',
+  var KEY = SK + 'store',
     subs = [];
   function load() {
     try {
@@ -14713,8 +14715,8 @@ function render() {
 render();
 (async function boot() {
   try {
-    localStorage.setItem('cyberdash:probe', '1');
-    localStorage.removeItem('cyberdash:probe');
+    localStorage.setItem(SK + 'probe', '1');
+    localStorage.removeItem(SK + 'probe');
     DB = localStore();
   } catch (e) {
     DB = null;
