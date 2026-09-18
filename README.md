@@ -52,16 +52,13 @@ The same layout every quarter means the board learns to read it once.
 ## Quick start
 
 ```bash
-git clone https://github.com/<your-username>/ExecDash.git
+git clone https://github.com/corifeo/ExecDash.git
 cd ExecDash
 python3 -m http.server 8000
 ```
 
 1. Open <http://localhost:8000>.
 2. Choose **Load sample data**, or **Set up an empty dashboard** to start from scratch.
-
-> [!TIP]
-> To host it, turn on **GitHub Pages** for the `main` branch, root folder. The dashboard is then served at `https://<your-username>.github.io/ExecDash/`.
 
 ## The dashboard
 
