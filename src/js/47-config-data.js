@@ -340,6 +340,8 @@ async function factoryReset(mode) {
       [SK + 'collapsed'].concat(VIEW_SECTIONS.map(viewKey)).forEach(function (k) {
         localStorage.removeItem(k);
       });
+      // A full reset starts over as a first visit, so the welcome window shows again.
+      if (mode === 'empty') localStorage.removeItem(SK + 'welcomed');
     } catch (e) {}
     wcfg = null;
     wq = null;
@@ -360,6 +362,7 @@ async function factoryReset(mode) {
     render();
     window.scrollTo(0, 0);
     if (mode === 'sample') loadSample();
+    else maybeWelcome();
   } catch (e) {
     writeErr(e);
   }
@@ -467,7 +470,7 @@ function cfgDataMgmt() {
       x: 'A full backup of all of the above in one file.',
       r: 'empty',
       rl: 'Reset everything',
-      rw: 'Deletes the structure, both registers, every quarter and view preferences.',
+      rw: 'Deletes the structure, both registers, every quarter and view preferences, and shows the welcome window again.',
       r2: 'sample',
       rl2: 'Reset to sample data',
       rw2: 'Resets everything, then loads the sample data.'
