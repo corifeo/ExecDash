@@ -4843,6 +4843,22 @@ details.ccard > summary .pill {
 .rvv b {
   font-weight: 600;
 }
+.wnote {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--green-bg);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.wnote.warn {
+  background: var(--amber-bg);
+}
+.wbtns {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
 
 /* Appearance options set from Structure (corners and spacing). */
 
@@ -7523,7 +7539,7 @@ function renderDashboard() {
   if (!config) {
     el.innerHTML =
       '<div class="empty"><p>No dashboard has been set up yet.</p>' +
-      '<div class="tools" style="justify-content:flex-start"><button class="btn primary" data-act="loadsample">Load sample data</button><button class="btn" data-act="init">Set up an empty dashboard</button></div><p class="desc">Data is kept in this browser. Use Configure, Data to back it up or move it.</p>' +
+      '<div class="tools" style="justify-content:flex-start"><button class="btn primary" data-act="loadsample">Load sample data</button><button class="btn" data-act="init">Set up an empty dashboard</button></div><p class="desc">Data is kept in this browser. Use Configure, Data to back it up or move it. <button class="btn link" data-act="about">About ExecDash</button></p>' +
       '</div>';
     return;
   }
@@ -9828,6 +9844,55 @@ function closeModal() {
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && modalBack) closeModal();
 });
+// Welcome and about: what ExecDash is, how it works, and where the data lives.
+function welcomeHtml() {
+  return (
+    '<p class="glead"><b>ExecDash is a board-level cyber security dashboard.</b> It shows risk against appetite, what changed this quarter, the state of the programme and the initiatives reducing risk, on one page a board can read in minutes.</p>' +
+    '<div class="gsteps">' +
+    [
+      [
+        'cost',
+        'Enter',
+        'The security team adds quarterly data and keeps the risk and initiative registers under Configure.'
+      ],
+      [
+        'ratio',
+        'Present',
+        'The Dashboard turns it into four sections for the board, with detail in hover tooltips.'
+      ],
+      ['who', 'Share', 'Export a file to back it up or hand it over, and import it on another device.']
+    ]
+      .map(function (x) {
+        return (
+          '<div class="gstep"><span class="gi">' +
+          GICON[x[0]] +
+          '</span><b>' +
+          x[1] +
+          '</b><span>' +
+          x[2] +
+          '</span></div>'
+        );
+      })
+      .join('') +
+    '</div>' +
+    '<div class="wnote"><b>Your data stays in this browser.</b> Everything you enter is saved in this browser\u2019s local storage on this device. Nothing is sent to a server, and there is no account.</div>' +
+    '<div class="wnote warn"><b>Export regularly so nothing is lost.</b> Clearing browsing data, using a private window, or switching browser or device leaves you with an empty dashboard. Use Configure, Data, Export to save a backup file, and Import to restore it.</div>' +
+    '<div class="wbtns"><button class="btn primary" data-act="mclose">Got it</button></div>'
+  );
+}
+function showWelcome() {
+  openModal('Welcome to ExecDash', welcomeHtml(), 'sm');
+}
+// First visit in this browser only.
+function maybeWelcome() {
+  try {
+    if (localStorage.getItem(SK + 'welcomed')) return;
+    localStorage.setItem(SK + 'welcomed', '1');
+  } catch (e) {
+    return;
+  }
+  showWelcome();
+}
 
 /* ===== src/js/41-dials.js ===== */
 /* Rotary dial control used for scores, money and event frequency. */
@@ -13413,7 +13478,7 @@ function cfgDataMgmt() {
     ) +
     '</h2><p class="hint">Data is stored in this browser. Export a full backup regularly. Exports use the saved data' +
     (d ? '. You have unsaved changes that will not be included.' : '.') +
-    '</p><div class="xgrid">' +
+    ' <button class="btn link" data-act="about">About ExecDash</button></p><div class="xgrid">' +
     cards
       .map(function (x) {
         var armedHere = resetArmed && (resetArmed === x.r || resetArmed === x.r2);
@@ -14404,6 +14469,9 @@ document.addEventListener('click', function (e) {
         x.classList.toggle('on', x.dataset.g === a);
       });
       return;
+    case 'about':
+      showWelcome();
+      return;
     case 'mclose':
       closeModal();
       return;
@@ -14721,6 +14789,7 @@ render();
   } catch (e) {
     DB = null;
   }
+  if (DB) maybeWelcome();
   if (!DB) {
     dbState = 'none';
     render();

@@ -538,6 +538,9 @@ document.addEventListener('click', function (e) {
         x.classList.toggle('on', x.dataset.g === a);
       });
       return;
+    case 'about':
+      showWelcome();
+      return;
     case 'mclose':
       closeModal();
       return;

@@ -1888,3 +1888,19 @@ details.ccard > summary .pill {
 .rvv b {
   font-weight: 600;
 }
+.wnote {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--green-bg);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.wnote.warn {
+  background: var(--amber-bg);
+}
+.wbtns {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
