@@ -291,7 +291,7 @@
     "committee": "Executive Risk Committee",
     "defaultQuarter": null,
     "exposureTitle": "Exposure",
-    "footer": "Appetite thresholds from the board-approved cyber risk appetite statement. Operational resilience is reported separately. Illustrative data for design review.",
+    "footer": "Illustrative sample data. ExecDash runs entirely in this browser: nothing you enter is sent to a server.",
     "functions": [
       {
         "id": "gv",

@@ -29,6 +29,7 @@ def serve():
 
 
 def load(ctx, url):
+    ctx.add_init_script("localStorage.setItem('execdash:welcomed','1')")
     page = ctx.new_page()
     page.goto(url)
     page.click('button[data-act="loadsample"]')

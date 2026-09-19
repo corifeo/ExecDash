@@ -670,3 +670,52 @@ function closeModal() {
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && modalBack) closeModal();
 });
+// Welcome and about: what ExecDash is, how it works, and where the data lives.
+function welcomeHtml() {
+  return (
+    '<p class="glead"><b>ExecDash is a board-level cyber security dashboard.</b> It shows risk against appetite, what changed this quarter, the state of the programme and the initiatives reducing risk, on one page a board can read in minutes.</p>' +
+    '<div class="gsteps">' +
+    [
+      [
+        'cost',
+        'Enter',
+        'The security team adds quarterly data and keeps the risk and initiative registers under Configure.'
+      ],
+      [
+        'ratio',
+        'Present',
+        'The Dashboard turns it into four sections for the board, with detail in hover tooltips.'
+      ],
+      ['who', 'Share', 'Export a file to back it up or hand it over, and import it on another device.']
+    ]
+      .map(function (x) {
+        return (
+          '<div class="gstep"><span class="gi">' +
+          GICON[x[0]] +
+          '</span><b>' +
+          x[1] +
+          '</b><span>' +
+          x[2] +
+          '</span></div>'
+        );
+      })
+      .join('') +
+    '</div>' +
+    '<div class="wnote"><b>Your data stays in this browser.</b> Everything you enter is saved in this browser\u2019s local storage on this device. Nothing is sent to a server, and there is no account.</div>' +
+    '<div class="wnote warn"><b>Export regularly so nothing is lost.</b> Clearing browsing data, using a private window, or switching browser or device leaves you with an empty dashboard. Use Configure, Data, Export to save a backup file, and Import to restore it.</div>' +
+    '<div class="wbtns"><button class="btn primary" data-act="mclose">Got it</button></div>'
+  );
+}
+function showWelcome() {
+  openModal('Welcome to ExecDash', welcomeHtml(), 'sm');
+}
+// First visit in this browser only.
+function maybeWelcome() {
+  try {
+    if (localStorage.getItem(SK + 'welcomed')) return;
+    localStorage.setItem(SK + 'welcomed', '1');
+  } catch (e) {
+    return;
+  }
+  showWelcome();
+}

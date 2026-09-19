@@ -43,6 +43,8 @@ def main():
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(url)
         page.wait_for_selector('button[data-act="loadsample"]')
+        results.append(check("welcome window shows on first visit", page.locator(".mback .modal").count() == 1))
+        page.click('.modal button[data-act="mclose"]')
         page.click('button[data-act="loadsample"]')
         page.wait_for_selector("#sec-4")
 

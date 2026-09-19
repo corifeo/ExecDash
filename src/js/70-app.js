@@ -104,6 +104,7 @@ render();
   } catch (e) {
     DB = null;
   }
+  if (DB) maybeWelcome();
   if (!DB) {
     dbState = 'none';
     render();

@@ -495,7 +495,7 @@ function cfgDataMgmt() {
     ) +
     '</h2><p class="hint">Data is stored in this browser. Export a full backup regularly. Exports use the saved data' +
     (d ? '. You have unsaved changes that will not be included.' : '.') +
-    '</p><div class="xgrid">' +
+    ' <button class="btn link" data-act="about">About ExecDash</button></p><div class="xgrid">' +
     cards
       .map(function (x) {
         var armedHere = resetArmed && (resetArmed === x.r || resetArmed === x.r2);

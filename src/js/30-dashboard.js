@@ -77,7 +77,7 @@ function renderDashboard() {
   if (!config) {
     el.innerHTML =
       '<div class="empty"><p>No dashboard has been set up yet.</p>' +
-      '<div class="tools" style="justify-content:flex-start"><button class="btn primary" data-act="loadsample">Load sample data</button><button class="btn" data-act="init">Set up an empty dashboard</button></div><p class="desc">Data is kept in this browser. Use Configure, Data to back it up or move it.</p>' +
+      '<div class="tools" style="justify-content:flex-start"><button class="btn primary" data-act="loadsample">Load sample data</button><button class="btn" data-act="init">Set up an empty dashboard</button></div><p class="desc">Data is kept in this browser. Use Configure, Data to back it up or move it. <button class="btn link" data-act="about">About ExecDash</button></p>' +
       '</div>';
     return;
   }

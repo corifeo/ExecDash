@@ -291,7 +291,7 @@
     "committee": "Executive Risk Committee",
     "defaultQuarter": null,
     "exposureTitle": "Exposure",
-    "footer": "Stress-test sample with many incidents and initiatives. Illustrative data only.",
+    "footer": "Illustrative sample data with many incidents and initiatives, for layout testing. ExecDash runs entirely in this browser: nothing you enter is sent to a server.",
     "functions": [
       {
         "id": "gv",

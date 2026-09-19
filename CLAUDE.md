@@ -25,7 +25,7 @@ The default in-app title, "Cyber security dashboard", is what the board sees and
 ```bash
 node scripts/build.mjs            # build index.html from src/ (always run after editing src/)
 node scripts/build.mjs --check    # CI: fail if index.html is stale
-python tests/smoke_test.py        # Playwright smoke test (29 checks); needs a fresh build
+python tests/smoke_test.py        # Playwright smoke test (30 checks); needs a fresh build
 python scripts/screenshots.py     # regenerate docs/screenshots from the sample data
 npx prettier@3 --write "src/**/*.{js,css}" scripts/build.mjs   # format (settings in .prettierrc.json)
 python -m http.server 8000        # serve locally; open http://localhost:8000
