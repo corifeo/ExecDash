@@ -22,7 +22,7 @@
 - **Fix:** dials show the stored value instead of the nearest step.
 - **Estimation guides:** the risk and initiative guides share one compact template: icon cards, example tabs with range bars, and a suggested example matched on tags that fills in the record being edited. The risk guide has 8 examples; the initiative guide has 9.
 - **Confirmations:** deleting a loss estimate or a value estimate now asks first.
-- **Welcome:** a first-visit window explains what ExecDash does, that data stays in the browser and is never sent to a server, and to export regularly. It reopens from About ExecDash on the Data tab and the empty state.
+- **Welcome:** a first-visit window explains what ExecDash does, that data stays in the browser and is never sent to a server, and to export regularly. It reopens from About ExecDash on the Data tab and the empty state. Reset everything clears it, so the window shows again.
 - **Sample footer:** describes the project instead of the appetite statement.
 - **Names:** storage keys are now `execdash:` (was `cyberdash:`), the export `format` is `exec-dashboard` (was `cyber-dashboard`) and export files are named `exec-dashboard-*.json`. Data under the old keys is not carried over, and old exports no longer import unless their `format` field is changed to `exec-dashboard`.
 

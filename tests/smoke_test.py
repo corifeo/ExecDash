@@ -124,6 +124,8 @@ def main():
         page.wait_for_selector('button[data-act="loadsample"]')
         stored = page.evaluate("localStorage.getItem('execdash:store')")
         results.append(check("reset clears stored data", stored in (None, "{}")))
+        results.append(check("reset shows the welcome window again", page.locator(".mback .modal").count() == 1))
+        page.click('.modal button[data-act="mclose"]')
         page.click('button[data-act="loadsample"]')
         page.wait_for_selector("#sec-4")
         results.append(check("sample data reloads after reset", page.locator("section.band").count() == 4))
