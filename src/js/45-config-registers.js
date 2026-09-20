@@ -182,13 +182,17 @@ function rowHead(k, id, enabled, name, chips, open, editAct) {
     esc(name) +
     '</div><div class="rtags">' +
     chips +
-    '</div></div><button class="btn" data-act="' +
+    '</div></div><button class="btn' +
+    (open && (dirtyCfg || dirtyQ) ? ' needdone' : '') +
+    '" data-act="' +
     editAct +
     '" data-a="' +
     esc(id) +
     '" aria-expanded="' +
     open +
-    '">' +
+    '"' +
+    (open && (dirtyCfg || dirtyQ) ? ' title="Finish editing this item, then save"' : '') +
+    '>' +
     (open ? 'Done' : 'Edit') +
     '</button></div>'
   );
@@ -1018,18 +1022,22 @@ function valueEditor(c, it, i) {
     red = num(it.reduction);
   var btns =
     '<span class="fbtns"><button class="btn" data-act="valguide" data-a="' + i + '">How to estimate</button>';
-  if (cost == null && red == null)
-    return (
-      '<div class="fair empty"><div><b>Avoided loss against cost</b><p class="desc">No estimate yet. Add one to show what this initiative saves on the dashboard.</p></div>' +
-      btns +
-      addBtn('addival', 'Add value estimate', ' data-a="' + i + '"') +
-      '</span></div>'
-    );
   var lr = (it.riskIds || [])
     .map(function (id) {
       return findRisk(c, id);
     })
     .filter(Boolean);
+  if (cost == null && red == null)
+    return (
+      '<div class="fair empty"><div><b>Avoided loss against cost</b><p class="desc">' +
+      (lr.length
+        ? 'No estimate yet. Add one to show what this initiative saves on the dashboard.'
+        : 'Link at least one risk above, then add an estimate to show what this initiative saves.') +
+      '</p></div>' +
+      btns +
+      (lr.length ? addBtn('addival', 'Add value estimate', ' data-a="' + i + '"') : '') +
+      '</span></div>'
+    );
   // Linked risks with their expected loss, so the reduction has something concrete to act on.
   var riskList = lr.length
     ? '<ul class="vrisks">' +
@@ -1134,15 +1142,18 @@ function valueEditor(c, it, i) {
     '</p></div>' +
     '<div class="fstep vred"><div class="fsh"><span class="fsn">2</span><b>How much risk does it remove?</b></div><p class="fq">Share of the linked risks\u2019 expected annual loss that goes away.</p>' +
     riskList +
-    slider(p + '.reduction', it.reduction, {
-      max: 100,
-      step: 5,
-      rr: true,
-      label: 'Expected loss reduction'
-    }) +
-    '<p class="fsay">' +
-    redSay +
-    '</p></div>' +
+    (lr.length
+      ? slider(p + '.reduction', it.reduction, {
+          max: 100,
+          step: 5,
+          rr: true,
+          label: 'Expected loss reduction'
+        }) +
+        '<p class="fsay">' +
+        redSay +
+        '</p>'
+      : '<p class="fsay">Link a risk above to set a reduction.</p>') +
+    '</div>' +
     '<div class="fstep fout"><div class="fsh"><span class="fsn">3</span><b>What this means</b>' +
     info(AVOID_NOTE) +
     '</div>' +
@@ -1408,10 +1419,18 @@ function initReg(c) {
               )
             ) +
             fld(
-              'Projected value' + (k ? ' (' + unitName(k.indicator.unit) + ')' : ''),
-              inp(p + '.projected', it.projected, 'number', ' data-rr'),
-              '',
-              'The value you expect the category indicator to reach once this initiative is delivered.'
+              'Projected value, optional' + (k ? ' (' + unitName(k.indicator.unit).toLowerCase() + ')' : ''),
+              inp(p + '.projected', it.projected, 'number', ' data-rr') +
+                '<span class="al fhint">' +
+                (k
+                  ? esc(k.indicator.desc) +
+                    '. ' +
+                    esc(measureText(k.indicator)) +
+                    ' Leave empty if this initiative is not measured by the indicator.'
+                  : 'Choose a category to project its indicator, or leave this empty.') +
+                '</span>',
+              'wide',
+              'The value you expect the category indicator to reach once this initiative is delivered. Optional: an initiative can show avoided loss without a projected value.'
             ) +
             (ps ? '<span class="pill ' + ps + '" style="align-self:center">' + WL[ps] + '</span>' : '') +
             '</div><div class="rowf">' +

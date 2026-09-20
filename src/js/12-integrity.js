@@ -84,6 +84,10 @@ function cfgFixes(c) {
     n += b - r.impacts.length;
   });
   c.initiatives.forEach(function (it) {
+    if (num(it.reduction) != null && !(it.riskIds || []).length) {
+      it.reduction = null;
+      n++;
+    }
     if (it.categoryId && !cats[it.categoryId]) {
       it.categoryId = '';
       it.subId = '';

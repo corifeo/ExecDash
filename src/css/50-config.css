@@ -1904,3 +1904,31 @@ details.ccard > summary .pill {
   justify-content: flex-end;
   margin-top: 14px;
 }
+.fhint {
+  display: block;
+  margin-top: 4px;
+  max-width: 560px;
+}
+.btn.needdone {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+/* Only pulses when animation is on in Appearance. */
+.anim .btn.needdone {
+  animation: donepulse 1.6s ease-in-out infinite;
+}
+@keyframes donepulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim .btn.needdone {
+    animation: none;
+  }
+}
