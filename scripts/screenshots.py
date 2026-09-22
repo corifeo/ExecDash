@@ -107,6 +107,17 @@ def main():
             page.screenshot(path=str(OUT / "incident-tooltip.png"))
             page.mouse.move(1, 1)
 
+            page.click('#hdr button[data-act="view"][data-a="timeline"]')
+            page.wait_for_selector("#tl .grow")
+            page.locator("#tl .grow").nth(2).click()
+            page.mouse.move(1, 1)
+            page.evaluate("scrollTo(0,0)")
+            page.wait_for_timeout(600)
+            page.screenshot(path=str(OUT / "timeline.png"), full_page=True, clip={"x": 0, "y": 0, "width": 1280, "height": 1250})
+            page.click('#hdr button[data-act="view"][data-a="dashboard"]')
+            page.wait_for_selector("#sec-4")
+            settle(page)
+
             page.evaluate("scrollTo(0,0)")
             page.click('button[data-act="collapseall"][data-a="1"]')
             page.wait_for_timeout(700)
@@ -162,6 +173,11 @@ def main():
         page.wait_for_timeout(600)
         page.evaluate("var t=document.getElementById('tip'); if(t) t.classList.remove('show')")
         page.screenshot(path=str(OUT / "mobile-what-has-changed.png"))
+        page.click('#hdr button[data-act="view"][data-a="timeline"]')
+        page.wait_for_selector("#tl .grow")
+        page.evaluate("scrollTo(0,0)")
+        page.wait_for_timeout(400)
+        page.screenshot(path=str(OUT / "mobile-timeline.png"))
         ctx.close()
 
         # Animated walkthrough: scroll through all four sections, holding only on What has changed.

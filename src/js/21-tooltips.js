@@ -175,11 +175,13 @@ function applyHl(st) {
 }
 var initFilter = '';
 function applyInitFilter() {
-  var g = document.getElementById('l4body');
-  if (!g) return;
-  g.classList.toggle('dim', !!initFilter);
-  g.querySelectorAll('.init').forEach(function (k) {
-    k.classList.toggle('match', !!initFilter && k.dataset.itype === initFilter);
+  ['l4body', 'tl'].forEach(function (id) {
+    var g = document.getElementById(id);
+    if (!g) return;
+    g.classList.toggle('dim', !!initFilter);
+    g.querySelectorAll('.init,.grow').forEach(function (k) {
+      k.classList.toggle('match', !!initFilter && k.dataset.itype === initFilter);
+    });
   });
 }
 document.addEventListener('pointerover', function (e) {

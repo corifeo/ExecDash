@@ -89,12 +89,14 @@ function render() {
   ensureSelected();
   applyStyle(view === 'config' && wcfg ? wcfg.style : config && config.style);
   renderHeader();
-  var cf = view === 'config';
-  $('#dash').hidden = cf;
-  $('#cfg').hidden = !cf;
-  if (cf) renderConfig();
+  $('#dash').hidden = view !== 'dashboard';
+  $('#tl').hidden = view !== 'timeline';
+  $('#cfg').hidden = view !== 'config';
+  if (view === 'config') renderConfig();
+  else if (view === 'timeline') renderTimeline();
   else renderDashboard();
 }
+tlRangeV = tlRange();
 render();
 (async function boot() {
   try {

@@ -1153,7 +1153,7 @@
   "initiatives": [
     {
       "categoryId": "pp",
-      "due": "Q1 2027",
+      "due": "Q4 2025",
       "enabled": true,
       "id": "i1",
       "name": "Vulnerability remediation acceleration",
@@ -1162,7 +1162,7 @@
         "lib21",
         "r5"
       ],
-      "start": "Q2 2026",
+      "start": "Q3 2025",
       "subId": "s3",
       "tags": [
         "Patching",
@@ -1175,7 +1175,7 @@
     },
     {
       "categoryId": "ssc",
-      "due": "Q4 2026",
+      "due": "Q1 2026",
       "enabled": true,
       "id": "i2",
       "name": "Signed builds and SBOM for all product pipelines",
@@ -1184,7 +1184,7 @@
         "lib17",
         "lib18"
       ],
-      "start": "Q1 2026",
+      "start": "Q3 2025",
       "subId": "s4",
       "tags": [
         "Supply chain",
@@ -1197,7 +1197,7 @@
     },
     {
       "categoryId": "secops",
-      "due": "Q2 2027",
+      "due": "Q3 2026",
       "enabled": true,
       "id": "i3",
       "name": "Central logging for legacy platforms",
@@ -1206,7 +1206,7 @@
         "lib36",
         "r1"
       ],
-      "start": "Q2 2026",
+      "start": "Q4 2025",
       "subId": "s1",
       "tags": [
         "Detection",
@@ -1220,7 +1220,7 @@
     },
     {
       "categoryId": "ei",
-      "due": "Q1 2027",
+      "due": "Q1 2026",
       "enabled": true,
       "id": "i4",
       "name": "Legacy platform migration",
@@ -1241,7 +1241,7 @@
     },
     {
       "categoryId": "idt",
-      "due": "Q4 2026",
+      "due": "Q3 2026",
       "enabled": true,
       "id": "i5",
       "name": "Integration and SaaS access reviews",
@@ -1250,7 +1250,7 @@
         "r2",
         "lib12"
       ],
-      "start": "Q3 2026",
+      "start": "Q1 2026",
       "subId": "s4",
       "tags": [
         "Privileged access",
@@ -1263,13 +1263,13 @@
     },
     {
       "categoryId": "exc",
-      "due": "Q4 2026",
+      "due": "Q1 2027",
       "enabled": true,
       "id": "i6",
       "name": "Risk exception renewal process",
       "projected": 0,
       "riskIds": [],
-      "start": "Q3 2026",
+      "start": "Q2 2026",
       "subId": "",
       "tags": [
         "Assurance",
@@ -1290,7 +1290,7 @@
       "riskIds": [
         "r4"
       ],
-      "start": "Q2 2026",
+      "start": "Q3 2026",
       "subId": "s2",
       "tags": [
         "Social engineering",
@@ -1311,7 +1311,7 @@
       "riskIds": [
         "r3"
       ],
-      "start": "Q2 2026",
+      "start": "Q4 2026",
       "subId": "s1",
       "tags": [
         "Identity",
@@ -1324,7 +1324,7 @@
     },
     {
       "categoryId": "idt",
-      "due": "Q4 2026",
+      "due": "Q4 2027",
       "enabled": true,
       "id": "i9",
       "name": "Privileged access vault migration",
@@ -1333,7 +1333,7 @@
         "r2",
         "lib9"
       ],
-      "start": "Q1 2026",
+      "start": "Q1 2027",
       "subId": "s2",
       "tags": [
         "Privileged access",
@@ -1346,7 +1346,7 @@
     },
     {
       "categoryId": "idt",
-      "due": "Q1 2027",
+      "due": "Q2 2027",
       "enabled": true,
       "id": "i10",
       "name": "Machine identity inventory",
@@ -1354,7 +1354,7 @@
       "riskIds": [
         "lib12"
       ],
-      "start": "Q3 2026",
+      "start": "Q1 2027",
       "subId": "s3",
       "tags": [
         "Secrets",
@@ -1367,7 +1367,7 @@
     },
     {
       "categoryId": "hr",
-      "due": "Q4 2026",
+      "due": "Q4 2027",
       "enabled": true,
       "id": "i11",
       "name": "Deepfake awareness for finance staff",
@@ -1375,7 +1375,7 @@
       "riskIds": [
         "r4"
       ],
-      "start": "Q3 2026",
+      "start": "Q2 2027",
       "subId": "s2",
       "tags": [
         "Fraud",
@@ -1388,7 +1388,7 @@
     },
     {
       "categoryId": "hr",
-      "due": "Q2 2027",
+      "due": "Q2 2028",
       "enabled": true,
       "id": "i12",
       "name": "Insider risk monitoring pilot",
@@ -1396,7 +1396,7 @@
       "riskIds": [
         "r4"
       ],
-      "start": "Q2 2026",
+      "start": "Q3 2027",
       "subId": "s3",
       "tags": [
         "Insider",
@@ -1409,7 +1409,7 @@
     },
     {
       "categoryId": "pp",
-      "due": "Q3 2026",
+      "due": "Q1 2028",
       "enabled": true,
       "id": "i13",
       "name": "Web application firewall on client portal",
@@ -1418,7 +1418,7 @@
         "r5",
         "lib22"
       ],
-      "start": "Q2 2026",
+      "start": "Q4 2027",
       "subId": "s1",
       "tags": [
         "Client-facing",
@@ -1431,7 +1431,7 @@
     },
     {
       "categoryId": "pp",
-      "due": "Q2 2027",
+      "due": "Q3 2028",
       "enabled": true,
       "id": "i14",
       "name": "Container image hardening",
@@ -1439,7 +1439,7 @@
       "riskIds": [
         "lib23"
       ],
-      "start": "Q3 2026",
+      "start": "Q1 2028",
       "subId": "s2",
       "tags": [
         "Supply chain",
@@ -1452,7 +1452,7 @@
     },
     {
       "categoryId": "ei",
-      "due": "Q1 2027",
+      "due": "Q1 2029",
       "enabled": true,
       "id": "i15",
       "name": "Network segmentation of payment zone",
@@ -1460,7 +1460,7 @@
       "riskIds": [
         "r6"
       ],
-      "start": "Q1 2026",
+      "start": "Q2 2028",
       "subId": "s2",
       "tags": [
         "Network",
@@ -1473,7 +1473,7 @@
     },
     {
       "categoryId": "ei",
-      "due": "Q4 2026",
+      "due": "Q3 2028",
       "enabled": true,
       "id": "i16",
       "name": "End-of-life server replacement",
@@ -1481,7 +1481,7 @@
       "riskIds": [
         "r6"
       ],
-      "start": "Q4 2025",
+      "start": "Q2 2028",
       "subId": "s3",
       "tags": [
         "Legacy",
@@ -1494,7 +1494,7 @@
     },
     {
       "categoryId": "data",
-      "due": "Q1 2027",
+      "due": "Q1 2029",
       "enabled": true,
       "id": "i17",
       "name": "Data loss prevention for email",
@@ -1502,7 +1502,7 @@
       "riskIds": [
         "r1"
       ],
-      "start": "Q2 2026",
+      "start": "Q3 2028",
       "subId": "s1",
       "tags": [
         "Data loss",
@@ -1515,7 +1515,7 @@
     },
     {
       "categoryId": "secops",
-      "due": "Q4 2026",
+      "due": "Q3 2029",
       "enabled": true,
       "id": "i18",
       "name": "SIEM detection content refresh",
@@ -1523,7 +1523,7 @@
       "riskIds": [
         "lib36"
       ],
-      "start": "Q3 2026",
+      "start": "Q4 2028",
       "subId": "s1",
       "tags": [
         "Detection",
@@ -1536,7 +1536,7 @@
     },
     {
       "categoryId": "assur",
-      "due": "Q1 2027",
+      "due": "Q2 2029",
       "enabled": true,
       "id": "i19",
       "name": "Third-party assurance automation",
@@ -1544,7 +1544,7 @@
       "riskIds": [
         "r2"
       ],
-      "start": "Q2 2026",
+      "start": "Q1 2029",
       "subId": "s2",
       "tags": [
         "Third party",
@@ -1678,81 +1678,81 @@
       "initiatives": {
         "i1": {
           "include": true,
-          "milestone": "Supplier patch agreement",
-          "progress": 10,
-          "status": "on"
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
         },
         "i2": {
           "include": true,
-          "milestone": "Pipelines 8 to 11 signed",
-          "progress": 45,
-          "status": "on"
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
         },
         "i3": {
           "include": true,
           "milestone": "Log source design",
-          "progress": 5,
-          "status": "ns"
+          "progress": 75,
+          "status": "on"
         },
         "i4": {
           "include": true,
-          "milestone": "Retire five systems",
-          "progress": 40,
-          "status": "risk"
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
         },
         "i7": {
           "include": true,
-          "milestone": "First drill",
-          "progress": 20,
-          "status": "on"
+          "milestone": "Starts Q3 2026",
+          "progress": 0,
+          "status": "ns"
         },
         "i8": {
           "include": true,
-          "milestone": "Roll out to operations teams",
-          "progress": 24,
-          "status": "on"
+          "milestone": "Starts Q4 2026",
+          "progress": 0,
+          "status": "ns"
         },
         "i9": {
           "include": true,
-          "milestone": "Migrate service accounts",
-          "progress": 39,
-          "status": "on"
+          "milestone": "Starts Q1 2027",
+          "progress": 0,
+          "status": "ns"
         },
         "i12": {
           "include": true,
-          "milestone": "Legal approval of monitoring scope",
-          "progress": 3,
-          "status": "off"
+          "milestone": "Starts Q3 2027",
+          "progress": 0,
+          "status": "ns"
         },
         "i13": {
           "include": true,
-          "milestone": "Complete",
-          "progress": 85,
-          "status": "on"
+          "milestone": "Starts Q4 2027",
+          "progress": 0,
+          "status": "ns"
         },
         "i15": {
           "include": true,
-          "milestone": "Firewall rule review",
-          "progress": 21,
-          "status": "on"
+          "milestone": "Starts Q2 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i16": {
           "include": true,
-          "milestone": "Replace final twelve servers",
-          "progress": 48,
-          "status": "on"
+          "milestone": "Starts Q2 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i17": {
           "include": true,
-          "milestone": "Block mode for finance",
-          "progress": 18,
-          "status": "on"
+          "milestone": "Starts Q3 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i19": {
           "include": true,
-          "milestone": "Select platform",
-          "progress": 9,
-          "status": "off"
+          "milestone": "Starts Q1 2029",
+          "progress": 0,
+          "status": "ns"
         }
       },
       "label": "Q2 2026",
@@ -2021,123 +2021,118 @@
       "initiatives": {
         "i1": {
           "include": true,
-          "milestone": "Vendor fix for supplier platform",
-          "note": "Delivery depends on the supplier platform patch, now due in October.",
-          "progress": 30,
-          "status": "risk"
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
         },
         "i2": {
-          "include": true,
-          "milestone": "Final three pipelines",
-          "progress": 75,
-          "status": "on"
-        },
-        "i3": {
-          "include": true,
-          "milestone": "Onboard first legacy platform",
-          "progress": 25,
-          "status": "on"
-        },
-        "i4": {
-          "include": true,
-          "milestone": "Retire remaining four systems",
-          "progress": 60,
-          "status": "on"
-        },
-        "i5": {
-          "include": true,
-          "milestone": "Review high-privilege integrations",
-          "progress": 15,
-          "status": "on"
-        },
-        "i6": {
-          "include": true,
-          "milestone": "Renew or close six lapsed exceptions",
-          "note": "Owners of the six lapsed exceptions have not responded. Escalated to the COO.",
-          "progress": 10,
-          "status": "off"
-        },
-        "i7": {
-          "include": true,
-          "milestone": "Second drill",
-          "progress": 55,
-          "status": "on"
-        },
-        "i8": {
-          "include": true,
-          "milestone": "Roll out to operations teams",
-          "progress": 40,
-          "status": "on"
-        },
-        "i9": {
-          "include": true,
-          "milestone": "Migrate service accounts",
-          "progress": 65,
-          "status": "risk",
-          "note": "Service account owners are slow to confirm dependencies."
-        },
-        "i10": {
-          "include": true,
-          "milestone": "Discovery scan of cloud estate",
-          "progress": 10,
-          "status": "on"
-        },
-        "i11": {
-          "include": true,
-          "milestone": "Second call-back drill",
-          "progress": 50,
-          "status": "on"
-        },
-        "i12": {
-          "include": true,
-          "milestone": "Legal approval of monitoring scope",
-          "progress": 5,
-          "status": "off",
-          "note": "Works council review has not started."
-        },
-        "i13": {
           "include": true,
           "milestone": "Complete",
           "progress": 100,
           "status": "done"
         },
+        "i3": {
+          "include": true,
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
+        },
+        "i4": {
+          "include": true,
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
+        },
+        "i5": {
+          "include": true,
+          "milestone": "Complete",
+          "progress": 100,
+          "status": "done"
+        },
+        "i6": {
+          "include": true,
+          "milestone": "Renew or close six lapsed exceptions",
+          "note": "Owners of the six lapsed exceptions have not responded. Escalated to the COO.",
+          "progress": 20,
+          "status": "off"
+        },
+        "i7": {
+          "include": true,
+          "milestone": "Second drill",
+          "progress": 50,
+          "status": "on"
+        },
+        "i8": {
+          "include": true,
+          "milestone": "Starts Q4 2026",
+          "progress": 0,
+          "status": "ns"
+        },
+        "i9": {
+          "include": true,
+          "milestone": "Starts Q1 2027",
+          "progress": 0,
+          "status": "ns"
+        },
+        "i10": {
+          "include": true,
+          "milestone": "Starts Q1 2027",
+          "progress": 0,
+          "status": "ns"
+        },
+        "i11": {
+          "include": true,
+          "milestone": "Starts Q2 2027",
+          "progress": 0,
+          "status": "ns"
+        },
+        "i12": {
+          "include": true,
+          "milestone": "Starts Q3 2027",
+          "progress": 0,
+          "status": "ns"
+        },
+        "i13": {
+          "include": true,
+          "milestone": "Starts Q4 2027",
+          "progress": 0,
+          "status": "ns"
+        },
         "i14": {
           "include": true,
-          "milestone": "Agree baseline images",
+          "milestone": "Starts Q1 2028",
           "progress": 0,
           "status": "ns"
         },
         "i15": {
           "include": true,
-          "milestone": "Firewall rule review",
-          "progress": 35,
-          "status": "risk",
-          "note": "Change freeze in November limits cut-over windows."
+          "milestone": "Starts Q2 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i16": {
           "include": true,
-          "milestone": "Replace final twelve servers",
-          "progress": 80,
-          "status": "on"
+          "milestone": "Starts Q2 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i17": {
           "include": true,
-          "milestone": "Block mode for finance",
-          "progress": 30,
-          "status": "on"
+          "milestone": "Starts Q3 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i18": {
           "include": true,
-          "milestone": "Twenty new detection rules",
-          "progress": 45,
-          "status": "on"
+          "milestone": "Starts Q4 2028",
+          "progress": 0,
+          "status": "ns"
         },
         "i19": {
           "include": true,
-          "milestone": "Select platform",
-          "progress": 15,
-          "status": "off",
-          "note": "Procurement paused pending budget review."
+          "milestone": "Starts Q1 2029",
+          "progress": 0,
+          "status": "ns"
         }
       },
       "label": "Q3 2026",

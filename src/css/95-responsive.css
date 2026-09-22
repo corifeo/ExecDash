@@ -210,3 +210,114 @@
     padding-right: 6px;
   }
 }
+/* Timeline at narrow widths: window as text, bar on its own line, chart scrolls. */
+@media (max-width: 900px) {
+  .tlhead {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .tlctl {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .ctlgrp {
+    flex-wrap: wrap;
+  }
+  .fstats.tlsum,
+  .tlmain.cpt .fstats.tlsum {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tlsum .fstat b {
+    font-size: 18px;
+  }
+  .chartscroll .cumchart {
+    min-width: 760px;
+  }
+  .ghead {
+    display: none;
+  }
+  .grow,
+  .tlmain.cpt .grow {
+    grid-template-columns: minmax(0, 1fr) 24px;
+    grid-template-areas: 'name exp' 'win win' 'track track' 'val val' 'det det';
+    row-gap: 8px;
+    padding: 12px 0;
+  }
+  .tlmain.cpt .grow {
+    grid-template-areas: 'name name' 'win win' 'track track';
+    row-gap: 4px;
+    padding: 8px 0;
+  }
+  .gname {
+    display: block;
+  }
+  .gname .attr {
+    display: inline-block;
+    margin-top: 6px;
+  }
+  .gwin {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .gwin b {
+    color: var(--ink-2);
+  }
+  .gtrack {
+    height: 12px;
+    background: var(--track);
+  }
+  .gnowline {
+    display: none;
+  }
+  .gbar {
+    left: 0;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+  }
+  .gbar em {
+    display: none;
+  }
+  .gbar b {
+    border-radius: 6px;
+  }
+  .gval {
+    text-align: left;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .gval b {
+    display: inline;
+  }
+  .grow .iexp {
+    align-self: start;
+  }
+  .gdet {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+  .gdside {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+  }
+  .grisk {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4px;
+  }
+  .grisk .grn {
+    grid-column: 1/-1;
+  }
+  .grisk .grv {
+    text-align: left;
+  }
+  .grisk .grv:last-child {
+    text-align: right;
+  }
+}

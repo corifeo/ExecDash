@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Timeline view:** a third view beside Dashboard and Configure, reached from the header or the Projected avoided loss box in Ongoing initiatives.
+  - A delivery gantt: one row per initiative, bars from start to due filled by progress and coloured by delivery status, with the current quarter marked.
+  - Rows expand to their linked risks, each with its expected annual loss and the share this initiative removes, plus window, milestone, cost and commentary.
+  - Six figures across the top: avoided a year once all land, avoided already, spent so far, break-even quarter, ratio and the last landing quarter.
+  - A cumulative position chart: costs when they fall, then avoided loss less running costs each quarter after delivery, with break-even marked. A second panel shows each quarter's money in and out on its own scale.
+  - Range (all, 3 years, 1 year), highlight by type, and Detailed and Compact views, all remembered in the browser.
+- **Sample data:** initiatives are staggered so at most three run at once, with two already complete.
+
 - **Header key:** two rows (appetite, links). The target key is removed.
 - **Incidents:** Notable incidents lists at most two, most severe first, one line each. The rest collapse into "+N more" with a tooltip. Category and risk are in the tooltip.
 - **Sample data:** `data/sample-large.json` has 19 initiatives and 11 described incidents for layout testing. Import it from Configure, Data.

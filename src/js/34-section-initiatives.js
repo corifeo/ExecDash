@@ -313,6 +313,7 @@ function layer4(cfg, q, prev, pl) {
           )
         ) +
         '><div class="rsh"><span class="name">Projected avoided loss</span>' +
+        '<button class="btn link tlbtn" data-act="view" data-a="timeline">Delivery timeline</button>' +
         (pvv.ratio != null
           ? '<b class="rratio' + (pvv.ratio < 1 ? ' low' : '') + '">' + esc(ratioTxt(pvv.ratio)) + '</b>'
           : '') +

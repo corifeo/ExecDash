@@ -54,7 +54,7 @@ The same layout every quarter means the board learns to read it once.
 ```bash
 git clone https://github.com/corifeo/ExecDash.git
 cd ExecDash
-python3 -m http.server 8000
+npm run serve        # or: python3 -m http.server 8000
 ```
 
 1. Open <http://localhost:8000>.
@@ -114,9 +114,22 @@ Each initiative shows:
 - delivery status and any linked risks (links are optional)
 - its projected impact, in context: the category and indicator it moves, the value now and when delivered, and where that lands against appetite
 - its projected value: avoided loss a year against cost, calculated from the linked risks' loss estimates. This is avoided loss, not a measure of overall cyber improvement
-- its projected value: avoided loss a year against cost, calculated from the linked risks' loss estimates. This is avoided loss, not a measure of overall cyber improvement
 
 <img alt="Ongoing initiatives with progress bars, projected impact and linked risks" src="docs/screenshots/ongoing-initiatives.png" width="900">
+
+## Delivery timeline
+
+A separate full width view, reached from the header or from the Projected avoided loss box. It answers two questions a board asks about a programme: when does each initiative land, and when does it pay for itself?
+
+- a gantt of every initiative, from its start quarter to its due quarter, filled by progress and coloured by delivery status, with the current quarter marked
+- each row opens to show its linked risks, each with its expected annual loss and the share this initiative removes, plus the window, next milestone, cost and commentary
+- a cumulative position chart: money out when costs fall, then avoided loss less running costs each quarter after an initiative is complete, with break-even marked. A second panel shows each quarter on its own scale
+- six figures across the top, including what has already been avoided and the quarter the programme breaks even
+- range, highlight by type, and Detailed and Compact views
+
+Avoided loss counts only once an initiative is complete, and a year of it is spread evenly across four quarters.
+
+<img alt="Delivery timeline: a gantt of initiatives with an expanded row showing linked risks, above the cumulative position chart" src="docs/screenshots/timeline.png" width="900">
 
 ### Links and detail on hover
 

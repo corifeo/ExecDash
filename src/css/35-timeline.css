@@ -1,0 +1,426 @@
+/* Timeline view: full width page, delivery gantt and the cumulative chart. */
+
+.tlmain {
+  padding: 22px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.tlhead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px 24px;
+}
+.tlhead h2 {
+  margin: 0;
+  font-size: 26px;
+}
+.tlhead .desc {
+  margin: 2px 0 0;
+}
+.tlctl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+.ctlgrp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ctlgrp .seg,
+.ctlgrp .hlchips {
+  display: inline-flex;
+}
+.fstats.tlsum {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+}
+.tlsum .fstat b {
+  font-size: 20px;
+}
+.tlbtn {
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 12.5px;
+}
+/* Compact section 4 must not grow, so the link is detailed only. */
+#l4view.cpt .tlbtn {
+  display: none;
+}
+
+/* Gantt */
+.gantt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ghead,
+.grow {
+  display: grid;
+  grid-template-columns: minmax(0, 270px) minmax(0, 1fr) 104px 22px;
+  gap: 16px;
+  align-items: center;
+}
+.ghead {
+  grid-template-areas: 'name track val exp';
+  font-size: 12px;
+  color: var(--ink-3);
+  padding-bottom: 6px;
+}
+.grow {
+  grid-template-areas: 'name track val exp' 'det det det det';
+  row-gap: 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.grow:hover,
+.grow:focus-visible {
+  background: var(--accent-bg);
+}
+#tl.dim .grow:not(.match) {
+  opacity: 0.35;
+}
+.gaxis {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+.gaxis i {
+  font-style: normal;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.15;
+  min-width: 0;
+}
+.gaxis i b,
+.gaxis i u {
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+}
+.gaxis i u {
+  font-size: 10.5px;
+}
+.gaxis i.now {
+  color: var(--accent);
+}
+.gaxis i.now b {
+  font-weight: 700;
+}
+.gname {
+  grid-area: name;
+  font-size: 13.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.gname .nm {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.gname .attr {
+  flex: none;
+}
+.gwin {
+  grid-area: win;
+  display: none;
+}
+.gtrack {
+  grid-area: track;
+  position: relative;
+  height: 22px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(var(--qw) - 1px),
+    var(--rule) calc(var(--qw) - 1px),
+    var(--rule) var(--qw)
+  );
+}
+/* The current quarter, marked across every row. */
+.gnowline {
+  position: absolute;
+  left: var(--nowx);
+  top: -6px;
+  bottom: -6px;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0.45;
+}
+.gbar {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: var(--s);
+  width: var(--w);
+  border-radius: 6px;
+  background: var(--track);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.gbar b {
+  display: block;
+  height: 100%;
+}
+.gbar em {
+  position: absolute;
+  right: 7px;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.gbar.inb em {
+  left: 8px;
+  right: auto;
+  color: var(--card);
+}
+.gbar.on b {
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+}
+.gbar.risk b {
+  background: var(--amber);
+}
+.gbar.off b {
+  background: var(--red);
+}
+.gbar.done b {
+  background: var(--green);
+}
+.gbar.ns b {
+  background: var(--ghost);
+}
+.gval {
+  grid-area: val;
+  text-align: right;
+  font-size: 13px;
+}
+.gval b {
+  display: block;
+  font-weight: 700;
+  color: var(--green);
+}
+.gval small {
+  color: var(--ink-3);
+  font-size: 11.5px;
+}
+.grow .iexp {
+  grid-area: exp;
+}
+
+/* Row detail */
+.gdet {
+  grid-area: det;
+  display: none;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 10px 28px;
+  margin: 8px 0 4px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--paper);
+  cursor: default;
+}
+.grow.open .gdet {
+  display: grid;
+}
+.gdcol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.grisk {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px 120px;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 0;
+  border-top: 1px solid var(--rule);
+}
+.grisk .ref,
+.grisk .rl {
+  max-width: 100%;
+  min-width: 0;
+}
+.grn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.grv {
+  text-align: right;
+  font-size: 12.5px;
+}
+.grv b {
+  display: block;
+  font-weight: 700;
+}
+.grv small {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+.grv.good b {
+  color: var(--green);
+}
+.gdside {
+  border-left: 1px solid var(--rule);
+  padding-left: 24px;
+}
+.gdrow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12.5px;
+}
+.gdrow span {
+  color: var(--ink-3);
+}
+.gdrow b {
+  text-align: right;
+}
+.gdnote {
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+.gdnote .al {
+  display: block;
+}
+
+/* Cumulative chart */
+.chartscroll {
+  overflow-x: auto;
+}
+.cumchart {
+  width: 100%;
+  height: auto;
+  margin: 10px 0 2px;
+  overflow: visible;
+}
+.cumchart .grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.cumchart .ax {
+  fill: var(--ink-3);
+  font-size: 11px;
+}
+.cumchart .ax.pt {
+  font-size: 10.5px;
+}
+.cumchart .plab {
+  fill: var(--ink-3);
+  font-size: 11px;
+  font-weight: 600;
+}
+.cumchart .nowline {
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0.45;
+}
+.cumchart .nowlinelab {
+  fill: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+.cumchart .beline {
+  stroke: var(--green);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+.cumchart .belinelab {
+  fill: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+}
+.cumchart .qcost {
+  fill: color-mix(in srgb, var(--ink-2) 55%, transparent);
+}
+.cumchart .qben {
+  fill: color-mix(in srgb, var(--green) 45%, transparent);
+}
+.cumchart .cumarea {
+  fill: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.cumchart .cumline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.cumchart .qlab {
+  fill: var(--ink-3);
+  font-size: 11.5px;
+  text-anchor: middle;
+}
+.cumchart .qlab.yr {
+  font-size: 10.5px;
+}
+.cumchart .qlab.now {
+  fill: var(--accent);
+  font-weight: 600;
+}
+.lkey .k5 {
+  width: 12px;
+  height: 10px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ink-2) 55%, transparent);
+}
+.lkey .k6 {
+  width: 12px;
+  height: 10px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--green) 45%, transparent);
+}
+.lkey .k7 {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+/* Compact: one line per initiative, no detail panels. */
+.tlmain.cpt .grow {
+  padding: 4px 0;
+  cursor: default;
+}
+.tlmain.cpt .gname .attr,
+.tlmain.cpt .grow .iexp,
+.tlmain.cpt .gdet,
+.tlmain.cpt .gval small {
+  display: none;
+}
+.tlmain.cpt .ghead,
+.tlmain.cpt .grow {
+  grid-template-columns: minmax(0, 270px) minmax(0, 1fr) 104px;
+  grid-template-areas: 'name track val';
+}
+.tlmain.cpt .gtrack {
+  height: 14px;
+}
+.tlmain.cpt .gbar em {
+  display: none;
+}
+.tlmain.cpt .fstats.tlsum {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.tlmain.cpt .gnowline {
+  top: -4px;
+  bottom: -4px;
+}
