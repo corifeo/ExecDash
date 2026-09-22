@@ -11,7 +11,7 @@ All data is plain JSON. The same shapes are used for storage and for import and 
 | `dashboard/initiatives` | `{ "items": [Initiative, ...] }` |
 | `quarters/<YYYY>-Q<n>` | One document per quarter, for example `quarters/2026-Q3` |
 
-All documents are kept in the browser under a single local storage key, `execdash:store`. View preferences use `execdash:collapsed` and one `execdash:view` key per section (`execdash:l3view` for section 3). A factory reset deletes them all. `execdash:welcomed` records that the welcome window has been shown; Reset everything clears it.
+All documents are kept in the browser under a single local storage key, `execdash:store`. View preferences use `execdash:collapsed` and one `execdash:view` key per section (`execdash:l3view` for section 3). A factory reset deletes them all. `execdash:welcomed` records that the welcome window has been shown; Reset everything clears it. `execdash:tlrange` and `execdash:tlview` hold the Timeline range and view.
 
 ## Structure (`dashboard/config`)
 

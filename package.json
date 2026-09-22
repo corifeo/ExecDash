@@ -8,7 +8,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
-    "serve": "python3 -m http.server 8000",
+    "serve": "node scripts/serve.mjs",
     "test": "python3 tests/smoke_test.py",
     "screenshots": "python3 scripts/screenshots.py",
     "format": "npx prettier@3 --write \"src/**/*.{js,css}\" scripts/build.mjs"

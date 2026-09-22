@@ -34,3 +34,6 @@ var wcfg = null,
 var CTX = null;
 // Initiative rows expanded in section 4, by initiative id.
 var initOpen = {};
+// Timeline view: expanded rows by initiative id, and the chosen range.
+var tlOpen = {};
+var tlRangeV = 'all';

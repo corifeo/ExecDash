@@ -30,24 +30,40 @@ function renderHeader() {
     tools +=
       '<div class="seg"><button data-act="view" data-a="dashboard" aria-pressed="' +
       (view === 'dashboard') +
-      '">Dashboard</button><button data-act="view" data-a="config" aria-pressed="' +
+      '">Dashboard</button>' +
+      (config
+        ? '<button data-act="view" data-a="timeline" aria-pressed="' +
+          (view === 'timeline') +
+          '">Timeline</button>'
+        : '') +
+      '<button data-act="view" data-a="config" aria-pressed="' +
       (view === 'config') +
       '">Configure</button></div>';
   }
   var keys =
-    view === 'dashboard' && config
-      ? '<div class="keys" aria-label="Status keys"><div class="keyrow"><span>Appetite</span><span class="pill g" data-hlst="g" title="Within appetite">Within</span><span class="pill a" data-hlst="a" title="Within tolerance">Tolerance</span><span class="pill r" data-hlst="r" title="Outside tolerance">Outside</span></div><div class="keyrow"><span>Links</span>' +
-        ref('cat', 'Category') +
-        ref('risk', 'Risk') +
-        ref('init', 'Initiative') +
-        ref('inc', 'Incident') +
+    view === 'timeline' && config
+      ? '<div class="keys" aria-label="Delivery keys"><div class="keyrow"><span>Delivery</span>' +
+        DS.filter(function (d) {
+          return d[0] !== 'ns';
+        })
+          .map(function (d) {
+            return '<span class="ds ' + d[0] + '">' + esc(d[1]) + '</span>';
+          })
+          .join('') +
         '</div></div>'
-      : '';
+      : view === 'dashboard' && config
+        ? '<div class="keys" aria-label="Status keys"><div class="keyrow"><span>Appetite</span><span class="pill g" data-hlst="g" title="Within appetite">Within</span><span class="pill a" data-hlst="a" title="Within tolerance">Tolerance</span><span class="pill r" data-hlst="r" title="Outside tolerance">Outside</span></div><div class="keyrow"><span>Links</span>' +
+          ref('cat', 'Category') +
+          ref('risk', 'Risk') +
+          ref('init', 'Initiative') +
+          ref('inc', 'Incident') +
+          '</div></div>'
+        : '';
   $('#hdr').innerHTML =
     '<div><h1>' +
     esc(view === 'config' ? title + ': configure' : title) +
     '</h1>' +
-    (sub && view === 'dashboard' ? '<p class="sub">' + sub + '</p>' : '') +
+    (sub && view !== 'config' ? '<p class="sub">' + sub + '</p>' : '') +
     '</div><div class="hright">' +
     (tools ? '<div class="tools">' + tools + '</div>' : '') +
     keys +

@@ -7,6 +7,7 @@ Guidance for Claude Code and other contributors working on ExecDash.
 ExecDash is a board-level cyber security dashboard for a UK financial services firm. It is a single static HTML file with no runtime dependencies:
 
 - **Dashboard:** a four-section view for a board or Executive Risk Committee.
+- **Timeline view:** a full width delivery gantt with the cumulative cost against avoided loss, reached from the header or the Projected avoided loss box.
 - **Configure view:** where the security team enters quarterly data, maintains risk and initiative registers, sets the structure and manages data.
 - **Storage:** all data lives in the browser's `localStorage`. Export and import are JSON files.
 
@@ -25,10 +26,10 @@ The default in-app title, "Cyber security dashboard", is what the board sees and
 ```bash
 node scripts/build.mjs            # build index.html from src/ (always run after editing src/)
 node scripts/build.mjs --check    # CI: fail if index.html is stale
-python tests/smoke_test.py        # Playwright smoke test (31 checks); needs a fresh build
+python tests/smoke_test.py        # Playwright smoke test (36 checks); needs a fresh build
 python scripts/screenshots.py     # regenerate docs/screenshots from the sample data
 npx prettier@3 --write "src/**/*.{js,css}" scripts/build.mjs   # format (settings in .prettierrc.json)
-python -m http.server 8000        # serve locally; open http://localhost:8000
+npm run serve                     # serve locally on http://localhost:8000 (Node, no Python needed)
 ```
 
 **Test dependencies:** `pip install playwright pillow` then `playwright install chromium`.
@@ -67,6 +68,7 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 | `23-charts` | Gauges, radar, maturity bars, loss tracker and buckets |
 | `30-dashboard` | Header, `band()` section wrapper, navigation bar, collapse state, `renderDashboard` |
 | `31`–`34-section-*` | One file per dashboard section (`layer1`…`layer4`) |
+| `35-timeline` | Timeline view: `renderTimeline`, delivery gantt, row detail, cumulative chart |
 | `40-controls` | Form controls: `fld`, `sel`, `inp`, `swb`, `info`, `delBtn`, `multiPick`, `tagEditor`, `slider`, `noteCtl`, `openModal`/`closeModal` |
 | `41-dials` | Rotary dial (`knob`) for scores, money and frequency |
 | `42-config` | `renderConfig`, tabs, save bar (`updateBar`), `rerenderConfig` |
@@ -84,6 +86,7 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 | `10-layout` | Header, section bands and rail, grids, navigation bar |
 | `20-components` | Tiles, pills, status shapes, `.ref` chips, buttons, segmented controls |
 | `30-dashboard` | Section content and compact variants |
+| `35-timeline` | Timeline view: page, gantt, row detail, cumulative chart |
 | `40-motion` | Keyframes and `.anim` rules |
 | `45-tooltips` | Tooltip panel |
 | `50-config` | Configure view |
@@ -100,7 +103,7 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 - `dashboard/risks` and `dashboard/initiatives`: `{ items: [...] }`.
 - `quarters/<YYYY-Qn>`: one document per quarter.
 
-**View preferences** are kept under separate keys: `execdash:collapsed`, and `viewKey(n)` for each section.
+**View preferences** are kept under separate keys: `execdash:collapsed`, `viewKey(n)` for each section, and `execdash:tlrange` and `execdash:tlview` for the Timeline.
 
 **Loading and migration.** At start-up, `70-app.js` subscribes to the documents, merges the registers into `config`, and calls `normalizeConfig`. Quarters are normalised on use with `normalizeQ(q, cfg)`.
 

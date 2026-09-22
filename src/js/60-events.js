@@ -139,6 +139,13 @@ document.addEventListener('click', function (e) {
     // Anywhere on an initiative row opens or closes its details.
     var ini = e.target.closest && e.target.closest('#l4body .init');
     if (ini && secView(4) !== 'compact') toggleInit(ini);
+    var trow = e.target.closest && e.target.closest('#tl .grow');
+    if (trow) {
+      var tid = trow.getAttribute('data-tlrow');
+      tlOpen[tid] = !tlOpen[tid];
+      trow.classList.toggle('open', !!tlOpen[tid]);
+      trow.querySelector('.iexp').setAttribute('aria-expanded', String(!!tlOpen[tid]));
+    }
     return;
   }
   var act = b.getAttribute('data-act'),
@@ -146,6 +153,21 @@ document.addEventListener('click', function (e) {
     d = b.getAttribute('data-d');
   if (act !== 'del' && act !== 'bulk') armed = null;
   switch (act) {
+    case 'tlrange':
+      setTlRange(a);
+      renderTimeline();
+      return;
+    case 'tlview':
+      try {
+        localStorage.setItem(SK + 'tlview', a);
+      } catch (er2) {}
+      renderTimeline();
+      return;
+    case 'tlexp':
+      tlOpen[a] = !tlOpen[a];
+      b.setAttribute('aria-expanded', String(!!tlOpen[a]));
+      b.closest('.grow').classList.toggle('open', !!tlOpen[a]);
+      return;
     case 'view':
       if (view === a) return;
       view = a;
