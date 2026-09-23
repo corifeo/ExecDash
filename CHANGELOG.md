@@ -9,6 +9,7 @@
   - A cumulative position chart: costs when they fall, then avoided loss less running costs each quarter after delivery, with break-even marked. A second panel shows each quarter's money in and out on its own scale.
   - Range (all, 3 years, 1 year), highlight by type, and Detailed and Compact views, all remembered in the browser.
 - **Sample data:** initiatives are staggered so at most three run at once, with two already complete.
+  - The Timeline button always shows in the header, disabled until a dashboard is set up, so the header keeps its shape.
 
 - **Header key:** two rows (appetite, links). The target key is removed.
 - **Incidents:** Notable incidents lists at most two, most severe first, one line each. The rest collapse into "+N more" with a tooltip. Category and risk are in the tooltip.
