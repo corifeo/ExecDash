@@ -8069,11 +8069,11 @@ function renderHeader() {
       '<div class="seg"><button data-act="view" data-a="dashboard" aria-pressed="' +
       (view === 'dashboard') +
       '">Dashboard</button>' +
-      (config
-        ? '<button data-act="view" data-a="timeline" aria-pressed="' +
-          (view === 'timeline') +
-          '">Timeline</button>'
-        : '') +
+      '<button data-act="view" data-a="timeline" aria-pressed="' +
+      (view === 'timeline') +
+      '"' +
+      (config ? '' : ' disabled title="Set up a dashboard first"') +
+      '>Timeline</button>' +
       '<button data-act="view" data-a="config" aria-pressed="' +
       (view === 'config') +
       '">Configure</button></div>';
