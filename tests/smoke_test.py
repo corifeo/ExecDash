@@ -48,6 +48,8 @@ def main():
         page.click('button[data-act="loadsample"]')
         page.wait_for_selector("#sec-4")
 
+        version = json.loads((ROOT / "package.json").read_text())["version"]
+        results.append(check("footer shows the running version", page.inner_text("#ftr .ver") == f"ExecDash {version}"))
         results.append(check("four dashboard sections render", page.locator("section.band").count() == 4))
         results.append(check("category cards render", page.locator("#l3body .kcard").count() >= 8))
         results.append(check("top risks render", page.locator(".risks li").count() == 5))

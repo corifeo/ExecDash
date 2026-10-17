@@ -119,6 +119,10 @@ footer {
   font-size: 13px;
   color: var(--ink-3);
 }
+footer .ver {
+  margin-left: auto;
+  font-size: 12px;
+}
 .band .rail {
   grid-row: 1 / span 2;
   grid-column: 1;
