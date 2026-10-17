@@ -5321,6 +5321,20 @@ details.ccard > summary .pill {
     animation: none;
   }
 }
+.secsw {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px 20px;
+}
+.secswrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.secswrow .snn {
+  color: var(--ink-2);
+}
 
 /* Appearance options set from Structure (corners and spacing). */
 
@@ -5913,6 +5927,7 @@ function defaultConfig() {
     ],
     vulnSeverities: ['Critical', 'High', 'Medium', 'Low'],
     vulnAppetite: {},
+    hiddenSections: {},
     style: defaultStyle(),
     risks: [],
     initiatives: []
@@ -5966,8 +5981,23 @@ function normalizeConfig(c) {
     return { id: g.id, name: g.name };
   });
   c.vulnAppetite = c.vulnAppetite || {};
+  var hs = c.hiddenSections && typeof c.hiddenSections === 'object' ? c.hiddenSections : {};
+  c.hiddenSections = {};
+  VIEW_SECTIONS.forEach(function (n) {
+    if (hs[n] === true) c.hiddenSections[n] = true;
+  });
   if (!c.vulnSeverities || !c.vulnSeverities.length) c.vulnSeverities = defaultConfig().vulnSeverities;
   return c;
+}
+// Dashboard sections switched off under Structure are hidden; their data is kept.
+function secShown(n, c) {
+  c = c || config;
+  return !(c && c.hiddenSections && c.hiddenSections[n]);
+}
+function shownSections(c) {
+  return VIEW_SECTIONS.filter(function (n) {
+    return secShown(n, c);
+  });
 }
 function qKey(q) {
   return (q.year || 0) * 10 + (q.q || 0);
@@ -7272,7 +7302,7 @@ function setSecView(n, v) {
   } catch (e) {}
 }
 function allViews() {
-  var v = VIEW_SECTIONS.map(secView);
+  var v = shownSections().map(secView);
   return v.every(function (x) {
     return x === v[0];
   })
@@ -8155,12 +8185,33 @@ function renderDashboard() {
   if (prev) prev = normalizeQ(prev, cfg);
   var pl = prev ? prev.label : null;
   CTX = { cfg: cfg, q: q, prev: prev, pl: pl };
+  var shown = shownSections(cfg);
+  if (!shown.length) {
+    el.innerHTML =
+      '<p class="empty">Every dashboard section is switched off. Turn one on under Configure, Structure, Dashboard sections.</p>';
+    return;
+  }
+  var layers = {
+    1: function () {
+      return layer1(cfg, q, prev, pl);
+    },
+    2: function () {
+      return layer2(cfg, q, prev, pl);
+    },
+    3: function () {
+      return layer3(cfg, q);
+    },
+    4: function () {
+      return layer4(cfg, q, prev, pl);
+    }
+  };
   el.innerHTML =
     navHtml() +
-    layer1(cfg, q, prev, pl) +
-    layer2(cfg, q, prev, pl) +
-    layer3(cfg, q) +
-    layer4(cfg, q, prev, pl);
+    shown
+      .map(function (n) {
+        return layers[n]();
+      })
+      .join('');
   applyHl(hlStatus);
   applyInitFilter();
   setupReveal(el);
@@ -8226,19 +8277,23 @@ function band(n, title, q, body, extra, summary) {
 function navHtml() {
   return (
     '<nav class="snav" aria-label="Dashboard sections"><div class="snav-in">' +
-    SECTIONS.map(function (x) {
-      return (
-        '<button class="snl" data-act="goto" data-a="' +
-        x[0] +
-        '" title="' +
-        x[1] +
-        '"><span class="snn">' +
-        x[0] +
-        '</span><span class="snt">' +
-        x[1] +
-        '</span></button>'
-      );
-    }).join('') +
+    SECTIONS.filter(function (x) {
+      return secShown(x[0]);
+    })
+      .map(function (x) {
+        return (
+          '<button class="snl" data-act="goto" data-a="' +
+          x[0] +
+          '" title="' +
+          x[1] +
+          '"><span class="snn">' +
+          x[0] +
+          '</span><span class="snt">' +
+          x[1] +
+          '</span></button>'
+        );
+      })
+      .join('') +
     '<span class="snsp"></span>' +
     allViewSeg() +
     '<span class="snsep" aria-hidden="true"></span><button class="btn link" data-act="collapseall" data-a="0">Expand all</button><button class="btn link" data-act="collapseall" data-a="1">Collapse all</button></div></nav>'
@@ -8682,6 +8737,10 @@ function pulseTile(cfg, q, prev, pl) {
       )
     });
   }
+  // Figures from hidden sections are left out, since their links would go nowhere.
+  rows = rows.filter(function (r) {
+    return secShown(r.sec, cfg);
+  });
   if (!rows.length) return '';
   return (
     '<article class="tile pulse">' +
@@ -9309,14 +9368,15 @@ function catCard(cfg, q, prev, pl, c, i, compact) {
     '</p>' +
     pill +
     '</div>';
-  var ib = n
-    ? ref('init', n + ' initiative' + (n > 1 ? 's' : '') + ' \u2193', {
-        act: 'gotoinit',
-        a: c.id,
-        cls: 'jump',
-        title: 'Show the linked initiatives'
-      })
-    : '';
+  var ib =
+    n && secShown(4, cfg)
+      ? ref('init', n + ' initiative' + (n > 1 ? 's' : '') + ' \u2193', {
+          act: 'gotoinit',
+          a: c.id,
+          cls: 'jump',
+          title: 'Show the linked initiatives'
+        })
+      : '';
   if (compact)
     return (
       open +
@@ -12518,6 +12578,20 @@ function cfgStructure() {
       tagEditor('c:impacts', c.impacts, { label: 'Impact types', placeholder: 'Add impact type' }),
       'wide'
     ) +
+    '</div></section>';
+  out +=
+    '<section class="csec"><h2>Dashboard sections</h2><p class="hint">Switch off a section to hide it from the dashboard. Its data stays in Quarter data and in exports, and the section returns as it was when you switch it back on. Section numbers do not change.</p><div class="secsw">' +
+    SECTIONS.map(function (x) {
+      return (
+        '<div class="secswrow">' +
+        swb('c:hiddenSections.' + x[0], !c.hiddenSections[x[0]], 'Show ' + x[1] + ' on the dashboard') +
+        '<span class="snn">' +
+        x[0] +
+        '</span><span>' +
+        esc(x[1]) +
+        '</span></div>'
+      );
+    }).join('') +
     '</div></section>';
   out +=
     '<section class="csec"><h2>Cyber categories</h2><p class="hint">Each category has one headline indicator, measured against appetite and tolerance or against a target. Subcategories are optional. Hidden categories keep their data but do not appear on the dashboard.</p>' +

@@ -344,6 +344,10 @@ function pulseTile(cfg, q, prev, pl) {
       )
     });
   }
+  // Figures from hidden sections are left out, since their links would go nowhere.
+  rows = rows.filter(function (r) {
+    return secShown(r.sec, cfg);
+  });
   if (!rows.length) return '';
   return (
     '<article class="tile pulse">' +

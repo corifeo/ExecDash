@@ -27,7 +27,7 @@ The default in-app title, "Cyber security dashboard", is what the board sees and
 node scripts/build.mjs            # build index.html from src/ (always run after editing src/)
 node scripts/build.mjs --check    # CI: fail if index.html is stale
 node scripts/release-notes.mjs --check   # CI: fail if CHANGELOG has no section for the package.json version
-python tests/smoke_test.py        # Playwright smoke test (36 checks); needs a fresh build
+python tests/smoke_test.py        # Playwright smoke test (38 checks); needs a fresh build
 python scripts/screenshots.py     # regenerate docs/screenshots from the sample data
 npx prettier@3 --write "src/**/*.{js,css}" scripts/build.mjs   # format (settings in .prettierrc.json)
 npm run serve                     # serve locally on http://localhost:8000 (Node, no Python needed)
@@ -121,7 +121,7 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 
 **Dashboard.** `render()` → `renderHeader()` + `renderDashboard()`.
 
-- `renderDashboard` builds all four sections as HTML strings and sets `innerHTML`, then calls `runAnims`.
+- `renderDashboard` builds the sections that are switched on (`shownSections`, from `hiddenSections` under Structure) as HTML strings and sets `innerHTML`, then calls `runAnims`. A link into another section must check `secShown(n)` first.
 - Sections re-render in place where possible, using `CTX` (for example `applySecView` and `l3Body`).
 
 **Configure.** `renderConfig()` rebuilds the active tab from `wcfg`/`wq`.

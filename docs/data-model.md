@@ -36,6 +36,7 @@ All documents are kept in the browser under a single local storage key, `execdas
 | `vulnSeverities` | string[] | Highest first |
 | `vulnFocus` | number | How many of the top severities the dashboard shows. Defaults to 2 |
 | `style` | object | Appearance: `accent` (hex colour), `palette` (`standard` or `cb` for colour-blind safe), `theme` (`system`, `light`, `dark`), `headings` (`serif`, `sans`), `corners` (`rounded`, `square`), `density` (`comfortable`, `compact`), `motion` (`on`, `off`) |
+| `hiddenSections` | object | Dashboard sections switched off, by number, for example `{ "2": true, "3": true }`. Hidden sections keep their data. Defaults to `{}` |
 | `vulnAppetite` | object | Optional limits on the total for each severity, for example `{ "Critical": { "appetite": 5, "tolerance": 10 } }`. Lower is better |
 
 ### Category
