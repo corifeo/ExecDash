@@ -236,17 +236,53 @@ These come from the product owner. Keep them.
 
 ## Releases
 
-ExecDash uses semantic versioning. Before 1.0.0, a minor version can change the data model (with migration in `normalizeConfig`), and a patch is fixes only.
+ExecDash uses semantic versioning, with tags `vX.Y.Z` on `main` and one GitHub release per tag. The released versions are listed in `CHANGELOG.md` and on the GitHub Releases page.
 
-- **The version** lives only in `package.json`. The build replaces `__VERSION__` in the script with it (`VERSION` in `02-constants.js`), so the About window and the export `appVersion` follow it.
-- **Between releases,** add every user-visible change under `## Unreleased` in `CHANGELOG.md`.
-- **To release:**
-  1. Rename `## Unreleased` to `## X.Y.Z (YYYY-MM-DD)` and add a new empty `## Unreleased` above it.
-  2. Set `"version"` in `package.json`, then rebuild so `index.html` carries it.
-  3. Commit as `Release X.Y.Z` and merge to `main`.
-  4. `.github/workflows/release.yml` sees a version with no tag, then tags the commit that last changed `package.json` as `vX.Y.Z` and creates a GitHub release from that CHANGELOG section. Do not create release tags by hand.
-- **Release token:** the workflow uses the `RELEASE_TOKEN` repository secret, a fine-grained personal access token for this repository with Contents and Workflows set to read and write. The built-in token cannot tag a commit that changes workflow files. When the token expires, releases fail with `HTTP 403: Resource not accessible by integration`; generate a new one and replace the secret.
+**Where the version lives.**
+
+- `package.json` is the only source. The build replaces `__VERSION__` in the script with it (`VERSION` in `02-constants.js`). The footer, the About window and the export `appVersion` all show it.
+- The hosted page shows the last released version until the next release, even when `main` has unreleased changes.
 - The export `version` field is the file format version, not the app version. Change it only when old files can no longer be read as they are.
+
+**Choosing the number.** Before 1.0.0:
+
+| Change | Bump | Example |
+|---|---|---|
+| New feature, new setting or stored field, or a data model change (migrated in `normalizeConfig`) | Minor, `0.x.0` | Dashboard section switches |
+| Fix or small visible change with no new setting or stored field | Patch, `0.x.y` | Version shown in the footer |
+| Docs, tests or CI only | None | README live link |
+
+A release takes the highest bump among its Unreleased entries.
+
+**Everyday changes.**
+
+- Add each user-visible change under `## Unreleased` in `CHANGELOG.md`, in the same PR.
+- Do not change `"version"` in a feature or fix PR. Only a release PR changes it.
+
+**To release** (one PR that contains only the release):
+
+1. In `CHANGELOG.md`, rename `## Unreleased` to `## X.Y.Z (YYYY-MM-DD)` and add a new empty `## Unreleased` above it.
+2. Set `"version"` in `package.json` to `X.Y.Z`, with no `v`.
+3. Run `node scripts/build.mjs`, then `node scripts/build.mjs --check` and `node scripts/release-notes.mjs --check`.
+4. Commit as `Release X.Y.Z`, open a PR titled `Release X.Y.Z`, and merge it once CI passes.
+5. `.github/workflows/release.yml` runs on the merge. Because `vX.Y.Z` does not exist yet, it tags the commit that last changed `package.json` and publishes the release from that CHANGELOG section.
+6. Check that the Release workflow run passed and that the Releases page shows `vX.Y.Z` as the latest release.
+
+**Tag rules.**
+
+- Tags are always `vX.Y.Z` (for example `v0.2.1`). A tag without the `v` is not recognised, and the workflow would create a duplicate release.
+- Do not create tags or releases by hand, except to recover a failed release (below).
+- Never move, delete or reuse a published tag. If a release is wrong, fix it in a new patch release.
+- Coding agents in cloud sessions cannot push tags. They prepare the release PR and leave tagging to the workflow.
+
+**Release token.** The workflow publishes with the `RELEASE_TOKEN` repository secret: a fine-grained personal access token for this repository, with Contents and Workflows set to read and write. The built-in workflow token cannot tag a commit that changes workflow files. To renew it, generate a new token and replace the secret.
+
+**If the Release workflow fails:**
+
+1. Open the failed run under Actions, Release, and read the error.
+2. `HTTP 403: Resource not accessible by integration` means the token has expired or lacks permissions. Replace `RELEASE_TOKEN`, then use Re-run jobs.
+3. If it still fails, create the release in the GitHub web UI: Releases, Draft a new release, tag `vX.Y.Z` created on publish, target the `Release X.Y.Z` commit, title `ExecDash X.Y.Z`, and the CHANGELOG section as notes. The next workflow run sees the tag and skips.
+4. To check: `git ls-remote --tags origin` lists every tag, and `git log -1 --format=%H -- package.json` on `main` gives the commit that `vX.Y.Z` should point at.
 
 ## Known limitations and ideas
 
