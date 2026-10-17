@@ -1,7 +1,12 @@
 # Changelog
 
+ExecDash uses [semantic versioning](https://semver.org). Until 1.0.0, a minor version (0.x.0) can change the data model, with old data migrated on load. Each release is tagged `vX.Y.Z` on `main`. See Releases in `CLAUDE.md` for the steps.
+
 ## Unreleased
 
+## 0.2.0 (2026-10-17)
+
+- **Versioning:** releases are now tagged. The version is shown in About ExecDash and recorded in every export as `appVersion`. The first release, previously called 1.0.0, is renumbered 0.1.0.
 - **Timeline view:** a third view beside Dashboard and Configure, reached from the header or the Projected avoided loss box in Ongoing initiatives.
   - A delivery gantt: one row per initiative, bars from start to due filled by progress and coloured by delivery status, with the current quarter marked.
   - Rows expand to their linked risks, each with its expected annual loss and the share this initiative removes, plus window, milestone, cost and commentary.
@@ -36,7 +41,7 @@
 - **Sample footer:** describes the project instead of the appetite statement.
 - **Names:** storage keys are now `execdash:` (was `cyberdash:`), the export `format` is `exec-dashboard` (was `cyber-dashboard`) and export files are named `exec-dashboard-*.json`. Data under the old keys is not carried over, and old exports no longer import unless their `format` field is changed to `exec-dashboard`.
 
-## 1.0.0 (2026-09-17)
+## 0.1.0 (2026-09-17)
 
 Minimum viable product, published as **ExecDash**. The dashboard, configuration and data handling are complete for quarterly board and committee use.
 

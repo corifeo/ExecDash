@@ -8,7 +8,13 @@ var IMPORT = null,
 var QID = /^\d{4}-Q[1-4]$/,
   SID = /^[A-Za-z0-9_.~:@+-]{1,80}$/;
 function buildExport(type, qsel) {
-  var d = { format: 'exec-dashboard', version: 1, type: type, exportedAt: new Date().toISOString() };
+  var d = {
+    format: 'exec-dashboard',
+    version: 1,
+    appVersion: VERSION,
+    type: type,
+    exportedAt: new Date().toISOString()
+  };
   if (type === 'structure' || type === 'backup') d.structure = stripCfg(config);
   if (type === 'risks' || type === 'backup') d.risks = clone(config.risks);
   if (type === 'initiatives' || type === 'backup') {

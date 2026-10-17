@@ -1901,8 +1901,15 @@ details.ccard > summary .pill {
 }
 .wbtns {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 12px;
   margin-top: 14px;
+}
+.wver {
+  margin-right: auto;
+  color: var(--ink-3);
+  font-size: 12px;
 }
 .fhint {
   display: block;

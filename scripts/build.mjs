@@ -6,6 +6,7 @@
 // Styles: every src/css/*.css file, in file-name order.
 // Script: every src/js/*.js file, in file-name order, wrapped in one
 // strict-mode function so nothing leaks into the global scope.
+// Version: __VERSION__ in the script becomes the package.json version.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,15 +29,19 @@ for (const marker of ['/* STYLES */', '/* SCRIPT */']) {
   if (!template.includes(marker)) fail(`Template is missing the ${marker} marker.`);
 }
 
+const { version } = JSON.parse(read('package.json'));
+if (!version) fail('package.json has no version.');
+
 const cssFiles = list('src/css', '.css');
 const jsFiles = list('src/js', '.js');
 if (!cssFiles.length || !jsFiles.length) fail('No source files found in src/css or src/js.');
 
 const styles = cssFiles.map((f) => read(f).trimEnd()).join('\n\n');
-const script =
+const script = (
   "(function(){\n'use strict';\n\n" +
   jsFiles.map((f) => `/* ===== ${f.replace(/\\/g, '/')} ===== */\n` + read(f).trimEnd()).join('\n\n') +
-  '\n})();';
+  '\n})();'
+).replace(/__VERSION__/g, version);
 
 // Syntax check before writing anything.
 try {
