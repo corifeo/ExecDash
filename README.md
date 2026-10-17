@@ -190,7 +190,7 @@ Switch to **Configure** in the header. Changes are held until you press **Save c
 | Tab | Purpose |
 |---|---|
 | **Quarter data** | Values for the selected quarter, each with last quarter's figure, plus commentary on anything that changed and a list of notable incidents |
-| **Structure** | Categories (with a show on dashboard switch), indicators and limits, subcategories, maturity functions, loss bands, incident priorities, exposure groups and appetite, and appearance |
+| **Structure** | Which of the four dashboard sections to show, categories (with a show on dashboard switch), indicators and limits, subcategories, maturity functions, loss bands, incident priorities, exposure groups and appetite, and appearance |
 | **Risks and initiatives** | Two registers with enable switches, filters, tags, bulk actions, loss estimates and optional links |
 | **Quarters** | Add a quarter (blank or copied forward), delete one, and choose which the dashboard opens on |
 | **Data** | Export and reset cards for each part of the data (resets ask for confirmation), previewed imports and a data health check |

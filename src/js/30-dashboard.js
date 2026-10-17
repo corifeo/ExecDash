@@ -108,12 +108,33 @@ function renderDashboard() {
   if (prev) prev = normalizeQ(prev, cfg);
   var pl = prev ? prev.label : null;
   CTX = { cfg: cfg, q: q, prev: prev, pl: pl };
+  var shown = shownSections(cfg);
+  if (!shown.length) {
+    el.innerHTML =
+      '<p class="empty">Every dashboard section is switched off. Turn one on under Configure, Structure, Dashboard sections.</p>';
+    return;
+  }
+  var layers = {
+    1: function () {
+      return layer1(cfg, q, prev, pl);
+    },
+    2: function () {
+      return layer2(cfg, q, prev, pl);
+    },
+    3: function () {
+      return layer3(cfg, q);
+    },
+    4: function () {
+      return layer4(cfg, q, prev, pl);
+    }
+  };
   el.innerHTML =
     navHtml() +
-    layer1(cfg, q, prev, pl) +
-    layer2(cfg, q, prev, pl) +
-    layer3(cfg, q) +
-    layer4(cfg, q, prev, pl);
+    shown
+      .map(function (n) {
+        return layers[n]();
+      })
+      .join('');
   applyHl(hlStatus);
   applyInitFilter();
   setupReveal(el);
@@ -179,19 +200,23 @@ function band(n, title, q, body, extra, summary) {
 function navHtml() {
   return (
     '<nav class="snav" aria-label="Dashboard sections"><div class="snav-in">' +
-    SECTIONS.map(function (x) {
-      return (
-        '<button class="snl" data-act="goto" data-a="' +
-        x[0] +
-        '" title="' +
-        x[1] +
-        '"><span class="snn">' +
-        x[0] +
-        '</span><span class="snt">' +
-        x[1] +
-        '</span></button>'
-      );
-    }).join('') +
+    SECTIONS.filter(function (x) {
+      return secShown(x[0]);
+    })
+      .map(function (x) {
+        return (
+          '<button class="snl" data-act="goto" data-a="' +
+          x[0] +
+          '" title="' +
+          x[1] +
+          '"><span class="snn">' +
+          x[0] +
+          '</span><span class="snt">' +
+          x[1] +
+          '</span></button>'
+        );
+      })
+      .join('') +
     '<span class="snsp"></span>' +
     allViewSeg() +
     '<span class="snsep" aria-hidden="true"></span><button class="btn link" data-act="collapseall" data-a="0">Expand all</button><button class="btn link" data-act="collapseall" data-a="1">Collapse all</button></div></nav>'

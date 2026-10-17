@@ -73,7 +73,7 @@ function setSecView(n, v) {
   } catch (e) {}
 }
 function allViews() {
-  var v = VIEW_SECTIONS.map(secView);
+  var v = shownSections().map(secView);
   return v.every(function (x) {
     return x === v[0];
   })

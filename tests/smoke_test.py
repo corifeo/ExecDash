@@ -131,6 +131,30 @@ def main():
         page.click('button[data-act="tlview"][data-a="compact"]')
         results.append(check("timeline compact hides row detail", page.locator("#tl .gdet:visible").count() == 0))
         page.click('button[data-act="tlview"][data-a="detail"]')
+
+        # Dashboard sections: switch off 2 and 3, check the dashboard, switch them back on.
+        page.click('#hdr button[data-act="view"][data-a="config"]')
+        page.click('button[data-act="tab"][data-a="structure"]')
+        for n in ["2", "3"]:
+            page.click(f'button[data-act="swb"][data-a="c:hiddenSections.{n}"]')
+        page.click('button[data-act="save"]')
+        page.wait_for_timeout(400)
+        page.click('#hdr button[data-act="view"][data-a="dashboard"]')
+        page.wait_for_selector("#sec-4")
+        shown = page.eval_on_selector_all("section.band", "els => els.map(e => e.dataset.sec)")
+        navs = page.eval_on_selector_all(".snav .snl", "els => els.map(e => e.dataset.a)")
+        gone = page.locator('.pulse .prow[data-a="2"]').count() == 0 and page.locator('.pulse .prow[data-a="4"]').count() == 1
+        results.append(check("hidden sections leave the dashboard and nav bar", shown == ["1", "4"] and navs == ["1", "4"] and gone))
+        page.click('#hdr button[data-act="view"][data-a="config"]')
+        page.click('button[data-act="tab"][data-a="structure"]')
+        for n in ["2", "3"]:
+            page.click(f'button[data-act="swb"][data-a="c:hiddenSections.{n}"]')
+        page.click('button[data-act="save"]')
+        page.wait_for_timeout(400)
+        page.click('#hdr button[data-act="view"][data-a="dashboard"]')
+        page.wait_for_selector("#sec-4")
+        results.append(check("sections return when switched back on", page.locator("section.band").count() == 4))
+
         page.click('#hdr button[data-act="view"][data-a="config"]')
         page.wait_for_selector('button[data-act="tab"][data-a="io"]')
         page.click('button[data-act="tab"][data-a="io"]')
