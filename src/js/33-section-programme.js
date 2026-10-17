@@ -58,14 +58,15 @@ function catCard(cfg, q, prev, pl, c, i, compact) {
     '</p>' +
     pill +
     '</div>';
-  var ib = n
-    ? ref('init', n + ' initiative' + (n > 1 ? 's' : '') + ' \u2193', {
-        act: 'gotoinit',
-        a: c.id,
-        cls: 'jump',
-        title: 'Show the linked initiatives'
-      })
-    : '';
+  var ib =
+    n && secShown(4, cfg)
+      ? ref('init', n + ' initiative' + (n > 1 ? 's' : '') + ' \u2193', {
+          act: 'gotoinit',
+          a: c.id,
+          cls: 'jump',
+          title: 'Show the linked initiatives'
+        })
+      : '';
   if (compact)
     return (
       open +

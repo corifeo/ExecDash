@@ -62,6 +62,7 @@ function defaultConfig() {
     ],
     vulnSeverities: ['Critical', 'High', 'Medium', 'Low'],
     vulnAppetite: {},
+    hiddenSections: {},
     style: defaultStyle(),
     risks: [],
     initiatives: []
@@ -115,8 +116,23 @@ function normalizeConfig(c) {
     return { id: g.id, name: g.name };
   });
   c.vulnAppetite = c.vulnAppetite || {};
+  var hs = c.hiddenSections && typeof c.hiddenSections === 'object' ? c.hiddenSections : {};
+  c.hiddenSections = {};
+  VIEW_SECTIONS.forEach(function (n) {
+    if (hs[n] === true) c.hiddenSections[n] = true;
+  });
   if (!c.vulnSeverities || !c.vulnSeverities.length) c.vulnSeverities = defaultConfig().vulnSeverities;
   return c;
+}
+// Dashboard sections switched off under Structure are hidden; their data is kept.
+function secShown(n, c) {
+  c = c || config;
+  return !(c && c.hiddenSections && c.hiddenSections[n]);
+}
+function shownSections(c) {
+  return VIEW_SECTIONS.filter(function (n) {
+    return secShown(n, c);
+  });
 }
 function qKey(q) {
   return (q.year || 0) * 10 + (q.q || 0);

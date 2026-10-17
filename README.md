@@ -9,7 +9,7 @@
   <img alt="Licence: PolyForm Noncommercial 1.0.0" src="https://img.shields.io/badge/licence-PolyForm%20Noncommercial-2F4B7C">
   <img alt="Dependencies: none" src="https://img.shields.io/badge/dependencies-none-1D7447">
   <img alt="Single HTML file" src="https://img.shields.io/badge/deploy-single%20HTML%20file-465264">
-  <img alt="Version 0.2.0" src="https://img.shields.io/badge/version-0.2.0-6A7485">
+  <a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/github/v/tag/corifeo/ExecDash?sort=semver&label=version&color=6A7485"></a>
 </p>
 
 <p align="center">
@@ -190,7 +190,7 @@ Switch to **Configure** in the header. Changes are held until you press **Save c
 | Tab | Purpose |
 |---|---|
 | **Quarter data** | Values for the selected quarter, each with last quarter's figure, plus commentary on anything that changed and a list of notable incidents |
-| **Structure** | Categories (with a show on dashboard switch), indicators and limits, subcategories, maturity functions, loss bands, incident priorities, exposure groups and appetite, and appearance |
+| **Structure** | Which of the four dashboard sections to show, categories (with a show on dashboard switch), indicators and limits, subcategories, maturity functions, loss bands, incident priorities, exposure groups and appetite, and appearance |
 | **Risks and initiatives** | Two registers with enable switches, filters, tags, bulk actions, loss estimates and optional links |
 | **Quarters** | Add a quarter (blank or copied forward), delete one, and choose which the dashboard opens on |
 | **Data** | Export and reset cards for each part of the data (resets ask for confirmation), previewed imports and a data health check |
@@ -285,6 +285,7 @@ src/index.template.html    Page shell with STYLES and SCRIPT markers
 src/css/                   Styles, one file per topic, concatenated in name order
 src/js/                    Script modules, concatenated in name order into one scope
 scripts/build.mjs          Builds index.html from src/
+scripts/release-notes.mjs  Prints or checks the CHANGELOG section for the current version
 scripts/screenshots.py     Regenerates docs/screenshots from the sample data
 data/                      Sample backup and risk library
 docs/                      Data model and screenshots
@@ -309,6 +310,8 @@ python scripts/screenshots.py
 ```
 
 Formatting uses Prettier with the settings in `.prettierrc.json` (`npm run format`). The workflow in [`.github/workflows/check.yml`](.github/workflows/check.yml) runs the build check and the smoke test on every push and pull request.
+
+**Versions.** ExecDash follows [semantic versioning](https://semver.org). The version lives in `package.json`, is shown in About ExecDash and is recorded in exports. Each release has a section in [`CHANGELOG.md`](CHANGELOG.md) and a `vX.Y.Z` tag, created by [`.github/workflows/release.yml`](.github/workflows/release.yml) when a new version reaches `main`.
 
 See [`CLAUDE.md`](CLAUDE.md) for the module map, conventions and how to add sections, fields and settings.
 

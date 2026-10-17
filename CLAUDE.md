@@ -11,7 +11,7 @@ ExecDash is a board-level cyber security dashboard for a UK financial services f
 - **Configure view:** where the security team enters quarterly data, maintains risk and initiative registers, sets the structure and manages data.
 - **Storage:** all data lives in the browser's `localStorage`. Export and import are JSON files.
 
-Version 1.0.0 is the MVP. The repository is `ExecDash` on GitHub, served by GitHub Pages.
+The version is in `package.json` (see Releases below). 0.1.0 was the MVP. The repository is `ExecDash` on GitHub, served by GitHub Pages.
 
 **Names that must not change**, because saved data and existing exports depend on them:
 
@@ -26,7 +26,8 @@ The default in-app title, "Cyber security dashboard", is what the board sees and
 ```bash
 node scripts/build.mjs            # build index.html from src/ (always run after editing src/)
 node scripts/build.mjs --check    # CI: fail if index.html is stale
-python tests/smoke_test.py        # Playwright smoke test (36 checks); needs a fresh build
+node scripts/release-notes.mjs --check   # CI: fail if CHANGELOG has no section for the package.json version
+python tests/smoke_test.py        # Playwright smoke test (38 checks); needs a fresh build
 python scripts/screenshots.py     # regenerate docs/screenshots from the sample data
 npx prettier@3 --write "src/**/*.{js,css}" scripts/build.mjs   # format (settings in .prettierrc.json)
 npm run serve                     # serve locally on http://localhost:8000 (Node, no Python needed)
@@ -120,7 +121,7 @@ scripts/build.mjs         Does the concatenation and a syntax check.
 
 **Dashboard.** `render()` → `renderHeader()` + `renderDashboard()`.
 
-- `renderDashboard` builds all four sections as HTML strings and sets `innerHTML`, then calls `runAnims`.
+- `renderDashboard` builds the sections that are switched on (`shownSections`, from `hiddenSections` under Structure) as HTML strings and sets `innerHTML`, then calls `runAnims`. A link into another section must check `secShown(n)` first.
 - Sections re-render in place where possible, using `CTX` (for example `applySecView` and `l3Body`).
 
 **Configure.** `renderConfig()` rebuilds the active tab from `wcfg`/`wq`.
@@ -223,15 +224,28 @@ These come from the product owner. Keep them.
 
 **Layout work:** measure section heights before and after with Playwright, using `document.querySelector('#sec-N').getBoundingClientRect().height`. Check that `document.documentElement.scrollWidth` equals the viewport width, so nothing overflows sideways.
 
-**Refactors:** compare screenshots before and after. The approach used for 1.0.0:
+**Refactors:** compare screenshots before and after. The approach used for 0.1.0:
 
 1. Capture about 20 states with animations disabled, by injecting `*{animation:none!important;transition:none!important}` and blurring focus.
 2. Diff them pixel by pixel with Pillow's `ImageChops.difference`. A refactor should produce zero differences.
 3. For hover, tooltip and animated states, compare `getComputedStyle` for every element across the two builds.
 
-**Linting:** there is no committed lint config. `npx eslint@8` with `no-unused-vars` and `no-undef` run on the combined script (the contents of the final `<script>` in `index.html`) was clean at 1.0.0.
+**Linting:** there is no committed lint config. `npx eslint@8` with `no-unused-vars` and `no-undef` run on the combined script (the contents of the final `<script>` in `index.html`) was clean at 0.1.0.
 
 **Data safety:** use the sample (`data/sample-backup.json`) for tests and screenshots. Never commit real risk, incident or vulnerability data; `.gitignore` excludes export files.
+
+## Releases
+
+ExecDash uses semantic versioning. Before 1.0.0, a minor version can change the data model (with migration in `normalizeConfig`), and a patch is fixes only.
+
+- **The version** lives only in `package.json`. The build replaces `__VERSION__` in the script with it (`VERSION` in `02-constants.js`), so the About window and the export `appVersion` follow it.
+- **Between releases,** add every user-visible change under `## Unreleased` in `CHANGELOG.md`.
+- **To release:**
+  1. Rename `## Unreleased` to `## X.Y.Z (YYYY-MM-DD)` and add a new empty `## Unreleased` above it.
+  2. Set `"version"` in `package.json`, then rebuild so `index.html` carries it.
+  3. Commit as `Release X.Y.Z` and merge to `main`.
+  4. `.github/workflows/release.yml` sees a version with no tag, then tags the commit that last changed `package.json` as `vX.Y.Z` and creates a GitHub release from that CHANGELOG section. Do not create release tags by hand.
+- The export `version` field is the file format version, not the app version. Change it only when old files can no longer be read as they are.
 
 ## Known limitations and ideas
 
