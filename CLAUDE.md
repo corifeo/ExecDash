@@ -244,7 +244,7 @@ ExecDash uses semantic versioning. Before 1.0.0, a minor version can change the 
   1. Rename `## Unreleased` to `## X.Y.Z (YYYY-MM-DD)` and add a new empty `## Unreleased` above it.
   2. Set `"version"` in `package.json`, then rebuild so `index.html` carries it.
   3. Commit as `Release X.Y.Z` and merge to `main`.
-  4. `.github/workflows/release.yml` sees a version with no tag, then tags the merge commit `vX.Y.Z` and creates a GitHub release from that CHANGELOG section. Do not create release tags by hand.
+  4. `.github/workflows/release.yml` sees a version with no tag, then tags the commit that last changed `package.json` as `vX.Y.Z` and creates a GitHub release from that CHANGELOG section. Do not create release tags by hand.
 - The export `version` field is the file format version, not the app version. Change it only when old files can no longer be read as they are.
 
 ## Known limitations and ideas
