@@ -6,6 +6,10 @@
 </p>
 
 <p align="center">
+  <b>Try it live:</b> <a href="https://corifeo.github.io/ExecDash/">corifeo.github.io/ExecDash</a>
+</p>
+
+<p align="center">
   <img alt="Licence: PolyForm Noncommercial 1.0.0" src="https://img.shields.io/badge/licence-PolyForm%20Noncommercial-2F4B7C">
   <img alt="Dependencies: none" src="https://img.shields.io/badge/dependencies-none-1D7447">
   <img alt="Single HTML file" src="https://img.shields.io/badge/deploy-single%20HTML%20file-465264">
@@ -50,6 +54,10 @@ The same layout every quarter means the board learns to read it once.
 </p>
 
 ## Quick start
+
+**Online.** Open <https://corifeo.github.io/ExecDash/>, the latest `main` served by GitHub Pages. The footer shows the version. Data you enter stays in that browser, as it does with a local copy.
+
+**Locally.**
 
 ```bash
 git clone https://github.com/corifeo/ExecDash.git
