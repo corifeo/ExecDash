@@ -5283,8 +5283,15 @@ details.ccard > summary .pill {
 }
 .wbtns {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 12px;
   margin-top: 14px;
+}
+.wver {
+  margin-right: auto;
+  color: var(--ink-3);
+  font-size: 12px;
 }
 .fhint {
   display: block;
@@ -5762,6 +5769,8 @@ function move(arr, i, d) {
 /* ===== src/js/02-constants.js ===== */
 /* Fixed labels and enumerations shared across the app. */
 
+// App version, filled in from package.json by scripts/build.mjs.
+var VERSION = '0.2.0';
 // Prefix for every browser storage key.
 var SK = 'execdash:';
 var W = { g: 'Within', a: 'Tolerance', r: 'Outside', n: 'n/a', on: 'On target', off: 'Behind target' };
@@ -11133,7 +11142,9 @@ function welcomeHtml() {
     '</div>' +
     '<div class="wnote"><b>Your data stays in this browser.</b> Everything you enter is saved in this browser\u2019s local storage on this device. Nothing is sent to a server, and there is no account.</div>' +
     '<div class="wnote warn"><b>Export regularly so nothing is lost.</b> Clearing browsing data, using a private window, or switching browser or device leaves you with an empty dashboard. Use Configure, Data, Export to save a backup file, and Import to restore it.</div>' +
-    '<div class="wbtns"><button class="btn primary" data-act="mclose">Got it</button></div>'
+    '<div class="wbtns"><span class="wver">Version ' +
+    esc(VERSION) +
+    '</span><button class="btn primary" data-act="mclose">Got it</button></div>'
   );
 }
 function showWelcome() {
@@ -14266,7 +14277,13 @@ var IMPORT = null,
 var QID = /^\d{4}-Q[1-4]$/,
   SID = /^[A-Za-z0-9_.~:@+-]{1,80}$/;
 function buildExport(type, qsel) {
-  var d = { format: 'exec-dashboard', version: 1, type: type, exportedAt: new Date().toISOString() };
+  var d = {
+    format: 'exec-dashboard',
+    version: 1,
+    appVersion: VERSION,
+    type: type,
+    exportedAt: new Date().toISOString()
+  };
   if (type === 'structure' || type === 'backup') d.structure = stripCfg(config);
   if (type === 'risks' || type === 'backup') d.risks = clone(config.risks);
   if (type === 'initiatives' || type === 'backup') {
