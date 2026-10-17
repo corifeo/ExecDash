@@ -238,6 +238,10 @@ footer {
   font-size: 13px;
   color: var(--ink-3);
 }
+footer .ver {
+  margin-left: auto;
+  font-size: 12px;
+}
 .band .rail {
   grid-row: 1 / span 2;
   grid-column: 1;
@@ -8145,8 +8149,12 @@ function renderHeader() {
     (tools ? '<div class="tools">' + tools + '</div>' : '') +
     keys +
     '</div>';
+  // The version shows on every view, so anyone on the hosted page can tell which release it is.
   $('#ftr').innerHTML =
-    config && config.footer && view === 'dashboard' ? '<span>' + esc(config.footer) + '</span>' : '';
+    (config && config.footer && view === 'dashboard' ? '<span>' + esc(config.footer) + '</span>' : '') +
+    '<span class="ver">ExecDash ' +
+    esc(VERSION) +
+    '</span>';
   // Browser tab: the dashboard title set under Structure, then the product name.
   document.title = config && title ? title + ' | ExecDash' : 'ExecDash';
 }

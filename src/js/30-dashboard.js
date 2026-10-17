@@ -68,8 +68,12 @@ function renderHeader() {
     (tools ? '<div class="tools">' + tools + '</div>' : '') +
     keys +
     '</div>';
+  // The version shows on every view, so anyone on the hosted page can tell which release it is.
   $('#ftr').innerHTML =
-    config && config.footer && view === 'dashboard' ? '<span>' + esc(config.footer) + '</span>' : '';
+    (config && config.footer && view === 'dashboard' ? '<span>' + esc(config.footer) + '</span>' : '') +
+    '<span class="ver">ExecDash ' +
+    esc(VERSION) +
+    '</span>';
   // Browser tab: the dashboard title set under Structure, then the product name.
   document.title = config && title ? title + ' | ExecDash' : 'ExecDash';
 }
