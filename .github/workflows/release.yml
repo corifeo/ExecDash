@@ -1,7 +1,8 @@
 name: Release
 
-# When main carries a package.json version that has no tag yet, tag that
-# commit vX.Y.Z and publish a GitHub release from its CHANGELOG section.
+# When main carries a package.json version that has no tag yet, tag the
+# commit that last changed package.json (the release commit) vX.Y.Z and
+# publish a GitHub release from its CHANGELOG section.
 on:
   push:
     branches: [main]
@@ -18,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -45,4 +48,5 @@ jobs:
         run: |
           node scripts/build.mjs --check
           node scripts/release-notes.mjs > "$RUNNER_TEMP/notes.md"
-          gh release create "v$VERSION" --target "$GITHUB_SHA" --title "ExecDash $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
+          TARGET=$(git log -1 --format=%H -- package.json)
+          gh release create "v$VERSION" --target "$TARGET" --title "ExecDash $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
