@@ -703,7 +703,9 @@ function welcomeHtml() {
     '</div>' +
     '<div class="wnote"><b>Your data stays in this browser.</b> Everything you enter is saved in this browser\u2019s local storage on this device. Nothing is sent to a server, and there is no account.</div>' +
     '<div class="wnote warn"><b>Export regularly so nothing is lost.</b> Clearing browsing data, using a private window, or switching browser or device leaves you with an empty dashboard. Use Configure, Data, Export to save a backup file, and Import to restore it.</div>' +
-    '<div class="wbtns"><button class="btn primary" data-act="mclose">Got it</button></div>'
+    '<div class="wbtns"><span class="wver">Version ' +
+    esc(VERSION) +
+    '</span><button class="btn primary" data-act="mclose">Got it</button></div>'
   );
 }
 function showWelcome() {

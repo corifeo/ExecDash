@@ -36,6 +36,7 @@ All documents are kept in the browser under a single local storage key, `execdas
 | `vulnSeverities` | string[] | Highest first |
 | `vulnFocus` | number | How many of the top severities the dashboard shows. Defaults to 2 |
 | `style` | object | Appearance: `accent` (hex colour), `palette` (`standard` or `cb` for colour-blind safe), `theme` (`system`, `light`, `dark`), `headings` (`serif`, `sans`), `corners` (`rounded`, `square`), `density` (`comfortable`, `compact`), `motion` (`on`, `off`) |
+| `hiddenSections` | object | Dashboard sections switched off, by number, for example `{ "2": true, "3": true }`. Hidden sections keep their data. Defaults to `{}` |
 | `vulnAppetite` | object | Optional limits on the total for each severity, for example `{ "Critical": { "appetite": 5, "tolerance": 10 } }`. Lower is better |
 
 ### Category
@@ -163,6 +164,7 @@ All documents are kept in the browser under a single local storage key, `execdas
 {
   "format": "exec-dashboard",
   "version": 1,
+  "appVersion": "0.2.0",
   "type": "backup",
   "exportedAt": "2026-09-17T00:00:00Z",
   "structure": {},
@@ -173,6 +175,7 @@ All documents are kept in the browser under a single local storage key, `execdas
 }
 ```
 
+- `version` is the file format version. `appVersion` is the ExecDash version that wrote the file, for reference only; import does not read it.
 - `type` is `structure`, `risks`, `initiatives`, `quarters` or `backup`. Only the keys for that type are required.
 - **Merge** matches items by id, then by name, and keeps the existing enabled setting.
 - **Replace** swaps the whole set.

@@ -1,13 +1,14 @@
 {
   "name": "execdash",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "ExecDash: an executive cyber security dashboard with a built-in configuration screen, in a single HTML file.",
   "private": true,
   "type": "module",
   "license": "PolyForm-Noncommercial-1.0.0",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node scripts/build.mjs --check",
+    "check": "node scripts/build.mjs --check && node scripts/release-notes.mjs --check",
+    "release-notes": "node scripts/release-notes.mjs",
     "serve": "node scripts/serve.mjs",
     "test": "python3 tests/smoke_test.py",
     "screenshots": "python3 scripts/screenshots.py",

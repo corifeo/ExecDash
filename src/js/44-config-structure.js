@@ -335,6 +335,20 @@ function cfgStructure() {
     ) +
     '</div></section>';
   out +=
+    '<section class="csec"><h2>Dashboard sections</h2><p class="hint">Switch off a section to hide it from the dashboard. Its data stays in Quarter data and in exports, and the section returns as it was when you switch it back on. Section numbers do not change.</p><div class="secsw">' +
+    SECTIONS.map(function (x) {
+      return (
+        '<div class="secswrow">' +
+        swb('c:hiddenSections.' + x[0], !c.hiddenSections[x[0]], 'Show ' + x[1] + ' on the dashboard') +
+        '<span class="snn">' +
+        x[0] +
+        '</span><span>' +
+        esc(x[1]) +
+        '</span></div>'
+      );
+    }).join('') +
+    '</div></section>';
+  out +=
     '<section class="csec"><h2>Cyber categories</h2><p class="hint">Each category has one headline indicator, measured against appetite and tolerance or against a target. Subcategories are optional. Hidden categories keep their data but do not appear on the dashboard.</p>' +
     c.categories
       .map(function (cat, i) {
