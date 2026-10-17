@@ -4,6 +4,7 @@ ExecDash uses [semantic versioning](https://semver.org). Until 1.0.0, a minor ve
 
 ## Unreleased
 
+- **Version:** the page footer shows the running version, for example ExecDash 0.2.0, on every view.
 - **Dashboard sections:** each of the four sections can be switched off under Configure, Structure, Dashboard sections, for example to show only Programme at a glance or only Ongoing initiatives.
   - A hidden section is left out of the dashboard and the navigation bar. Its data, its Quarter data tab and exports are unchanged, and it returns as it was when switched back on.
   - Section numbers stay the same. Links into a hidden section are left out: the Across the programme rows for it, and the initiative chip on category cards when Ongoing initiatives is hidden.
