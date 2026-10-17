@@ -43,7 +43,10 @@ jobs:
       - name: Tag and publish the release
         if: steps.tag.outputs.exists == 'false'
         env:
-          GH_TOKEN: ${{ github.token }}
+          # The built-in token cannot create a tag on a commit that changes
+          # workflow files, so a RELEASE_TOKEN secret (Contents and Workflows
+          # write) is used when set.
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
           VERSION: ${{ steps.v.outputs.version }}
         run: |
           node scripts/build.mjs --check
